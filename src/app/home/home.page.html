@@ -14,7 +14,11 @@
     </ion-header>
 
     <div id="container">
-        <mgl-map [style]="'https://demotiles.maplibre.org/style.json'" [zoom]="[9]" [center]="[-74.5, 40]">
-        </mgl-map>
+        <div id="mapContainer">
+            <mgl-map #homeMap [style]="'https://demotiles.maplibre.org/style.json'" [zoom]="[9]" [center]="[-74.5, 40]"
+                (mapLoad)="maploaded($event)">
+            </mgl-map>
+
+        </div>
     </div>
 </ion-content>
