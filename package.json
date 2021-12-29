@@ -24,6 +24,8 @@
         "@angular/platform-browser-dynamic": "~13.0.0",
         "@angular/router": "~13.0.0",
         "@ionic/angular": "^6.0.0",
+        "maplibre-gl": "^1.15.2",
+        "ngx-mapbox-gl": "^7.1.2",
         "rxjs": "~6.6.0",
         "tslib": "^2.2.0",
         "zone.js": "~0.11.4"
