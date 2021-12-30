@@ -14,8 +14,12 @@
     </ion-header>
 
     <div id="container">
-            <mgl-map #homeMap [style]="'https://demotiles.maplibre.org/style.json'" [zoom]="[9]" [center]="[-74.5, 40]"
+            <mgl-map #homeMap [style]="'https://demotiles.maplibre.org/style.json'" [zoom]="[3]" 
                 (mapLoad)="maploaded($event)">
+                <mgl-geojson-source id="strutture">
+                    <mgl-feature 
+                        *ngFor="let feature of featureCollection.features; index as i"  [id]="i" [geometry]="feature.geometry"></mgl-feature>
+                </mgl-geojson-source>
             </mgl-map>
     </div>
 </ion-content>

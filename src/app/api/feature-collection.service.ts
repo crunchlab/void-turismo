@@ -9,6 +9,7 @@ export class FeatureCollectionService {
     constructor() { }
 
     public list(): Observable<any> {
-        return of(struttureRicettive);
+        let list: any[] = struttureRicettive.features.map(struttura => ({ geometry: struttura.geometry, type: struttura.type }));
+        return of({ features: list});
     }
 }
