@@ -10,12 +10,12 @@ import { FeatureCollectionService } from '../api/feature-collection.service';
 })
 export class HomePage {
     @ViewChild('homeMap') homeMap: maplibregl.Map;
-    featureCollection: any;
+    // featureCollection: any;
 
   constructor(featureCollectionService:FeatureCollectionService) {
-      featureCollectionService.list().subscribe((featureCollection: FeatureCollection)=>{
-          this.featureCollection = { 'type': 'geojson', data:featureCollection};
-      });
+    //   featureCollectionService.list().subscribe((featureCollection: FeatureCollection)=>{
+    //       this.featureCollection = { 'type': 'geojson', data:featureCollection};
+    //   });
   }
 
     public maploaded(event:any){
