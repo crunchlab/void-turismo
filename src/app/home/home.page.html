@@ -14,11 +14,11 @@
     </ion-header>
 
     <div id="container">
-            <mgl-map #homeMap [style]="'./assets/map-styles/style-dark.json'" [zoom]="[3]" 
-                (mapLoad)="maploaded($event)">
-                <mgl-geojson-source id="strutture" [data]="'./assets/data/strutture.json'">
-                </mgl-geojson-source>
-                <mgl-layer id="strutture-layer" type="circle" source="strutture"></mgl-layer>
-            </mgl-map>
+        <mgl-map #homeMap [style]="'./assets/map-styles/style-dark.json'" [zoom]="[3]" (mapLoad)="maploaded($event)">
+            <mgl-geojson-source id="strutture" [data]="'./assets/data/strutture.json'">
+            </mgl-geojson-source>
+            
+            <mgl-layer id="strutture-layer" type="circle" source="strutture"></mgl-layer>
+        </mgl-map>
     </div>
 </ion-content>
