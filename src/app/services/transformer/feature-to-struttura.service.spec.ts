@@ -87,5 +87,6 @@ describe('FeatureToStrutturaService', () => {
             }
         };
         let struttura: Struttura = transformer.featureToStruttura(feature);
+        expect(struttura).toBeDefined();
     });
 });

@@ -1,16 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Feature, Geometry } from 'geojson';
-import { environment } from 'src/environments/environment';
-
+import { FieldMapping } from '../../interfaces/fieldMapping.interface';
+import { environment } from '../../../environments/environment';
+import { Struttura } from '../../models/struttura/struttura';
+import { get, pick } from "lodash";
 @Injectable({
     providedIn: 'root'
 })
 export class FeatureToStrutturaService {
-    featureToStruttura(feature: Feature<Geometry, { [name: string]: any; }>): import("../../models/struttura/struttura").Struttura {
-        throw new Error('Method not implemented.');
-    }
     /** Object used to map feature properties to struttura fields */
-    mappings: any = environment.fieldMappings;
+    mappings: FieldMapping[] = environment.fieldMappings;
 
+    /**
+     * Maps the feature.properties elements to the field of a Struttura instance
+     * @param feature: Feature
+     */
+    featureToStruttura(feature: Feature<Geometry, { [name: string]: any; }>): Struttura {
+
+        let struttura: Struttura = new Struttura();
+        this.mappings.map((mapping: FieldMapping) => {
+            if (Array.isArray(mapping.properties)) {
+                struttura[mapping.field] = pick(feature.properties, mapping.properties)
+            } else {
+                struttura[mapping.field] = get(feature.properties, mapping.properties);
+            }
+        });
+        return struttura;
+    }
     constructor() { }
 }
