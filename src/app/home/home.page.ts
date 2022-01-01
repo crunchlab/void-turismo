@@ -24,11 +24,11 @@ export class HomePage {
         this.homeMap.on('click', 'strutture-layer', (e: any) => {
             // Copy coordinates array.
             const coordinates = this.get(e, 'features[0].geometry.coordinates', []).slice();
-            const description = this.get(e, 'features[0].properties.DENOMINAZIONE');
-
+            const description = this.get(e, 'features[0].properties.denominazione');
+            const htmlContent = `<h4 class="tooltip_title">${description}</h4>`;
             new maplibregl.Popup()
                 .setLngLat(coordinates)
-                .setHTML(description)
+                .setHTML(htmlContent)
                 .addTo(this.homeMap);
         });
         event.resize();
