@@ -14,8 +14,14 @@
     </ion-header>
 
     <div id="container">
-            <mgl-map #homeMap [style]="'https://demotiles.maplibre.org/style.json'" [zoom]="[9]" [center]="[-74.5, 40]"
-                (mapLoad)="maploaded($event)">
-            </mgl-map>
+        <mgl-map #homeMap [style]="'./assets/map-styles/style-dark.json'" [zoom]="[9]" (mapLoad)="maploaded($event)"
+            [center]="[12.5510662,45.6331619]">
+            <mgl-geojson-source id="strutture" [data]="'./assets/data/strutture.json'">
+            </mgl-geojson-source>
+
+            <mgl-layer id="strutture-label-layer" type="symbol" source="strutture" [layout]="struttureLabelLayout"></mgl-layer>
+
+            <mgl-layer id="strutture-layer" type="circle" source="strutture"></mgl-layer>
+        </mgl-map>
     </div>
 </ion-content>
