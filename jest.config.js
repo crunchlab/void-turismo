@@ -25,5 +25,9 @@ module.exports = {
   testMatch: [
     '<rootDir>/src/app/*.spec.ts',
     '<rootDir>/src/app/**/*.spec.ts'
-  ]
+  ],
+    setupFiles:[
+        '<rootDir>/jest.stub.js',
+
+    ]
 };
