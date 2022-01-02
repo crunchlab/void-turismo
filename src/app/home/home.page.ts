@@ -11,12 +11,28 @@ export class HomePage {
     homeMap: maplibregl.Map;
     selectedFeature: any = { lngLat: [0, 0] };
     public get = _get;
+
+    public struttureLabelLayout: maplibregl.SymbolLayout =
+        {
+            "visibility": "visible",
+
+            "text-field": ["get", "denominazione"
+            ],
+            "text-font": [
+                "Open Sans Semibold",
+                "Arial Unicode MS Bold"
+            ],
+            "text-offset": [
+                0,
+                1.25
+            ],
+            "text-anchor": "top"
+
+
+        };
     // featureCollection: any;
 
     constructor(featureCollectionService: FeatureCollectionService) {
-        //   featureCollectionService.list().subscribe((featureCollection: FeatureCollection)=>{
-        //       this.featureCollection = { 'type': 'geojson', data:featureCollection};
-        //   });
     }
 
     public maploaded(event: any) {

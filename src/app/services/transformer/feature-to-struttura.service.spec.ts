@@ -117,6 +117,7 @@ describe('FeatureToStrutturaService', () => {
         expectedStruttura.nuovaClassificazioneLR11 = get(feature.properties, 'nuovaClassificazioneLR11');
         let struttura: Struttura = transformer.featureToStruttura(feature);
         expect(struttura).toBeDefined();
-       fail();
+        expect(struttura).toMatchObject(expectedStruttura);
+        
     });
 });
