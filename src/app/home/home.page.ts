@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
-import { get as _get } from 'lodash';
-import { FeatureCollectionService } from '../services/api/feature-collection.service';
+import { get as _get, isNil } from 'lodash';
+import { Struttura } from '../models/struttura/struttura';
+import { FeatureToStrutturaService } from '../services/transformer/feature-to-struttura.service';
+import { Feature, Geometry } from 'geojson';
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
@@ -30,24 +32,40 @@ export class HomePage {
 
 
         };
+    featureTransformer: FeatureToStrutturaService;
     // featureCollection: any;
 
-    constructor(featureCollectionService: FeatureCollectionService) {
+    constructor(featureTransformer: FeatureToStrutturaService) {
+        this.featureTransformer = featureTransformer;
     }
 
-    public maploaded(event: any) {
+    public mapLoaded(event: any) {
         this.homeMap = event;
         this.homeMap.on('click', 'strutture-layer', (e: any) => {
-            // Copy coordinates array.
-            const coordinates = this.get(e, 'features[0].geometry.coordinates', []).slice();
-            const description = this.get(e, 'features[0].properties.denominazione');
-            const htmlContent = `<h4 class="tooltip_title">${description}</h4>`;
-            new maplibregl.Popup()
-                .setLngLat(coordinates)
-                .setHTML(htmlContent)
-                .addTo(this.homeMap);
+            let clickedFeature = this.get(e, 'features[0]', null);
+            if (!isNil(clickedFeature)) {
+                this.handleLayerClick(clickedFeature);
+            }
+        });
+        this.homeMap.on('click', 'strutture-label-layer', (e: any) => {
+            let clickedFeature = this.get(e, 'features[0]', null);
+            if (!isNil(clickedFeature)) {
+                this.handleLayerClick(clickedFeature);
+            }
         });
         event.resize();
+    }
+
+    private handleLayerClick(clickedFeature: Feature<Geometry, { [name: string]: any; }>) {
+        let struttura: Struttura = this.featureTransformer.featureToStruttura(clickedFeature);
+        console.log(struttura);
+        const coordinates = this.get(clickedFeature, 'geometry.coordinates', []).slice();
+        const description = this.get(clickedFeature, 'properties.denominazione');
+        const htmlContent = `<h4 class="tooltip_title">${description}</h4>`;
+        new maplibregl.Popup()
+            .setLngLat(coordinates)
+            .setHTML(htmlContent)
+            .addTo(this.homeMap);
     }
 
 
