@@ -6,7 +6,8 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { NgxMapLibreGLModule } from 'ngx-maplibre-gl';
-
+// home.module.ts
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { NgxMapLibreGLModule } from 'ngx-maplibre-gl';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    NgxMapLibreGLModule
+    NgxMapLibreGLModule,
+    SwiperModule
   ],
   declarations: [HomePage]
 })
