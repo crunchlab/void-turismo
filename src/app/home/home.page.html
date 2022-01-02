@@ -15,7 +15,11 @@
 
     <div id="container">
         <div id="mapContainer">
-            <mgl-map #homeMap [style]="'./assets/map-styles/style-dark.json'" [zoom]="[9]" (mapLoad)="maploaded($event)"
+            <mgl-map #homeMap 
+                [attributionControl]="false"  
+                [style]="'./assets/map-styles/style-dark.json'" 
+                [zoom]="[9]" 
+                (mapLoad)="maploaded($event)"
                 [center]="[12.5510662,45.6331619]">
                 <mgl-geojson-source id="strutture" [data]="'./assets/data/strutture.json'">
                 </mgl-geojson-source>
@@ -27,7 +31,7 @@
             </mgl-map>
         </div>
         <div id="slideContainer">
-            <swiper>
+            <swiper [slidesPerView]="1.5" [centeredSlides]="true" [spaceBetween]="10">
                 <ng-template swiperSlide>Slide 1</ng-template>
                 <ng-template swiperSlide>Slide 2 </ng-template>
                 <ng-template swiperSlide>Slide 3</ng-template>
