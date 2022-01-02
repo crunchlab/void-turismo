@@ -30,13 +30,22 @@
                 <mgl-layer id="strutture-layer" type="circle" source="strutture"></mgl-layer>
             </mgl-map>
         </div>
-        <div id="slideContainer">
-            <swiper [slidesPerView]="1.5" [centeredSlides]="true" [spaceBetween]="10">
+        <!-- <div id="slideContainer"> -->
+            <swiper [slidesPerView]="1.5" [centeredSlides]="true" [spaceBetween]="10" [pagination]="{ dynamicBullets: true }">
+                <ng-template swiperSlide>Slide 1</ng-template>
+                <ng-template swiperSlide>Slide 2 </ng-template>
+                <ng-template swiperSlide>Slide 3</ng-template>
+                <ng-template swiperSlide>Slide 1</ng-template>
+                <ng-template swiperSlide>Slide 2 </ng-template>
+                <ng-template swiperSlide>Slide 3</ng-template>
+                <ng-template swiperSlide>Slide 1</ng-template>
+                <ng-template swiperSlide>Slide 2 </ng-template>
+                <ng-template swiperSlide>Slide 3</ng-template>
                 <ng-template swiperSlide>Slide 1</ng-template>
                 <ng-template swiperSlide>Slide 2 </ng-template>
                 <ng-template swiperSlide>Slide 3</ng-template>
             </swiper>
 
-        </div>
+        <!-- </div> -->
     </div>
 </ion-content>
