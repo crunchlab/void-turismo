@@ -10,10 +10,6 @@
         "maptiler_attribution": {
             "attribution": "<a href=\"https://www.maptiler.com/copyright/\" target=\"_blank\">&copy; MapTiler</a> <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">&copy; OpenStreetMap contributors</a>",
             "type": "vector"
-        },
-        "strutture_ricettive_veneto_orientale": {
-            "data": "https://api.maptiler.com/data/12345a46-60dd-4c39-85a6-0679d24855e9/features.json?key=Qq3PqdIVS97ZZ0IMbrEs",
-            "type": "geojson"
         }
     },
     "layers": [
