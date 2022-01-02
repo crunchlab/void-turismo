@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { Feature } from 'geojson';
-import { Struttura } from 'src/app/models/struttura/struttura';
-
+import { get, pick } from 'lodash';
+import { Struttura } from '../../models/struttura/struttura';
 import { FeatureToStrutturaService } from './feature-to-struttura.service';
 
 describe('FeatureToStrutturaService', () => {
@@ -86,7 +86,37 @@ describe('FeatureToStrutturaService', () => {
                 "nuovaClassificazioneLR11": "2 **"
             }
         };
+        let expectedStruttura: Struttura = new Struttura();
+        expectedStruttura.trasporti = pick(feature.properties, ["aeroporto", "autostrada", "stazioneFs"]);
+        expectedStruttura.posizione = pick(feature.properties, ["centroStorico", "periferia", "zonaFiera", "collinare", "lago", "mare"]);
+        expectedStruttura.servizi = pick(feature.properties, ["ristorante", "ariaCondizionata", "parcheggio"]);
+        expectedStruttura.wellness = pick(feature.properties, ["termale", "fitness", "sauna", "piscina", "piscinaCoperta", "solarium", "impiantiRisalita"]);
+        expectedStruttura.lingue = pick(feature.properties, ["inglese", "spagnolo", "tedesco", "francese"]);
+        expectedStruttura.contatti = pick(feature.properties, ["www", "email", "fax", "telefono"]);
+
+        expectedStruttura.cap = get(feature.properties, 'cap');
+        expectedStruttura.zona = get(feature.properties, 'zona');
+        expectedStruttura.comune = get(feature.properties, 'comune');
+        expectedStruttura.stelle = get(feature.properties, 'stelle');
+        expectedStruttura.interno = get(feature.properties, 'interno');
+        expectedStruttura.localita = get(feature.properties, 'localita');
+        expectedStruttura.categoria = get(feature.properties, 'categoria');
+        expectedStruttura.indirizzo = get(feature.properties, 'indirizzo');
+        expectedStruttura.provincia = get(feature.properties, 'provincia');
+        expectedStruttura.tipologia = get(feature.properties, 'tipologia');
+        expectedStruttura.giochiBimbi = get(feature.properties, 'giochiBimbi');
+        expectedStruttura.altriServizi = get(feature.properties, 'altriServizi');
+        expectedStruttura.denominazione = get(feature.properties, 'denominazione');
+        expectedStruttura.numeroCivico = get(feature.properties, 'numeroCivico');
+        expectedStruttura.animaliAmmessi = get(feature.properties, 'animaliAmmessi');
+        expectedStruttura.accessoDisabili = get(feature.properties, 'accessoDisabili');
+        expectedStruttura.chiusuraTemporanea = get(feature.properties, 'chiusuraTemporanea');
+        expectedStruttura.dataUltimaModifica = get(feature.properties, 'dataUltimaModifica');
+        expectedStruttura.tipologiaSecondaria = get(feature.properties, 'tipologiaSecondaria');
+        expectedStruttura.codiceIdentificativo = get(feature.properties, 'codiceIdentificativo');
+        expectedStruttura.nuovaClassificazioneLR11 = get(feature.properties, 'nuovaClassificazioneLR11');
         let struttura: Struttura = transformer.featureToStruttura(feature);
         expect(struttura).toBeDefined();
+       fail();
     });
 });
