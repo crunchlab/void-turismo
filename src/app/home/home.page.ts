@@ -4,9 +4,9 @@ import { get as _get, isNil } from 'lodash';
 import { Struttura } from '../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../services/transformer/feature-to-struttura.service';
 import { Feature, Geometry } from 'geojson';
-import SwiperCore, { Pagination } from 'swiper';
+import SwiperCore, { Pagination, Virtual } from 'swiper';
 
-SwiperCore.use([Pagination]);
+SwiperCore.use([Pagination, Virtual]);
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',
@@ -36,6 +36,7 @@ export class HomePage {
 
         };
     featureTransformer: FeatureToStrutturaService;
+    strutture: Struttura[] = [];
     // featureCollection: any;
 
     constructor(featureTransformer: FeatureToStrutturaService) {
@@ -56,9 +57,13 @@ export class HomePage {
                 this.handleLayerClick(clickedFeature);
             }
         });
+        this.strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+
         event.resize();
     }
-
+    public mapZoomEnd(event: any) {
+        this.strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+    }
     private handleLayerClick(clickedFeature: Feature<Geometry, { [name: string]: any; }>) {
         let struttura: Struttura = this.featureTransformer.featureToStruttura(clickedFeature);
         console.log(struttura);
