@@ -4,9 +4,9 @@ import { get as _get, isNil, uniq } from 'lodash';
 import { Struttura } from '../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../services/transformer/feature-to-struttura.service';
 import { Feature, Geometry } from 'geojson';
-import SwiperCore, { Pagination, Virtual } from 'swiper';
+import SwiperCore, { Virtual } from 'swiper';
 
-SwiperCore.use([Pagination, Virtual]);
+SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',
     templateUrl: 'home.page.html',

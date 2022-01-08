@@ -9,6 +9,7 @@ import { NgxMapLibreGLModule } from 'ngx-maplibre-gl';
 // home.module.ts
 import { SwiperModule } from 'swiper/angular';
 import { TranslocoModule } from '@ngneat/transloco';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
     imports: [
@@ -18,7 +19,9 @@ import { TranslocoModule } from '@ngneat/transloco';
         HomePageRoutingModule,
         NgxMapLibreGLModule,
         SwiperModule,
-    TranslocoModule    ],
+        TranslocoModule,
+        ScrollingModule
+    ],
     declarations: [HomePage]
 })
 export class HomePageModule { }
