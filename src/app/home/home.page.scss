@@ -48,10 +48,17 @@ mgl-map,
     ::ng-deep .swiper-slide {
         background-color: white;
         border-radius: 14px;
-        color:var(--ionic-primary, black)
+        color: var(--ionic-primary, black);
     }
 
     //  ::ng-deep .swiper-pagination {
     //     position: relative;
     // }
+}
+
+.search_container {
+    z-index: 100;
+    position: absolute;
+    margin: auto;
+    width: 100%;
 }

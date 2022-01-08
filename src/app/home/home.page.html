@@ -14,6 +14,12 @@
     </ion-header> -->
 
     <div id="container">
+        <div class="search_container">
+            <ion-searchbar debounce="500" type="text" (ionChange)="onSearchItemChange($event)"></ion-searchbar>
+            <ion-list *ngIf="comuniCandidati.length">
+                <ion-item *ngFor="let comune of comuniCandidati">{{ comune }}</ion-item>
+            </ion-list>
+        </div>
         <div id="mapContainer">
             <mgl-map #homeMap [attributionControl]="false" [style]="'./assets/map-styles/style-dark.json'" [zoom]="[9]"
                 (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd($event)" [center]="[12.5510662,45.6331619]">
