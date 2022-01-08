@@ -33,48 +33,8 @@
             </mgl-map>
         </div>
         <!-- <div id="slideContainer"> -->
-
-        <cdk-virtual-scroll-viewport #listaRisultati itemSize="100" minBufferPx="500" maxBufferPx="1000"
-            class="strutture_lista" *transloco="let t" orientation="horizontal">
-            <ion-item *cdkVirtualFor="let struttura of strutture;"
-                class="struttura_slide"
-               lines="none">
-                <ion-grid>
-                    <ion-row>
-                        <ion-col>
-                            <ion-grid>
-                                <ion-row>
-                                    <ion-col>
-                                        <h5 class="struttura_slide_titolo">{{struttura.denominazione}}</h5>
-                                    </ion-col>
-                                </ion-row>
-                                <ion-row>
-                                    <ion-col>
-                                        <div class="struttura_slide_indirizzo">{{struttura.indirizzo}}</div>
-                                    </ion-col>
-                                </ion-row>
-                                <ion-row>
-                                    <ion-col>
-                                        <div class="struttura_slide_comune">{{struttura.comune}}</div>
-                                    </ion-col>
-                                </ion-row>
-                                <ion-row>
-                                    <ion-col>
-                                        <div class="struttura_slide_tipologia">{{struttura.tipologia}}</div>
-                                    </ion-col>
-                                </ion-row>
-
-                            </ion-grid>
-                        </ion-col>
-                        <ion-col size="2">
-                            <a>{{t('struttura.dettagli_link')}}</a>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-
-            </ion-item>
-        </cdk-virtual-scroll-viewport>
-        <!-- <swiper [slidesPerView]="1.5" [centeredSlides]="true" [spaceBetween]="10">
+        <swiper [slidesPerView]="1.5" [centeredSlides]="true" [spaceBetween]="10"
+            [pagination]="{ dynamicBullets: true }">
             <ng-container *ngFor="let struttura of strutture;">
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
                     <ion-grid>
@@ -111,7 +71,7 @@
                     </ion-grid>
                 </ng-template>
             </ng-container>
-        </swiper> -->
+        </swiper>
 
         <!-- </div> -->
     </div>
