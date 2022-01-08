@@ -33,7 +33,7 @@
             </mgl-map>
         </div>
 
-        <cdk-virtual-scroll-viewport #listaRisultati itemSize="282" minBufferPx="2000" maxBufferPx="2000"
+        <cdk-virtual-scroll-viewport #listaRisultati itemSize="400" minBufferPx="500" maxBufferPx="1000"
             class="strutture_lista" *transloco="let t" orientation="horizontal">
             <ion-item *cdkVirtualFor="let struttura of strutture;" class="struttura_slide" lines="none">
                 <ion-grid class="ion-no-margin">
@@ -74,6 +74,5 @@
 
             </ion-item>
         </cdk-virtual-scroll-viewport>
-        
     </div>
 </ion-content>
