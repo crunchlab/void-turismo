@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
 import { get as _get, isNil, uniq } from 'lodash';
 import { Struttura } from '../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../services/transformer/feature-to-struttura.service';
 import { Feature, Geometry } from 'geojson';
 import SwiperCore, { Virtual } from 'swiper';
+import { SwiperComponent } from 'swiper/angular';
 
 SwiperCore.use([Virtual]);
 @Component({
@@ -39,11 +40,18 @@ export class HomePage {
     strutture: Struttura[] = [];
     comuni: string[] = [];
     comuniCandidati: string[] = [];
+    slidesVisible: boolean = false;
+    @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
 
     constructor(featureTransformer: FeatureToStrutturaService) {
         this.featureTransformer = featureTransformer;
     }
 
+    ngOnInit(): void {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        
+    }
     public mapLoaded(event: any) {
         this.homeMap = event;
         this.homeMap.on('sourcedata', e => this.sectionSourceAddedCallback(e));
@@ -67,15 +75,28 @@ export class HomePage {
         if (this.homeMap.getSource('strutture') &&
             this.homeMap.isSourceLoaded('strutture') &&
             e.isSourceLoaded) {
-            this.strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
-            this.comuni = uniq(this.strutture.map((s: Struttura) => s.comune));
+            let strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+            this.comuni = uniq(strutture.map((s: Struttura) => s.comune));
 
             this.homeMap.off('sourcedata', this.sectionSourceAddedCallback); //Unbind event here
         }
     }
 
-    public mapZoomEnd(event: any) {
-        this.strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+    public mapZoomEnd() {
+        if (this.homeMap.getZoom() > 10) {
+            this.strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+            this.swiperStrutture.swiperRef.virtual.removeAllSlides();
+            this.swiperStrutture.swiperRef.updateSlides();
+            this.swiperStrutture.swiperRef.virtual.update(true);
+            if (this.strutture.length) {
+                this.swiperStrutture.swiperRef.slideTo(0);
+            }
+
+        } else {
+            // this.swiperStrutture.swiperRef.removeAllSlides();
+            this.strutture = [];
+        }
+
     }
     private handleLayerClick(clickedFeature: Feature<Geometry, { [name: string]: any; }>) {
         let struttura: Struttura = this.featureTransformer.featureToStruttura(clickedFeature);
