@@ -34,7 +34,7 @@
         </div>
         <!-- <div id="slideContainer"> -->
         <swiper [slidesPerView]="1.5" [centeredSlides]="true" [spaceBetween]="10"
-            [pagination]="{ dynamicBullets: true }">
+            [pagination]="{ dynamicBullets: true }" [virtual]="true">
             <ng-container *ngFor="let struttura of strutture;">
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
                     <ion-grid>
