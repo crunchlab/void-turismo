@@ -6,16 +6,19 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { NgxMapLibreGLModule } from 'ngx-maplibre-gl';
-
+// home.module.ts
+import { SwiperModule } from 'swiper/angular';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule,
-    NgxMapLibreGLModule
-  ],
-  declarations: [HomePage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        HomePageRoutingModule,
+        NgxMapLibreGLModule,
+        SwiperModule,
+    TranslocoModule    ],
+    declarations: [HomePage]
 })
-export class HomePageModule {}
+export class HomePageModule { }

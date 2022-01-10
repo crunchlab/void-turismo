@@ -4,8 +4,15 @@
     position: absolute;
     left: 0;
     right: 0;
-    top: 50%;
-    transform: translateY(-50%);
+}
+
+#mapContainer {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    margin: 0;
+    padding: 0;
 }
 
 #container strong {
@@ -28,9 +35,30 @@
 
 mgl-map,
 .maplibregl-canvas {
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
 }
 .maplibregl-canvas-container {
-    height: 100vh;
+    height: 100%;
+}
+
+.swiper {
+    height: 25vh;
+    top: 75vh;
+    ::ng-deep .swiper-slide {
+        background-color: white;
+        border-radius: 14px;
+        color: var(--ionic-primary, black);
+    }
+
+    //  ::ng-deep .swiper-pagination {
+    //     position: relative;
+    // }
+}
+
+.search_container {
+    z-index: 100;
+    position: absolute;
+    margin: auto;
+    width: 100%;
 }
