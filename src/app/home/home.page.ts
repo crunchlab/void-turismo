@@ -50,7 +50,7 @@ export class HomePage {
     ngOnInit(): void {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
-        
+
     }
     public mapLoaded(event: any) {
         this.homeMap = event;
@@ -82,7 +82,13 @@ export class HomePage {
         }
     }
 
+    public onDragEnd() {
+        this.refreshSlides();
+    }
     public mapZoomEnd() {
+        this.refreshSlides();
+    }
+    private refreshSlides() {
         if (this.homeMap.getZoom() > 10) {
             this.strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
             this.swiperStrutture.swiperRef.virtual.removeAllSlides();
@@ -93,11 +99,10 @@ export class HomePage {
             }
 
         } else {
-            // this.swiperStrutture.swiperRef.removeAllSlides();
             this.strutture = [];
         }
-
     }
+
     private handleLayerClick(clickedFeature: Feature<Geometry, { [name: string]: any; }>) {
         let struttura: Struttura = this.featureTransformer.featureToStruttura(clickedFeature);
         const coordinates = this.get(clickedFeature, 'geometry.coordinates', []).slice();

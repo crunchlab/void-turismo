@@ -22,7 +22,9 @@
         </div>
         <div id="mapContainer">
             <mgl-map #homeMap [attributionControl]="false" [style]="'./assets/map-styles/style-dark.json'" [zoom]="[9]"
-                (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd()" [center]="[12.5510662,45.6331619]">
+                (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd()" 
+                (dragEnd)="onDragEnd()"
+                 [center]="[12.5510662,45.6331619]">
                 <mgl-geojson-source id="strutture" [data]="'./assets/data/strutture.json'">
                 </mgl-geojson-source>
 
