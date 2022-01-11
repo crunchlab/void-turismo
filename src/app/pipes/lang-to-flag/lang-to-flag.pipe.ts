@@ -13,7 +13,7 @@ export class LangToFlagPipe implements PipeTransform {
                 flag = "assets/icons/svg-flags/fr.svg";
                 break;
             case 'inglese':
-                flag = "assets/icons/svg-flags/gb-en.svg";
+                flag = "assets/icons/svg-flags/gb.svg";
                 break;
             case 'spagnolo':
                 flag = "assets/icons/svg-flags/es.svg";

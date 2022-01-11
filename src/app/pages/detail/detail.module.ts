@@ -10,6 +10,7 @@ import { DetailPage } from './detail.page';
 import { TranslocoModule } from '@ngneat/transloco';
 import { BoolToWordPipeModule } from 'src/app/pipes/bool-to-word/bool-to-word.module';
 import { LangToFlagPipeModule } from 'src/app/pipes/lang-to-flag/lang-to-flag.module';
+import { FilterKeyValuePipeModule } from 'src/app/pipes/filter-key-value/bool-to-word.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -18,7 +19,8 @@ import { LangToFlagPipeModule } from 'src/app/pipes/lang-to-flag/lang-to-flag.mo
         DetailPageRoutingModule,
         TranslocoModule,
         BoolToWordPipeModule,
-        LangToFlagPipeModule],
+        LangToFlagPipeModule,
+        FilterKeyValuePipeModule],
     declarations: [DetailPage]
 })
 export class DetailPageModule { }
