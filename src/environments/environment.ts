@@ -4,7 +4,10 @@ import featureToStrutturaMappings from "../mappings/featureToStrutturaMappings";
 // The list of file replacements can be found in `angular.json`.
 export const environment = {
     production: false,
-    fieldMappings: featureToStrutturaMappings
+    fieldMappings: featureToStrutturaMappings,
+    mapStyle: './assets/map-styles/roadmap-style.json'
+    // mapStyle: './assets/map-styles/dark-style.json'
+
 };
 
 /*

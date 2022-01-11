@@ -7,6 +7,8 @@ import { Feature, Geometry } from 'geojson';
 import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+
 
 SwiperCore.use([Virtual]);
 @Component({
@@ -17,6 +19,7 @@ SwiperCore.use([Virtual]);
 export class HomePage {
     homeMap: maplibregl.Map;
     selectedFeature: any = { lngLat: [0, 0] };
+    public mapStyle = environment.mapStyle;
     public get = _get;
 
     public struttureLabelLayout: maplibregl.SymbolLayout =
