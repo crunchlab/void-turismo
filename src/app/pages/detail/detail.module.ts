@@ -8,14 +8,15 @@ import { DetailPageRoutingModule } from './detail-routing.module';
 
 import { DetailPage } from './detail.page';
 import { TranslocoModule } from '@ngneat/transloco';
-
+import { BoolToWordPipeModule } from 'src/app/pipes/bool-to-word/bool-to-word.module';
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
         DetailPageRoutingModule,
-        TranslocoModule],
+        TranslocoModule,
+        BoolToWordPipeModule],
     declarations: [DetailPage]
 })
 export class DetailPageModule { }
