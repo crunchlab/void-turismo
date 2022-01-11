@@ -21,26 +21,27 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        {{struttura.indirizzo}} {{struttura.numeroCivico}}, {{struttura.comune}}, {{struttura.provincia}}
+                        {{struttura.indirizzo}} {{struttura.numeroCivico}}, {{struttura.comune}},
+                        {{struttura.provincia}}
                     </ion-col>
                 </ion-row>
             </ion-col>
         </ion-row>
 
         <ion-row class="detail_services">
-            <ion-col>
+            <ion-col *ngIf="struttura.accessoDisabili">
                 <div>
                     <ion-icon src="../../assets/icons/ISO_wheel_chair.svg"></ion-icon>
                     <ion-label>{{t('detail.accessibility')}}</ion-label>
                 </div>
             </ion-col>
-            <ion-col>
+            <ion-col *ngIf="struttura.giochiBimbi">
                 <div>
                     <ion-icon src="../../assets/icons/playground.svg"></ion-icon>
                     <ion-label>{{t('detail.playground')}}</ion-label>
                 </div>
             </ion-col>
-            <ion-col>
+            <ion-col *ngIf="struttura.animaliAmmessi">
                 <div>
                     <ion-icon src="../../assets/icons/pets.svg"></ion-icon>
                     <ion-label>{{t('detail.pets')}}</ion-label>
@@ -92,7 +93,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.aperto')}}</ion-col>
-                    <ion-col>{{struttura.chiusuraTemporanea}}</ion-col>
+                    <ion-col>{{!struttura.chiusuraTemporanea | boolToWord}}</ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.accessoDisabili')}}</ion-col>
@@ -100,11 +101,11 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.giochiBimbi')}}</ion-col>
-                    <ion-col>{{struttura.giochiBimbi}}</ion-col>
+                    <ion-col>{{struttura.giochiBimbi | boolToWord}}</ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.animaliAmmessi')}}</ion-col>
-                    <ion-col>{{struttura.animaliAmmessi}}</ion-col>
+                    <ion-col>{{struttura.animaliAmmessi | boolToWord}}</ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.posizione')}}</ion-col>
