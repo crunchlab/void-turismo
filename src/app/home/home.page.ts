@@ -6,6 +6,7 @@ import { FeatureToStrutturaService } from '../services/transformer/feature-to-st
 import { Feature, Geometry } from 'geojson';
 import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
+import { Router } from '@angular/router';
 
 SwiperCore.use([Virtual]);
 @Component({
@@ -42,9 +43,11 @@ export class HomePage {
     comuniCandidati: string[] = [];
     slidesVisible: boolean = false;
     @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
+    router: Router;
 
-    constructor(featureTransformer: FeatureToStrutturaService) {
+    constructor(featureTransformer: FeatureToStrutturaService, router: Router) {
         this.featureTransformer = featureTransformer;
+        this.router = router;
     }
 
     ngOnInit(): void {
@@ -116,6 +119,10 @@ export class HomePage {
         } else {
             this.comuniCandidati = [];
         }
+    }
+
+    public showDetailPage(struttura: Struttura) {
+        this.router.navigate(['/detail', { state: { 'struttura': struttura } }]);
     }
 
 }
