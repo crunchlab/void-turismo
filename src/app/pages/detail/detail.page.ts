@@ -17,8 +17,8 @@ export class DetailPage implements OnInit {
 
     ngOnInit() {
         this.actRoute.params.subscribe(params => {
-            console.log('The id of this route is: ', params.id);
             this.struttura = this.strutturaService.getDetail(params.id);
+            console.log(this.struttura);
         });
     }
 
