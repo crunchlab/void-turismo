@@ -9,12 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { TranslocoRootModule } from './transloco-root.module';
 import { StrutturaService } from './services/api/struttura.service';
+import { BoolToWordPipe } from './bool-to-word.pipe';
 
 @NgModule({
-    declarations: [AppComponent],
+    declarations: [AppComponent, BoolToWordPipe],
     entryComponents: [],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, TranslocoRootModule],
-    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, StrutturaService],
+    providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, StrutturaService, BoolToWordPipe],
     bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
 import { get as _get, isNil, uniq } from 'lodash';
-import { Struttura } from '../models/struttura/struttura';
-import { FeatureToStrutturaService } from '../services/transformer/feature-to-struttura.service';
+import { Struttura } from '../../models/struttura/struttura';
+import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
 import { Feature, Geometry } from 'geojson';
 import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Struttura } from '../models/struttura/struttura';
-import { StrutturaService } from '../services/api/struttura.service';
+import { Struttura } from '../../models/struttura/struttura';
+import { StrutturaService } from '../../services/api/struttura.service';
 
 @Component({
     selector: 'app-detail',
