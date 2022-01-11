@@ -27,7 +27,8 @@
                 <mgl-geojson-source id="strutture" [data]="'./assets/data/strutture.json'">
                 </mgl-geojson-source>
 
-                <mgl-layer id="strutture-label-layer" type="symbol" source="strutture" [layout]="struttureLabelLayout">
+                <mgl-layer id="strutture-label-layer" type="symbol" source="strutture" [layout]="struttureLabelLayout"
+               >
                 </mgl-layer>
 
                 <mgl-layer id="strutture-layer" type="circle" source="strutture"></mgl-layer>

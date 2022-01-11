@@ -25,7 +25,6 @@ export class HomePage {
     public struttureLabelLayout: maplibregl.SymbolLayout =
         {
             "visibility": "visible",
-
             "text-field": ["get", "denominazione"
             ],
             "text-font": [
@@ -37,9 +36,17 @@ export class HomePage {
                 1.25
             ],
             "text-anchor": "top"
-
-
         };
+    public labelPaint: maplibregl.SymbolPaint = {
+
+        "text-opacity": {
+            "stops": [
+                [{ "zoom": 6, "value": 0 }, 0],
+                [{ "zoom": 10, "value": 1 }, 1]
+            ]
+
+        }
+    };
     strutture: Struttura[] = [];
     comuni: string[] = [];
     comuniCandidati: string[] = [];
