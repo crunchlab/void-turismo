@@ -22,9 +22,8 @@
         </div>
         <div id="mapContainer">
             <mgl-map #homeMap [attributionControl]="false" [style]="'./assets/map-styles/style-dark.json'" [zoom]="[9]"
-                (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd()" 
-                (dragEnd)="onDragEnd()"
-                 [center]="[12.5510662,45.6331619]">
+                (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd()" (dragEnd)="onDragEnd()"
+                [center]="[12.5510662,45.6331619]">
                 <mgl-geojson-source id="strutture" [data]="'./assets/data/strutture.json'">
                 </mgl-geojson-source>
 
@@ -41,7 +40,7 @@
                     <ion-grid class="ion-no-margin">
                         <ion-row class="ion-no-margin">
                             <ion-col size="11" class="ion-no-margin">
-                                <a (click)="showDetailPage(struttura)">
+                                <a [routerLink]="['/','detail',struttura.codiceIdentificativo]">
                                     <h5 class="struttura_slide_titolo">{{struttura.denominazione}}</h5>
                                 </a>
                             </ion-col>

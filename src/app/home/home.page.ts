@@ -125,9 +125,4 @@ export class HomePage {
             this.comuniCandidati = [];
         }
     }
-
-    public showDetailPage(struttura: Struttura) {
-        this.router.navigate(['/detail', { state: { 'struttura': struttura } }]);
-    }
-
 }
