@@ -1,5 +1,29 @@
 {
     "struttura": {
         "dettagli_link": "dettagli"
+    },
+    "global": {
+        "true": "Sì",
+        "false": "No"
+    },
+    "detail": {
+        "back": "indietro",
+        "contatti": "contatti",
+        "web": "www",
+        "mail": "mail",
+        "phone": "tel.",
+        "dettagli": "dettagli",
+        "tipologia": "tipologia",
+        "classificazione": "classificazione",
+        "aperto": "aperto",
+        "accessoDisabili": "accessibile",
+        "giochiBimbi": "area giochi",
+        "animaliAmmessi": "animali ammessi",
+        "posizione": "posizione",
+        "trasporti": "trasporti",
+        "servizi": "servizi",
+        "wellness": "wellness",
+        "lingue": "lingue",
+        "dataUltimaModifica": "aggiornato il"
     }
 }
