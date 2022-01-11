@@ -37,24 +37,16 @@ export class HomePage {
 
 
         };
-    featureTransformer: FeatureToStrutturaService;
     strutture: Struttura[] = [];
     comuni: string[] = [];
     comuniCandidati: string[] = [];
     slidesVisible: boolean = false;
     @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
-    router: Router;
 
-    constructor(featureTransformer: FeatureToStrutturaService, router: Router) {
-        this.featureTransformer = featureTransformer;
-        this.router = router;
-    }
-
-    ngOnInit(): void {
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
+    constructor(private featureTransformer: FeatureToStrutturaService, private router: Router) {
 
     }
+
     public mapLoaded(event: any) {
         this.homeMap = event;
         this.homeMap.on('sourcedata', e => this.sectionSourceAddedCallback(e));

@@ -1,9 +1,77 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>detail</ion-title>
-  </ion-toolbar>
+<ion-header *transloco="let t">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button mode="md"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{t('detail.back')}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *transloco="let t">
+    <ion-grid>
+        <ion-row class="detail_intestazione">
+            <ion-col>
+                <ion-row>
+                    <h3>{{struttura.denominazione}}</h3>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        {{struttura.tipologia}} - {{struttura.nuovaClassificazioneLR11}}
+                    </ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        {{struttura.indirizzo}}, {{struttura.comune}}, {{struttura.provincia}}
+                    </ion-col>
+                </ion-row>
+            </ion-col>
+        </ion-row>
 
+        <ion-row>
+            <ion-col>
+                <div>
+                    <ion-icon src="../../assets/icons/ISO_wheel_chair.svg"></ion-icon>
+                    <ion-label>{{t('detail.accessibility')}}</ion-label>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <ion-icon  src="../../assets/icons/playground.svg"></ion-icon>
+                    <ion-label>{{t('detail.playground')}}</ion-label>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <ion-icon src="../../assets/icons/pets.svg"></ion-icon>
+                    <ion-label>{{t('detail.pets')}}</ion-label>
+                </div>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <h5>{{t('detail.contatti')}}</h5>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <div>
+                    <ion-icon name="globe-outline"></ion-icon>
+                    <ion-label>{{t('detail.web')}}</ion-label>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <ion-icon name="at-outline"></ion-icon>
+                    <ion-label>{{t('detail.mail')}}</ion-label>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <ion-icon name="call-outline"></ion-icon>
+                    <ion-label>{{t('detail.phone')}}</ion-label>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
