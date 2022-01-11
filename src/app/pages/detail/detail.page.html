@@ -109,19 +109,43 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.posizione')}}</ion-col>
-                    <ion-col>{{struttura.posizione}}</ion-col>
+                    <ion-col>
+                        <ion-row>
+                            <ion-col *ngFor="let item of struttura.posizione | keyvalue">
+                                <span *ngIf="item.value">{{item.key}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.trasporti')}}</ion-col>
-                    <ion-col>{{struttura.trasporti}}</ion-col>
+                    <ion-col>
+                        <ion-row>
+                            <ion-col *ngFor="let item of struttura.trasporti | keyvalue">
+                                <span *ngIf="item.value">{{item.key}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.servizi')}}</ion-col>
-                    <ion-col>{{struttura.servizi}}</ion-col>
+                    <ion-col>
+                        <ion-row>
+                            <ion-col *ngFor="let item of struttura.servizi | keyvalue">
+                                <span *ngIf="item.value">{{item.key}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.wellness')}}</ion-col>
-                    <ion-col>{{struttura.wellness}}</ion-col>
+                    <ion-col>
+                        <ion-row>
+                            <ion-col *ngFor="let item of struttura.wellness | keyvalue">
+                                <span *ngIf="item.value">{{item.key}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.lingue')}}</ion-col>
