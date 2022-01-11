@@ -14,7 +14,7 @@
         "test": "ng test -- --watch",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "publish":"ionic build --prod -- --base-href https://crunchlab.github.io/void-turismo/ && npx angular-cli-ghpages --dir=www"
+        "publish": "ionic build --prod -- --base-href https://crunchlab.github.io/void-turismo/ && npx angular-cli-ghpages --dir=www"
     },
     "private": true,
     "dependencies": {
@@ -30,6 +30,7 @@
         "maplibre-gl": "^1.15.2",
         "ngx-maplibre-gl": "^12.0.0",
         "rxjs": "~6.6.0",
+        "svg-country-flags": "^1.2.10",
         "swiper": "^7.4.1",
         "tslib": "^2.2.0",
         "zone.js": "~0.11.4"

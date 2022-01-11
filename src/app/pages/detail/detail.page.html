@@ -149,7 +149,15 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.lingue')}}</ion-col>
-                    <ion-col>{{struttura.lingue}}</ion-col>
+                    <ion-col>
+                        <ion-row>
+                            <ion-col *ngFor="let item of struttura.lingue | keyvalue">
+                                <span *ngIf="item.value">
+                                    <ion-icon [src]="item.key | langtoflag"></ion-icon>
+                                </span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.dataUltimaModifica')}}</ion-col>

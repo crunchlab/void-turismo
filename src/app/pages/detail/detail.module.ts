@@ -9,6 +9,7 @@ import { DetailPageRoutingModule } from './detail-routing.module';
 import { DetailPage } from './detail.page';
 import { TranslocoModule } from '@ngneat/transloco';
 import { BoolToWordPipeModule } from 'src/app/pipes/bool-to-word/bool-to-word.module';
+import { LangToFlagPipeModule } from 'src/app/pipes/lang-to-flag/lang-to-flag.module';
 @NgModule({
     imports: [
         CommonModule,
@@ -16,7 +17,8 @@ import { BoolToWordPipeModule } from 'src/app/pipes/bool-to-word/bool-to-word.mo
         IonicModule,
         DetailPageRoutingModule,
         TranslocoModule,
-        BoolToWordPipeModule],
+        BoolToWordPipeModule,
+        LangToFlagPipeModule],
     declarations: [DetailPage]
 })
 export class DetailPageModule { }
