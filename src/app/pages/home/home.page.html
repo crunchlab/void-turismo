@@ -40,13 +40,10 @@
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
                     <ion-grid class="ion-no-margin">
                         <ion-row class="ion-no-margin">
-                            <ion-col size="11" class="ion-no-margin">
+                            <ion-col class="ion-no-margin">
                                 <a [routerLink]="['/','detail',struttura.codiceIdentificativo]">
                                     <h5 class="struttura_slide_titolo">{{struttura.denominazione}}</h5>
                                 </a>
-                            </ion-col>
-                            <ion-col size="1" class="ion-no-margin">
-                                <ion-icon name="information-circle-outline"></ion-icon>
                             </ion-col>
                         </ion-row>
                         <ion-row class="ion-no-margin">
