@@ -15,7 +15,7 @@ export class FeatureToStrutturaService {
      * Maps the feature.properties elements to the field of a Struttura instance
      * @param feature: Feature
      */
-    featureToStruttura(feature: Feature<Geometry, { [name: string]: any; }>): Struttura {
+    public featureToStruttura(feature: Feature<Geometry, { [name: string]: any; }>): Struttura {
 
         let struttura: Struttura = new Struttura();
         this.mappings.map((mapping: FieldMapping) => {

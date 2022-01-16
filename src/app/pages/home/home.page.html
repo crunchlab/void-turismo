@@ -21,12 +21,14 @@
             </ion-list>
         </div>
         <div id="mapContainer">
-            <mgl-map #homeMap [attributionControl]="false" [style]="'./assets/map-styles/style-dark.json'" [zoom]="[9]"
-                (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd()" [center]="[12.5510662,45.6331619]">
+            <mgl-map #homeMap [attributionControl]="false" [style]="mapStyle" [zoom]="[9]"
+                (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd()" (dragEnd)="onDragEnd()"
+                [center]="[12.5510662,45.6331619]">
                 <mgl-geojson-source id="strutture" [data]="'./assets/data/strutture.json'">
                 </mgl-geojson-source>
 
-                <mgl-layer id="strutture-label-layer" type="symbol" source="strutture" [layout]="struttureLabelLayout">
+                <mgl-layer id="strutture-label-layer" type="symbol" source="strutture" [layout]="struttureLabelLayout"
+               >
                 </mgl-layer>
 
                 <mgl-layer id="strutture-layer" type="circle" source="strutture"></mgl-layer>
@@ -38,11 +40,10 @@
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
                     <ion-grid class="ion-no-margin">
                         <ion-row class="ion-no-margin">
-                            <ion-col size="11" class="ion-no-margin">
-                                <h5 class="struttura_slide_titolo">{{struttura.denominazione}}</h5>
-                            </ion-col>
-                            <ion-col size="1" class="ion-no-margin">
-                                <ion-icon name="information-circle-outline"></ion-icon>
+                            <ion-col class="ion-no-margin">
+                                <a [routerLink]="['/','detail',struttura.codiceIdentificativo]">
+                                    <h5 class="struttura_slide_titolo">{{struttura.denominazione}}</h5>
+                                </a>
                             </ion-col>
                         </ion-row>
                         <ion-row class="ion-no-margin">
@@ -58,7 +59,8 @@
                         </ion-row>
                         <ion-row class="ion-no-margin">
                             <ion-col class="ion-no-margin">
-                                <span class="struttura_slide_classificazione">{{struttura.nuovaClassificazioneLR11}}</span>
+                                <span
+                                    class="struttura_slide_classificazione">{{struttura.nuovaClassificazioneLR11}}</span>
                             </ion-col>
                         </ion-row>
                     </ion-grid>

@@ -1,5 +1,29 @@
 {
     "struttura": {
         "dettagli_link": "dettagli"
+    },
+    "global": {
+        "true": "Sì",
+        "false": "No"
+    },
+    "detail": {
+        "back": "back",
+        "contatti": "contatti",
+        "web": "web",
+        "mail": "mail",
+        "phone": "phone",
+        "dettagli": "dettagli",
+        "tipologia": "tipologia",
+        "classificazione": "classificazione",
+        "aperto": "aperto",
+        "accessoDisabili": "accessoDisabili",
+        "giochiBimbi": "giochiBimbi",
+        "animaliAmmessi": "animaliAmmessi",
+        "posizione": "posizione",
+        "trasporti": "trasporti",
+        "servizi": "servizi",
+        "wellness": "wellness",
+        "lingue": "lingue",
+        "dataUltimaModifica": "dataUltimaModifica"
     }
 }

@@ -1,11 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
 import { get as _get, isNil, uniq } from 'lodash';
-import { Struttura } from '../models/struttura/struttura';
-import { FeatureToStrutturaService } from '../services/transformer/feature-to-struttura.service';
+import { Struttura } from '../../models/struttura/struttura';
+import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
 import { Feature, Geometry } from 'geojson';
 import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
+import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
+
 
 SwiperCore.use([Virtual]);
 @Component({
@@ -16,12 +19,12 @@ SwiperCore.use([Virtual]);
 export class HomePage {
     homeMap: maplibregl.Map;
     selectedFeature: any = { lngLat: [0, 0] };
+    public mapStyle = environment.mapStyle;
     public get = _get;
 
     public struttureLabelLayout: maplibregl.SymbolLayout =
         {
             "visibility": "visible",
-
             "text-field": ["get", "denominazione"
             ],
             "text-font": [
@@ -33,25 +36,27 @@ export class HomePage {
                 1.25
             ],
             "text-anchor": "top"
-
-
         };
-    featureTransformer: FeatureToStrutturaService;
+    public labelPaint: maplibregl.SymbolPaint = {
+
+        "text-opacity": {
+            "stops": [
+                [{ "zoom": 6, "value": 0 }, 0],
+                [{ "zoom": 10, "value": 1 }, 1]
+            ]
+
+        }
+    };
     strutture: Struttura[] = [];
     comuni: string[] = [];
     comuniCandidati: string[] = [];
     slidesVisible: boolean = false;
     @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
 
-    constructor(featureTransformer: FeatureToStrutturaService) {
-        this.featureTransformer = featureTransformer;
+    constructor(private featureTransformer: FeatureToStrutturaService, private router: Router) {
+
     }
 
-    ngOnInit(): void {
-        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-        //Add 'implements OnInit' to the class.
-        
-    }
     public mapLoaded(event: any) {
         this.homeMap = event;
         this.homeMap.on('sourcedata', e => this.sectionSourceAddedCallback(e));
@@ -82,7 +87,13 @@ export class HomePage {
         }
     }
 
+    public onDragEnd() {
+        this.refreshSlides();
+    }
     public mapZoomEnd() {
+        this.refreshSlides();
+    }
+    private refreshSlides() {
         if (this.homeMap.getZoom() > 10) {
             this.strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
             this.swiperStrutture.swiperRef.virtual.removeAllSlides();
@@ -93,11 +104,10 @@ export class HomePage {
             }
 
         } else {
-            // this.swiperStrutture.swiperRef.removeAllSlides();
             this.strutture = [];
         }
-
     }
+
     private handleLayerClick(clickedFeature: Feature<Geometry, { [name: string]: any; }>) {
         let struttura: Struttura = this.featureTransformer.featureToStruttura(clickedFeature);
         const coordinates = this.get(clickedFeature, 'geometry.coordinates', []).slice();
@@ -117,5 +127,4 @@ export class HomePage {
             this.comuniCandidati = [];
         }
     }
-
 }
