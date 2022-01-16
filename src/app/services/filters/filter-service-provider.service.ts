@@ -34,7 +34,7 @@ export class FilterServiceProvider {
 
     applyFilters(features: any, path:string): any {
         let results: any = [];
-        let filterString: string = "features[*";
+        let filterString: string = `${path}[*`;
         this.filters.map((filter: AttributeFilter, idx: number) => {
 
             switch (filter.operator) {
@@ -65,7 +65,7 @@ export class FilterServiceProvider {
         });
         filterString += "]";
         console.log(filterString);
-        results = jq.default(filterString, { data: features, allowRegexp: true });
+        results = jq.default(filterString, { data: features, allowRegexp: true }).value;
         return results;
     }
     constructor() { }

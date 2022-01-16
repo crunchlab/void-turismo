@@ -62,21 +62,20 @@ describe('FilterServiceProvider', () => {
             {
                 property: 'tipologia',
                 operator: FilterOperator.eq,
-                value: Tipologia.ALBERGO
+                value: "ALBERGO"
             }, {
                 property: 'comune',
                 operator: FilterOperator.like,
                 value: "JESO"
             }, {
-                property: 'nuovaClassificazioneLR11osizione',
+                property: 'nuovaClassificazioneLR11',
                 operator: FilterOperator.like,
                 value: 3
             }
         ];
         service.setFilters(filters);
-        let features: Feature<Geometry, { [name: string]: any; }>[] = (strutture.features as Feature<Geometry, { [name: string]: any; }>[]);
-        let results: Feature<Geometry, { [name: string]: any; }>[] = service.applyFilters(features, "features.properties");
-        expect(results.length).toBe(208);
+        let results: Feature<Geometry, { [name: string]: any; }>[] = service.applyFilters(strutture, "features.properties");
+        expect(results.length).toBe(210);
     });
 
 });
