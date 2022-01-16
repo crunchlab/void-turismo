@@ -6,6 +6,10 @@ import { AttributeFilter } from '../../interfaces/attributeFilter.interface';
 
 import { FilterServiceProvider } from './filter-service-provider.service';
 
+import * as strutture from '../../../assets/data/strutture.json';
+import { Feature, Geometry } from 'geojson';
+
+
 describe('FilterServiceProvider', () => {
     let service: FilterServiceProvider;
 
@@ -26,12 +30,53 @@ describe('FilterServiceProvider', () => {
             value: Tipologia.ALBERGO
         };
         service.addFilter(filterAttribute);
-        expect(service.attributeFilters.findIndex(a => a.property == filterAttribute.property)).toBeGreaterThan(-1);
+        expect(service.filters.findIndex(a => a.property == filterAttribute.property)).toBeGreaterThan(-1);
         filterAttribute.value = Tipologia.BED_AND_BREAKFAST
         service.addFilter(filterAttribute);
-        expect(service.attributeFilters.findIndex(a => a.property == filterAttribute.property)).toBeGreaterThan(-1);
+        expect(service.filters.findIndex(a => a.property == filterAttribute.property)).toBeGreaterThan(-1);
+    });
+
+    it('should update filters array', () => {
+        let filters: AttributeFilter[] = [
+            {
+                property: 'tipologia',
+                operator: FilterOperator.eq,
+                value: Tipologia.ALBERGO
+            }, {
+                property: 'comune',
+                operator: FilterOperator.like,
+                value: "JESO"
+            }, {
+                property: 'pnuovaClassificazioneLR11osizione',
+                operator: FilterOperator.eq,
+                value: 3
+            }
+        ];
+        service.setFilters(filters);
+        expect(service.getFilters()).toEqual(filters);
+    });
 
 
+    it('should apply current filters to data collection', () => {
+        let filters: AttributeFilter[] = [
+            {
+                property: 'tipologia',
+                operator: FilterOperator.eq,
+                value: Tipologia.ALBERGO
+            }, {
+                property: 'comune',
+                operator: FilterOperator.like,
+                value: "JESO"
+            }, {
+                property: 'nuovaClassificazioneLR11osizione',
+                operator: FilterOperator.like,
+                value: 3
+            }
+        ];
+        service.setFilters(filters);
+        let features: Feature<Geometry, { [name: string]: any; }>[] = (strutture.features as Feature<Geometry, { [name: string]: any; }>[]);
+        let results: Feature<Geometry, { [name: string]: any; }>[] = service.applyFilters(features, "features.properties");
+        expect(results.length).toBe(208);
     });
 
 });
