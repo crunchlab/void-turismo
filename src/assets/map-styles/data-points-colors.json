@@ -1,0 +1,10 @@
+{
+    "tipologia": {
+        "AGRITURISMO": "#003f5c",
+        "ALBERGO": "#444e86",
+        "APPARTAMENTO": "#955196",
+        "BED_AND_BREAKFAST": "#dd5182",
+        "CAMPEGGIO": "#ff6e54",
+        "ALTRO": "#ffa600"
+    }
+}

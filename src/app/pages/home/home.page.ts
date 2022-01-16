@@ -8,6 +8,7 @@ import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
 
 
 SwiperCore.use([Virtual]);
@@ -22,6 +23,69 @@ export class HomePage {
     public mapStyle = environment.mapStyle;
     public get = _get;
 
+    public struttureCirclePaint: maplibregl.CirclePaint = {
+        'circle-radius': {
+            'base': 1.75,
+            'stops': [
+                [0, 0],
+                [6, 1],
+                [8, 2],
+                [11, 4],
+                [12, 5]
+            ]
+        },
+        'circle-color': [
+            'case',
+            // ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
+            // 'transparent',
+            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
+            COLOR_MAP.tipologia.ALTRO,
+            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "ALBERGO"]],
+            COLOR_MAP.tipologia.ALBERGO,
+            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "APPARTAMENTO"]],
+            COLOR_MAP.tipologia.APPARTAMENTO,
+            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "AGRITURISMO"]],
+            COLOR_MAP.tipologia.AGRITURISMO,
+            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "BED_AND_BREAKFAST"]],
+            COLOR_MAP.tipologia.BED_AND_BREAKFAST,
+            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "CAMPEGGIO"]],
+            COLOR_MAP.tipologia.CAMPEGGIO,
+            'transparent'
+        ],
+        'circle-stroke-color': [
+            'case',
+            ['any',
+                // ['!', ['boolean', ['feature-state', 'isSelected'], true]],
+                ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
+            ],
+            COLOR_MAP.tipologia.ALTRO,
+            ['==', ['get', 'tipologia'], "ALBERGO"],
+            COLOR_MAP.tipologia.ALBERGO,
+            ['==', ['get', 'tipologia'], "APPARTAMENTO"],
+            COLOR_MAP.tipologia.AGRITURISMO,
+            ['==', ['get', 'tipologia'], "AGRITURISMO"],
+            COLOR_MAP.tipologia.APPARTAMENTO,
+            ['==', ['get', 'tipologia'], "BED_AND_BREAKFAST"],
+            COLOR_MAP.tipologia.BED_AND_BREAKFAST,
+            ['==', ['get', 'tipologia'], "CAMPEGGIO"],
+            COLOR_MAP.tipologia.CAMPEGGIO,
+            'transparent'
+        ],
+        'circle-stroke-width': 1,
+
+        'circle-stroke-opacity': [
+            'case',
+            ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
+            0.5,
+            1
+        ],
+        'circle-opacity': [
+            'case',
+            ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
+            0.5,
+            1
+        ]
+    };
     public struttureLabelLayout: maplibregl.SymbolLayout =
         {
             "visibility": "visible",
