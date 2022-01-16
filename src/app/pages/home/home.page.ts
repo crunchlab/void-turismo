@@ -122,7 +122,7 @@ export class HomePage {
     public onSearchItemChange(event: any) {
         let searchTerm: string = _get(event, 'detail.value', '');
         if (searchTerm) {
-            this.comuniCandidati = this.comuni.filter(c => (c.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1));
+            this.comuniCandidati = this.comuni.filter(c => (c.toLowerCase().replace(' ', '').indexOf(searchTerm.toLowerCase().replace(' ', '')) > -1));
         } else {
             this.comuniCandidati = [];
         }
