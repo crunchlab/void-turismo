@@ -9,6 +9,7 @@ import { SwiperComponent } from 'swiper/angular';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
+import { FilterServiceProvider } from 'src/app/services/filters/filter-service-provider.service';
 
 
 SwiperCore.use([Virtual]);
@@ -117,7 +118,7 @@ export class HomePage {
     slidesVisible: boolean = false;
     @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
 
-    constructor(private featureTransformer: FeatureToStrutturaService, private router: Router) {
+    constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider) {
 
     }
 
@@ -159,7 +160,8 @@ export class HomePage {
     }
     private refreshSlides() {
         if (this.homeMap.getZoom() > 10) {
-            this.strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+            let filteredFeatures = this.filterService.applyFilters(this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }), "properties");
+            this.strutture = filteredFeatures.map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
             this.swiperStrutture.swiperRef.virtual.removeAllSlides();
             this.swiperStrutture.swiperRef.updateSlides();
             this.swiperStrutture.swiperRef.virtual.update(true);
@@ -173,7 +175,6 @@ export class HomePage {
     }
 
     private handleLayerClick(clickedFeature: Feature<Geometry, { [name: string]: any; }>) {
-        let struttura: Struttura = this.featureTransformer.featureToStruttura(clickedFeature);
         const coordinates = this.get(clickedFeature, 'geometry.coordinates', []).slice();
         const description = this.get(clickedFeature, 'properties.denominazione');
         const htmlContent = `<h4 class="tooltip_title">${description}</h4>`;
