@@ -10,10 +10,9 @@ import { environment } from '../../../environments/environment';
 import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
 import { FilterServiceProvider } from 'src/app/services/filters/filter-service-provider.service';
 import { FilterOperator } from 'src/app/enums/filterOperator.enum';
-import bbox from '@turf/bbox';
 import struttureGeoJson from '../../../assets/data/strutture.json';
 import { MapUtilsService } from 'src/app/services/utils/map-utils.service';
-import { LngLatBoundsLike, LngLatLike } from 'maplibre-gl';
+import { LngLatLike } from 'maplibre-gl';
 SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',
