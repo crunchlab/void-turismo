@@ -1,4 +1,7 @@
 {
+    "home": {
+        "comune": "Comune"
+    },
     "struttura": {
         "dettagli_link": "dettagli"
     },
@@ -7,23 +10,23 @@
         "false": "No"
     },
     "detail": {
-        "back": "back",
+        "back": "indietro",
         "contatti": "contatti",
-        "web": "web",
+        "web": "www",
         "mail": "mail",
-        "phone": "phone",
+        "phone": "tel.",
         "dettagli": "dettagli",
         "tipologia": "tipologia",
         "classificazione": "classificazione",
         "aperto": "aperto",
-        "accessoDisabili": "accessoDisabili",
-        "giochiBimbi": "giochiBimbi",
-        "animaliAmmessi": "animaliAmmessi",
+        "accessoDisabili": "accessibile",
+        "giochiBimbi": "area giochi",
+        "animaliAmmessi": "animali ammessi",
         "posizione": "posizione",
         "trasporti": "trasporti",
         "servizi": "servizi",
         "wellness": "wellness",
         "lingue": "lingue",
-        "dataUltimaModifica": "dataUltimaModifica"
+        "dataUltimaModifica": "aggiornato il"
     }
 }
