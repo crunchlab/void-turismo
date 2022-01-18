@@ -1,17 +1,17 @@
 import { Component, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
-import { get as _get, isNil, uniq } from 'lodash';
+import { get as _get, isNil, uniq, uniqBy } from 'lodash';
 import { Struttura } from '../../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
-import { Feature, Geometry } from 'geojson';
+import { Feature, FeatureCollection, Geometry } from 'geojson';
 import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { environment } from '../../../environments/environment';
 import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
 import { FilterServiceProvider } from 'src/app/services/filters/filter-service-provider.service';
 import { FilterOperator } from 'src/app/enums/filterOperator.enum';
-
-
+import bbox from '@turf/bbox';
+import struttureGeoJson from '../../../assets/data/strutture.json';
 SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',
@@ -23,7 +23,7 @@ export class HomePage {
     selectedFeature: any = { lngLat: [0, 0] };
     public mapStyle = environment.mapStyle;
     public get = _get;
-
+    public struttureGeoJson: FeatureCollection = (struttureGeoJson as FeatureCollection);
     public comuneSelezionato: string = "";
 
     public struttureCirclePaint: maplibregl.CirclePaint = {
@@ -147,7 +147,7 @@ export class HomePage {
             this.homeMap.isSourceLoaded('strutture') &&
             e.isSourceLoaded && (!this.comuni.length)) {
 
-            let strutture = this.homeMap.querySourceFeatures('strutture').map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+            let strutture = this.struttureGeoJson.features.map(feature => this.featureTransformer.featureToStruttura(feature as Feature));
             this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
             this.homeMap.off('sourcedata', this.sectionSourceAddedCallback); //Unbind event here
         }
@@ -163,9 +163,13 @@ export class HomePage {
         let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] });
         let filteredFeatures = this.filterService.applyFilters(renderedFeatures, "properties");
         let filterdIds: number[] = filteredFeatures.map(f => f.codiceIdentificativo);
+        let filterCoordinates = [];
         renderedFeatures.map(f => {
             let isMatch = filterdIds.includes(f.properties.codiceIdentificativo);
             this.homeMap.setFeatureState({ source: 'strutture', id: f.properties.codiceIdentificativo }, { "isMatch": isMatch });
+            if (isMatch) {
+                filterCoordinates.push(f);
+            }
         });
         if (this.homeMap.getZoom() > 10) {
             this.strutture = filteredFeatures.map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
@@ -178,6 +182,9 @@ export class HomePage {
 
         } else {
             this.strutture = [];
+        }
+        if (filterCoordinates.length) {
+            console.log(bbox(filterCoordinates));
         }
     }
 
