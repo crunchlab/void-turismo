@@ -9,6 +9,7 @@ import { SwiperComponent } from 'swiper/angular';
 import { environment } from '../../../environments/environment';
 import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
 import { FilterServiceProvider } from 'src/app/services/filters/filter-service-provider.service';
+import { FilterOperator } from 'src/app/enums/filterOperator.enum';
 
 
 SwiperCore.use([Virtual]);
@@ -147,7 +148,7 @@ export class HomePage {
             this.homeMap.isSourceLoaded('strutture') &&
             e.isSourceLoaded) {
             let strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
-            this.comuni = uniq(strutture.map((s: Struttura) => s.comune));
+            this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
 
             this.homeMap.off('sourcedata', this.sectionSourceAddedCallback); //Unbind event here
         }
@@ -191,22 +192,18 @@ export class HomePage {
             .addTo(this.homeMap);
     }
 
-    public onSearchItemChange(event: any) {
-        let searchTerm: string = _get(event, 'detail.value', '');
-        if (searchTerm) {
-            this.comuniCandidati = this.comuni.filter(c => (c.toLowerCase().replace(' ', '').indexOf(searchTerm.toLowerCase().replace(' ', '')) > -1));
-        } else {
-            this.comuniCandidati = [];
-        }
-    }
-
-    public searchComune(term: string) {
+    public searchComune(term: string, comune: string) {
         term = term.toLowerCase();
-        return term;
+        return comune.toLowerCase().replace(' ', '').indexOf(term) > -1;
 
     }
 
-    onComuneChange(comune: string) {
-        console.log(comune);
+    public onComuneChange(searchTerm: string) {
+        this.filterService.addFilter({
+            property: 'comune',
+            operator: FilterOperator.like,
+            value: searchTerm
+        });
+        this.refreshSlides();
     }
 }

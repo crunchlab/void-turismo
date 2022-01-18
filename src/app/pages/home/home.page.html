@@ -15,9 +15,14 @@
 
     <div id="container">
         <div class="search_container">
-            <ng-select class="search-comuni-select" [items]="comuni"
-                bindLabel="descProgrammaOperativo" [addTag]="false" [multiple]="false" [searchFn]="searchComune"
-                [hideSelected]="true" [minTermLength]="2" [virtualScroll]="true" (change)="onComuneChange($event)"
+            <ng-select class="search-comuni-select" 
+                [items]="comuni"
+                bindLabel="descProgrammaOperativo" 
+                [addTag]="false" 
+                [multiple]="false" [searchFn]="searchComune"
+                [hideSelected]="false" 
+                [minTermLength]="2" 
+                [virtualScroll]="true" (change)="onComuneChange($event)"
                 [placeholder]="'home.comune'|transloco" [typeToSearchText]="" #comuneSelect
                 [(ngModel)]="comuneSelezionato">
             
