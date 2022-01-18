@@ -146,7 +146,8 @@ export class HomePage {
         if (this.homeMap.getSource('strutture') &&
             this.homeMap.isSourceLoaded('strutture') &&
             e.isSourceLoaded && (!this.comuni.length)) {
-            let strutture = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }).map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+
+            let strutture = this.homeMap.querySourceFeatures('strutture').map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
             this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
             this.homeMap.off('sourcedata', this.sectionSourceAddedCallback); //Unbind event here
         }
@@ -190,14 +191,14 @@ export class HomePage {
             .addTo(this.homeMap);
     }
 
-    public searchComune(term: string="", comune: string) {
+    public searchComune(term: string = "", comune: string) {
         term = term.toLowerCase();
         return comune.toLowerCase().replace(' ', '').indexOf(term) > -1;
 
     }
 
-    public onComuneChange(searchTerm: string="") {
-        
+    public onComuneChange(searchTerm: string = "") {
+
         this.filterService.addFilter({
             property: 'comune',
             operator: FilterOperator.like,
