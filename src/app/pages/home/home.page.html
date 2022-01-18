@@ -31,7 +31,7 @@
         </div>
         <div id="mapContainer">
             <mgl-map #homeMap [attributionControl]="false" [style]="mapStyle" [zoom]="[9]"
-                (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd()"  (mapDragEnd)="onDragEnd()"
+                (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd($event)"  (mapDragEnd)="onDragEnd($event)"
                 [center]="[12.5510662,45.6331619]">
                 <mgl-geojson-source id="strutture" [data]="struttureGeoJson" promoteId="codiceIdentificativo">
                 </mgl-geojson-source>

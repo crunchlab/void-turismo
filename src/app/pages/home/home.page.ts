@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
-import { get as _get, isNil, uniq, uniqBy } from 'lodash';
+import { get, get as _get, isNil, uniq, uniqBy } from 'lodash';
 import { Struttura } from '../../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
 import { Feature, FeatureCollection, Geometry } from 'geojson';
@@ -12,7 +12,7 @@ import { FilterServiceProvider } from 'src/app/services/filters/filter-service-p
 import { FilterOperator } from 'src/app/enums/filterOperator.enum';
 import struttureGeoJson from '../../../assets/data/strutture.json';
 import { MapUtilsService } from 'src/app/services/utils/map-utils.service';
-import { LngLatLike } from 'maplibre-gl';
+import { LngLatLike, MapboxEvent } from 'maplibre-gl';
 SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',
@@ -154,12 +154,14 @@ export class HomePage {
         }
     }
 
-    public onDragEnd() {
-        this.refreshSlides();
+    public onDragEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
+        let isHuman = get(evt, 'originalEvent.isTrusted', false);
+        this.refreshSlides(!isHuman);
+
     }
-    public mapZoomEnd() {
-        console.log('mapZoomEnd');
-        this.refreshSlides();
+    public mapZoomEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
+        let isHuman = get(evt, 'originalEvent.isTrusted', false);
+        this.refreshSlides(!isHuman);
     }
     private refreshSlides(fitToResults: boolean = false) {
         let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] });
