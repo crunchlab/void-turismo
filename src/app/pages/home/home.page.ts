@@ -198,7 +198,8 @@ export class HomePage {
 
     }
 
-    public onComuneChange(searchTerm: string) {
+    public onComuneChange(searchTerm: string="") {
+        
         this.filterService.addFilter({
             property: 'comune',
             operator: FilterOperator.like,
