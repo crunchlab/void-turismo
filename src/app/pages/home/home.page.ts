@@ -6,7 +6,6 @@ import { FeatureToStrutturaService } from '../../services/transformer/feature-to
 import { Feature, Geometry } from 'geojson';
 import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
-import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
 import { FilterServiceProvider } from 'src/app/services/filters/filter-service-provider.service';
@@ -23,6 +22,8 @@ export class HomePage {
     selectedFeature: any = { lngLat: [0, 0] };
     public mapStyle = environment.mapStyle;
     public get = _get;
+
+    public comuneSelezionato: string = "";
 
     public struttureCirclePaint: maplibregl.CirclePaint = {
         'circle-radius': {
@@ -197,5 +198,15 @@ export class HomePage {
         } else {
             this.comuniCandidati = [];
         }
+    }
+
+    public searchComune(term: string) {
+        term = term.toLowerCase();
+        return term;
+
+    }
+
+    onComuneChange(comune: string) {
+        console.log(comune);
     }
 }

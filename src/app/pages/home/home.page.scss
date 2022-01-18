@@ -62,3 +62,66 @@ mgl-map,
     margin: auto;
     width: 100%;
 }
+
+.search-comuni-select {
+    background: white;
+    padding-left: 24px !important;
+    padding-right: 12px !important;
+
+    .ng-select-container {
+        min-height: unset !important;
+        background: white;
+        height: 36px;
+        border-radius: 18px;
+
+        input[type="text"] {
+            padding-left: 17px !important;
+            padding-right: 12px !important;
+        }
+
+        .ng-value-container {
+            align-self: flex-end;
+            margin-left: 17px;
+
+            .ng-placeholder {
+                position: unset;
+            }
+        }
+
+        .ng-arrow-wrapper {
+            visibility: hidden;
+        }
+    }
+
+    &.ng-select-opened {
+        .ng-select-container {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            z-index: 2000;
+
+            .ng-placeholder {
+                display: none;
+            }
+        }
+    }
+
+    .ng-has-value {
+        .ng-placeholder {
+            display: none;
+        }
+    }
+
+    .ng-dropdown-panel {
+        margin-left: 24px;
+        // padding-right: 12px;
+        width: calc(100% - 36px);
+        border-top-left-radius: 18px;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 18px;
+        margin-bottom: 12px;
+
+        // .scroll-host {
+        //     @include hideScrollbar();
+        // }
+    }
+}

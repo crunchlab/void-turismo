@@ -9,6 +9,7 @@ import { NgxMapLibreGLModule } from 'ngx-maplibre-gl';
 // home.module.ts
 import { SwiperModule } from 'swiper/angular';
 import { TranslocoModule } from '@ngneat/transloco';
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
     imports: [
         CommonModule,
@@ -17,7 +18,9 @@ import { TranslocoModule } from '@ngneat/transloco';
         HomePageRoutingModule,
         NgxMapLibreGLModule,
         SwiperModule,
-        TranslocoModule],
+        TranslocoModule,
+        NgSelectModule, 
+        FormsModule],
     declarations: [HomePage]
 })
 export class HomePageModule { }
