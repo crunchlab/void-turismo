@@ -64,7 +64,6 @@ export class FilterServiceProvider {
             }
         });
         filterString += "]";
-        console.log(filterString);
         results = jq.default(filterString, { data: features, allowRegexp: true }).value;
         return results;
     }
