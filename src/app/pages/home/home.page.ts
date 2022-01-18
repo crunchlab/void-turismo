@@ -39,24 +39,24 @@ export class HomePage {
             'case',
             // ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
             // 'transparent',
-            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
             COLOR_MAP.tipologia.ALTRO,
-            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "ALBERGO"]],
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "ALBERGO"]],
             COLOR_MAP.tipologia.ALBERGO,
-            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "APPARTAMENTO"]],
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "APPARTAMENTO"]],
             COLOR_MAP.tipologia.APPARTAMENTO,
-            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "AGRITURISMO"]],
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "AGRITURISMO"]],
             COLOR_MAP.tipologia.AGRITURISMO,
-            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "BED_AND_BREAKFAST"]],
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "BED_AND_BREAKFAST"]],
             COLOR_MAP.tipologia.BED_AND_BREAKFAST,
-            ['all', ['boolean', ['feature-state', 'isSelected'], true], ['==', ['get', 'tipologia'], "CAMPEGGIO"]],
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "CAMPEGGIO"]],
             COLOR_MAP.tipologia.CAMPEGGIO,
             'transparent'
         ],
         'circle-stroke-color': [
             'case',
             ['any',
-                // ['!', ['boolean', ['feature-state', 'isSelected'], true]],
+                // ['!', ['boolean', ['feature-state', 'isMatch'], true]],
                 ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
             ],
             COLOR_MAP.tipologia.ALTRO,
@@ -159,8 +159,14 @@ export class HomePage {
         this.refreshSlides();
     }
     private refreshSlides() {
+        let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] });
+        let filteredFeatures = this.filterService.applyFilters(renderedFeatures, "properties");
+        let filterdIds: number[] = filteredFeatures.map(f => f.codiceIdentificativo);
+        renderedFeatures.map(f => {
+            let isMatch = filterdIds.includes(f.properties.codiceIdentificativo);
+            this.homeMap.setFeatureState({ source: 'strutture-layer', id: f.properties.codiceIdentificativo }, { "isMatch": isMatch });
+        });
         if (this.homeMap.getZoom() > 10) {
-            let filteredFeatures = this.filterService.applyFilters(this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] }), "properties");
             this.strutture = filteredFeatures.map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
             this.swiperStrutture.swiperRef.virtual.removeAllSlides();
             this.swiperStrutture.swiperRef.updateSlides();
