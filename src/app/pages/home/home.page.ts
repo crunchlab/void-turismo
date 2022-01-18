@@ -165,7 +165,7 @@ export class HomePage {
         let filterdIds: number[] = filteredFeatures.map(f => f.codiceIdentificativo);
         renderedFeatures.map(f => {
             let isMatch = filterdIds.includes(f.properties.codiceIdentificativo);
-            this.homeMap.setFeatureState({ source: 'strutture-layer', id: f.properties.codiceIdentificativo }, { "isMatch": isMatch });
+            this.homeMap.setFeatureState({ source: 'strutture', id: f.properties.codiceIdentificativo }, { "isMatch": isMatch });
         });
         if (this.homeMap.getZoom() > 10) {
             this.strutture = filteredFeatures.map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));

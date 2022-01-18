@@ -1,4 +1,8 @@
+
 {
+    "home":{
+        "comune":"Comune"
+    },
     "struttura": {
         "dettagli_link": "dettagli"
     },

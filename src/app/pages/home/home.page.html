@@ -15,11 +15,6 @@
 
     <div id="container">
         <div class="search_container">
-            <!-- <ion-searchbar debounce="500" type="text" (ionChange)="onSearchItemChange($event)"></ion-searchbar>
-            <ion-list *ngIf="comuniCandidati.length">
-                <ion-item *ngFor="let comune of comuniCandidati">{{ comune }}</ion-item>
-            </ion-list> -->
-
             <ng-select class="search-comuni-select" [items]="comuni"
                 bindLabel="descProgrammaOperativo" [addTag]="false" [multiple]="false" [searchFn]="searchComune"
                 [hideSelected]="true" [minTermLength]="2" [virtualScroll]="true" (change)="onComuneChange($event)"
