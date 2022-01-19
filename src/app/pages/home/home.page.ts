@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
-import { get, get as _get, isNil, uniq, uniqBy } from 'lodash';
+import { get, get as _get, isNil, uniq } from 'lodash';
 import { Struttura } from '../../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
 import { Feature, FeatureCollection, Geometry } from 'geojson';
@@ -20,6 +20,9 @@ SwiperCore.use([Virtual]);
     styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+    @ViewChild('searchContainer') searchContainer: HTMLDivElement;
+    @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
+
     homeMap: maplibregl.Map;
     selectedFeature: any = { lngLat: [0, 0] };
     public mapStyle = environment.mapStyle;
@@ -118,7 +121,6 @@ export class HomePage {
     strutture: Struttura[] = [];
     comuni: string[] = [];
     slidesVisible: boolean = false;
-    @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
 
     constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService) {
 
@@ -156,23 +158,26 @@ export class HomePage {
 
     public onDragEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
         let isHuman = get(evt, 'originalEvent.isTrusted', false);
-        this.refreshSlides(!isHuman);
+        if (isHuman) {
+            this.refreshSlides();
+        }
 
     }
     public mapZoomEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
         let isHuman = get(evt, 'originalEvent.isTrusted', false);
-        this.refreshSlides(!isHuman);
+        if (isHuman) {
+            this.refreshSlides();
+        }
     }
     private refreshSlides(fitToResults: boolean = false) {
-        let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] });
-        let filteredFeatures = this.filterService.applyFilters(renderedFeatures, "properties");
+        let filteredFeatures = this.filterService.applyFilters(this.struttureGeoJson.features, "properties");
         let filterdIds: number[] = filteredFeatures.map(f => f.codiceIdentificativo);
         let filterCoordinates: LngLatLike[] = this.struttureGeoJson.features.filter(f => filterdIds.includes(+f.properties.codiceIdentificativo)).map(f => (f.geometry as any).coordinates);
-        renderedFeatures.map(f => {
+        this.struttureGeoJson.features.map(f => {
             let isMatch = filterdIds.includes(f.properties.codiceIdentificativo);
             this.homeMap.setFeatureState({ source: 'strutture', id: f.properties.codiceIdentificativo }, { "isMatch": isMatch });
         });
-        if (this.homeMap.getZoom() > 10) {
+        if (fitToResults || (this.homeMap.getZoom() > 10)) {
             this.strutture = filteredFeatures.map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
             this.swiperStrutture.swiperRef.virtual.removeAllSlides();
             this.swiperStrutture.swiperRef.updateSlides();
@@ -185,7 +190,14 @@ export class HomePage {
             this.strutture = [];
         }
         if (fitToResults && filterCoordinates.length) {
-            this.homeMap.fitBounds(this.mapUtils.getLatLngBounds(filterCoordinates));
+            let paddingObject = {
+                top: (this.searchContainer as any).nativeElement.getBoundingClientRect().height + 30,
+                left: 0,
+                right: 0,
+                bottom: (this.swiperStrutture as any).elementRef.nativeElement.getBoundingClientRect().height + 30
+            };
+            this.homeMap
+                .fitBounds(this.mapUtils.getLatLngBounds(filterCoordinates), { padding: paddingObject });
         }
     }
 

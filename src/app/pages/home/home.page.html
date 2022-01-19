@@ -14,7 +14,7 @@
     </ion-header> -->
 
     <div id="container">
-        <div class="search_container">
+        <div class="search_container" #searchContainer>
             <ng-select class="search-comuni-select" 
                 [items]="comuni"
                 bindLabel="descProgrammaOperativo" 
@@ -24,7 +24,7 @@
                 [hideSelected]="false" 
                 [minTermLength]="2" 
                 [virtualScroll]="true" (change)="onComuneChange($event)"
-                [placeholder]="'home.comune'|transloco" [typeToSearchText]="" #comuneSelect
+                [placeholder]="'home.comune'|transloco" [typeToSearchText]=""
                 [(ngModel)]="comuneSelezionato">
             
             </ng-select>
