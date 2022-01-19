@@ -120,6 +120,7 @@ export class HomePage implements OnInit {
     };
     strutture: Struttura[] = [];
     comuni: string[] = [];
+    tipologie:string[]=[];
     slidesVisible: boolean = false;
 
     ngOnInit(): void {
@@ -127,6 +128,7 @@ export class HomePage implements OnInit {
         //Add 'implements OnInit' to the class.
         let strutture = this.struttureGeoJson.features.map(feature => this.featureTransformer.featureToStruttura(feature as Feature));
         this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
+        this.tipologie = uniq(strutture.map((s:Struttura)=>s.tipologia)).sort();
         
     }
     constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService) {

@@ -41,10 +41,23 @@ mgl-map,
 .maplibregl-canvas-container {
     height: 100%;
 }
-
+.horizontal_scroll_flex {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+}
+.tipologia_chip {
+    width: 100%;
+    text-align: center;
+    flex-grow: 3;
+    display: inline-table;
+    white-space: nowrap;
+}
 .swiper {
     height: 0;
-    &.visible_slides{
+    &.visible_slides {
         height: 25vh;
     }
     top: 75vh;

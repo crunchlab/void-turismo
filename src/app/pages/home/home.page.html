@@ -21,6 +21,9 @@
                 [typeToSearchText]="" [(ngModel)]="comuneSelezionato">
 
             </ng-select>
+            <div #tipologieFilter class="horizontal_scroll_flex">
+                <ion-chip mode="md" class="tipologia_chip" *ngFor="let tipologia of tipologie"><ion-label>{{tipologia}}</ion-label></ion-chip>
+            </div>
         </div>
         <div id="mapContainer">
             <mgl-map #homeMap [attributionControl]="false" [style]="mapStyle" [zoom]="[9]" (mapLoad)="mapLoaded($event)"
