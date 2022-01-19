@@ -22,7 +22,10 @@
 
             </ng-select>
             <div #tipologieFilter class="horizontal_scroll_flex">
-                <ion-chip mode="md" class="tipologia_chip" *ngFor="let tipologia of tipologie"><ion-label>{{tipologia}}</ion-label></ion-chip>
+                <ion-chip mode="md" class="tipologia_chip"
+                    [attr.tipologia]="tipologia.replaceAll(' ', '_').replaceAll('\'','')" *ngFor="let tipologia of tipologie">
+                    <ion-label>{{tipologia}}</ion-label>
+                </ion-chip>
             </div>
         </div>
         <div id="mapContainer">
