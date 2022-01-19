@@ -43,7 +43,10 @@ mgl-map,
 }
 
 .swiper {
-    height: 25vh;
+    height: 0;
+    &.visible_slides{
+        height: 25vh;
+    }
     top: 75vh;
     ::ng-deep .swiper-slide {
         background-color: white;

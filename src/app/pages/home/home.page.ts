@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
 import { get, get as _get, isNil, uniq } from 'lodash';
 import { Struttura } from '../../models/struttura/struttura';
@@ -19,7 +19,7 @@ SwiperCore.use([Virtual]);
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
     @ViewChild('searchContainer') searchContainer: HTMLDivElement;
     @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
 
@@ -122,13 +122,19 @@ export class HomePage {
     comuni: string[] = [];
     slidesVisible: boolean = false;
 
+    ngOnInit(): void {
+        //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+        //Add 'implements OnInit' to the class.
+        let strutture = this.struttureGeoJson.features.map(feature => this.featureTransformer.featureToStruttura(feature as Feature));
+        this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
+        
+    }
     constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService) {
 
     }
 
     public mapLoaded(event: any) {
         this.homeMap = event;
-        this.homeMap.on('sourcedata', e => this.sectionSourceAddedCallback(e));
         this.homeMap.on('click', 'strutture-layer', (e: any) => {
             let clickedFeature = this.get(e, 'features[0]', null);
             if (!isNil(clickedFeature)) {
@@ -141,20 +147,11 @@ export class HomePage {
                 this.handleLayerClick(clickedFeature);
             }
         });
-
-
         event.resize();
+        let filterCoordinates: LngLatLike[] = this.struttureGeoJson.features.map(f => (f.geometry as any).coordinates);
+        this.fitResultsBBox(filterCoordinates);
     }
-    sectionSourceAddedCallback(e: maplibregl.EventData): void {
-        if (this.homeMap.getSource('strutture') &&
-            this.homeMap.isSourceLoaded('strutture') &&
-            e.isSourceLoaded && (!this.comuni.length)) {
-
-            let strutture = this.struttureGeoJson.features.map(feature => this.featureTransformer.featureToStruttura(feature as Feature));
-            this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
-            this.homeMap.off('sourcedata', this.sectionSourceAddedCallback); //Unbind event here
-        }
-    }
+   
 
     public onDragEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
         let isHuman = get(evt, 'originalEvent.isTrusted', false);
@@ -190,15 +187,20 @@ export class HomePage {
             this.strutture = [];
         }
         if (fitToResults && filterCoordinates.length) {
-            let paddingObject = {
-                top: (this.searchContainer as any).nativeElement.getBoundingClientRect().height + 30,
-                left: 0,
-                right: 0,
-                bottom: (this.swiperStrutture as any).elementRef.nativeElement.getBoundingClientRect().height + 30
-            };
-            this.homeMap
-                .fitBounds(this.mapUtils.getLatLngBounds(filterCoordinates), { padding: paddingObject });
+            this.fitResultsBBox(filterCoordinates);
         }
+    }
+
+
+    private fitResultsBBox(filterCoordinates: maplibregl.LngLatLike[]) {
+        let paddingObject = {
+            top: (this.searchContainer as any).nativeElement.getBoundingClientRect().height + 100,
+            left: 50,
+            right: 50,
+            bottom: (this.swiperStrutture as any).elementRef.nativeElement.getBoundingClientRect().height + 100
+        };
+        this.homeMap
+            .fitBounds(this.mapUtils.getLatLngBounds(filterCoordinates), { padding: paddingObject });
     }
 
     private handleLayerClick(clickedFeature: Feature<Geometry, { [name: string]: any; }>) {
