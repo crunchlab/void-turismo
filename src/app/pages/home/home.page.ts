@@ -46,17 +46,23 @@ export class HomePage implements OnInit {
             // ['!', ['boolean', ['feature-state', 'isHighlighted'], true]],
             // 'transparent',
             ['all', ['boolean', ['feature-state', 'isMatch'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
-            COLOR_MAP.tipologia.ALTRO,
+            COLOR_MAP.tipologia.ALTRA_RICETTIVITA,
             ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "ALBERGO"]],
             COLOR_MAP.tipologia.ALBERGO,
             ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "APPARTAMENTO"]],
             COLOR_MAP.tipologia.APPARTAMENTO,
             ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "AGRITURISMO"]],
             COLOR_MAP.tipologia.AGRITURISMO,
-            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "BED_AND_BREAKFAST"]],
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "BED AND BREAKFAST"]],
             COLOR_MAP.tipologia.BED_AND_BREAKFAST,
             ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "CAMPEGGIO"]],
             COLOR_MAP.tipologia.CAMPEGGIO,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "AFFITTACAMERE"]],
+            COLOR_MAP.tipologia.AFFITTACAMERE,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "COUNTRY HOUSE"]],
+            COLOR_MAP.tipologia.COUNTRY_HOUSE,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "RESIDENCE"]],
+            COLOR_MAP.tipologia.RESIDENCE,
             'transparent'
         ],
         'circle-stroke-color': [
@@ -65,7 +71,7 @@ export class HomePage implements OnInit {
                 // ['!', ['boolean', ['feature-state', 'isMatch'], true]],
                 ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]
             ],
-            COLOR_MAP.tipologia.ALTRO,
+            COLOR_MAP.tipologia.ALTRA_RICETTIVITA,
             ['==', ['get', 'tipologia'], "ALBERGO"],
             COLOR_MAP.tipologia.ALBERGO,
             ['==', ['get', 'tipologia'], "APPARTAMENTO"],
@@ -118,6 +124,7 @@ export class HomePage implements OnInit {
 
         }
     };
+    
     strutture: Struttura[] = [];
     comuni: string[] = [];
     tipologie:string[]=[];
@@ -129,6 +136,7 @@ export class HomePage implements OnInit {
         let strutture = this.struttureGeoJson.features.map(feature => this.featureTransformer.featureToStruttura(feature as Feature));
         this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
         this.tipologie = uniq(strutture.map((s:Struttura)=>s.tipologia)).sort();
+        console.log(this.tipologie);
         
     }
     constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService) {
