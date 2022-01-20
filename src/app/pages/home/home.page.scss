@@ -57,6 +57,9 @@ mgl-map,
     flex-grow: 3;
     display: inline-table;
     white-space: nowrap;
+    &.chip_selected {
+        background-color: white;
+    }
 }
 .swiper {
     height: 0;

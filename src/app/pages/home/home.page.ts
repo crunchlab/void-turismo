@@ -137,7 +137,7 @@ export class HomePage implements OnInit {
         let strutture = this.struttureGeoJson.features.map(feature => this.featureTransformer.featureToStruttura(feature as Feature));
         this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
         this.tipologie = uniq(strutture.map((s: Struttura) => s.tipologia)).sort();
-        console.log(this.tipologie);
+        this.tipologieSelezionate = [...this.tipologie];
 
     }
     constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService) {
@@ -243,10 +243,12 @@ export class HomePage implements OnInit {
     public onChipClick(tipologia: string) {
         if (this.tipologieSelezionate.includes(tipologia)) {
             remove(this.tipologieSelezionate, t => t == tipologia);
+            if (!this.tipologieSelezionate.length) {
+                this.tipologieSelezionate = [...this.tipologie];
+            }
         } else {
             this.tipologieSelezionate.push(tipologia);
         }
-
         console.log(this.tipologieSelezionate);
     }
 }
