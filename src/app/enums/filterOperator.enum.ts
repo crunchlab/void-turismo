@@ -4,5 +4,6 @@ export enum FilterOperator {
     gte,
     gteq,
     lte,
-    lteq
+    lteq,
+    in
 }

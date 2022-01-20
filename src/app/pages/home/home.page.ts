@@ -249,6 +249,7 @@ export class HomePage implements OnInit {
         } else {
             this.tipologieSelezionate.push(tipologia);
         }
-        console.log(this.tipologieSelezionate);
+        this.filterService.addFilter({ property: 'tipologia', operator: FilterOperator.in, value: this.tipologieSelezionate });
+        this.refreshSlides(false);
     }
 }

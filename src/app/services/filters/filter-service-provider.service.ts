@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { set } from 'lodash';
+import { remove, set } from 'lodash';
 import { AttributeFilter } from '../../interfaces/attributeFilter.interface';
 import * as jq from "json-query";
 import { FilterOperator } from '../../enums/filterOperator.enum';
@@ -32,8 +32,9 @@ export class FilterServiceProvider {
         }
     }
 
-    applyFilters(features: any, path:string): any {
+    applyFilters(features: any, path: string): any {
         let results: any = [];
+        let arrayFilters: AttributeFilter[] = [];
         let filterString: string = `${path}[*`;
         this.filters.map((filter: AttributeFilter, idx: number) => {
 
@@ -56,15 +57,21 @@ export class FilterServiceProvider {
                 case FilterOperator.like:
                     filterString += `${filter.property}~/.*${filter.value}.*/i`;
                     break
+                case FilterOperator.in:
+                    arrayFilters.push(filter);
+                    break
                 default:
                     break;
             }
-            if(idx < this.filters.length-1){
-                filterString+=" & ";
+            if (idx < this.filters.length - 1) {
+                filterString += " & ";
             }
         });
         filterString += "]";
         results = jq.default(filterString, { data: features, allowRegexp: true }).value;
+        arrayFilters.map((filter: AttributeFilter) => {
+            remove(results, r => !(filter.value as any[]).includes(r[filter.property]))
+        });
         return results;
     }
     constructor() { }
