@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
-import { get, get as _get, isNil, uniq } from 'lodash';
+import { get, get as _get, isNil, remove, uniq } from 'lodash';
 import { Struttura } from '../../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
 import { Feature, FeatureCollection, Geometry } from 'geojson';
@@ -124,20 +124,21 @@ export class HomePage implements OnInit {
 
         }
     };
-    
+
     strutture: Struttura[] = [];
     comuni: string[] = [];
-    tipologie:string[]=[];
+    tipologie: string[] = [];
     slidesVisible: boolean = false;
+    tipologieSelezionate: string[] = [];
 
     ngOnInit(): void {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
         let strutture = this.struttureGeoJson.features.map(feature => this.featureTransformer.featureToStruttura(feature as Feature));
         this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
-        this.tipologie = uniq(strutture.map((s:Struttura)=>s.tipologia)).sort();
+        this.tipologie = uniq(strutture.map((s: Struttura) => s.tipologia)).sort();
         console.log(this.tipologie);
-        
+
     }
     constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService) {
 
@@ -161,7 +162,7 @@ export class HomePage implements OnInit {
         let filterCoordinates: LngLatLike[] = this.struttureGeoJson.features.map(f => (f.geometry as any).coordinates);
         this.fitResultsBBox(filterCoordinates);
     }
-   
+
 
     public onDragEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
         let isHuman = get(evt, 'originalEvent.isTrusted', false);
@@ -237,5 +238,15 @@ export class HomePage implements OnInit {
             value: searchTerm
         });
         this.refreshSlides(true);
+    }
+
+    public onChipClick(tipologia: string) {
+        if (this.tipologieSelezionate.includes(tipologia)) {
+            remove(this.tipologieSelezionate, t => t == tipologia);
+        } else {
+            this.tipologieSelezionate.push(tipologia);
+        }
+
+        console.log(this.tipologieSelezionate);
     }
 }
