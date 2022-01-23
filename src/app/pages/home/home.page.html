@@ -22,7 +22,9 @@
                     [placeholder]="'home.comune'|transloco" [typeToSearchText]="" [(ngModel)]="comuneSelezionato">
 
                 </ng-select>
-                <ion-fab-button  (click)="onUserLocationClick()" id="user_locator"><ion-icon name="locate-outline"></ion-icon></ion-fab-button>
+                <ion-fab-button (click)="onUserLocationClick()" id="user_locator">
+                    <ion-icon name="locate-outline"></ion-icon>
+                </ion-fab-button>
             </div>
             <div #tipologieFilter class="horizontal_scroll_flex">
                 <ion-chip mode="md" class="tipologia_chip" (click)="onChipClick(tipologia)"
@@ -49,7 +51,8 @@
         </div>
         <!-- <div id="slideContainer"> -->
         <swiper #swiperStrutture [slidesPerView]="1.5" [ngClass]="{'visible_slides': strutture.length}"
-            [centeredSlides]="true" [spaceBetween]="10" [virtual]="true" (slideChange)="onSlideChange($event)">
+            [noSwiping]="true" [allowTouchMove]="false" [centeredSlides]="true" [spaceBetween]="10" [virtual]="true"
+            (slideChange)="onSlideChange($event)">
             <ng-container *ngFor="let struttura of strutture;">
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
                     <ion-grid class="ion-no-margin">
