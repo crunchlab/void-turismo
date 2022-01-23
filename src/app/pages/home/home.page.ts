@@ -4,16 +4,16 @@ import { get, get as _get, isNil, remove, uniq } from 'lodash';
 import { Struttura } from '../../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
 import { Feature, FeatureCollection, Geometry } from 'geojson';
-import SwiperCore, { Virtual } from 'swiper';
+import SwiperCore, { Swiper, Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { environment } from '../../../environments/environment';
 import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
 import { FilterServiceProvider } from 'src/app/services/filters/filter-service-provider.service';
 import { FilterOperator } from 'src/app/enums/filterOperator.enum';
-import struttureGeoJson from '../../../assets/data/strutture.json';
-import comuni from '../../../assets/data/comuni.json';
 import { MapUtilsService } from 'src/app/services/utils/map-utils.service';
 import { LngLatLike, MapboxEvent } from 'maplibre-gl';
+import struttureGeoJson from '../../../assets/data/strutture.json';
+import comuni from '../../../assets/data/comuni.json';
 SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',
@@ -36,6 +36,7 @@ export class HomePage implements OnInit {
     public tipologie: string[] = [];
     public slidesVisible: boolean = false;
     public tipologieSelezionate: string[] = [];
+    private marker: maplibregl.Marker = this.createMarker();
 
     public struttureCirclePaint: maplibregl.CirclePaint = {
         'circle-radius': {
@@ -256,5 +257,28 @@ export class HomePage implements OnInit {
         }
         this.filterService.addFilter({ property: 'tipologia', operator: FilterOperator.in, value: this.tipologieSelezionate });
         this.refreshSlides();
+    }
+
+    private createMarker(color:string='red'): maplibregl.Marker {
+        const el = document.createElement('div');
+        el.className = 'marker-container';
+        const markerDiv = document.createElement('div');
+        markerDiv.className = 'marker';
+        el.appendChild(markerDiv);
+        let marker: maplibregl.Marker = new maplibregl.Marker({color:color});
+
+        return marker;
+    }
+
+
+    public onSlideChange(event: any) {
+        let index = event.activeIndex;
+        let struttura = this.strutture[index];
+        let geojsonPoint = this.struttureGeoJson.features.find(f => f.properties.codiceIdentificativo == struttura.codiceIdentificativo);
+        const coordinates = this.get(geojsonPoint, 'geometry.coordinates', []).slice();
+        this.marker.remove();
+        this.marker = this.createMarker(COLOR_MAP.tipologia[struttura.tipologia.replaceAll(' ', '_').toUpperCase()]);
+        this.marker.setLngLat(coordinates)
+            .addTo(this.homeMap);
     }
 }

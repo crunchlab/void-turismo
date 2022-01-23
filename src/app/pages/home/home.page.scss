@@ -1,6 +1,5 @@
 @import "../../../theme/scrollbar-width-mixin.scss";
 
-
 #container {
     text-align: center;
 
@@ -60,33 +59,33 @@ mgl-map,
     white-space: nowrap;
     background-color: white;
     &.chip_selected {
-    &[data-tipologia=AFFITTACAMERE]{
-        background-color: var(--tipologia-background-affittacamere);
-    }
-    &[data-tipologia=AGRITURISMO]{
-        background-color: var(--tipologia-background-agriturismo);
-    }
-    &[data-tipologia=ALBERGO]{
-        background-color: var(--tipologia-background-albergo);
-    }
-    &[data-tipologia=ALTRA_RICETTIVITA]{
-        background-color: var(--tipologia-background-altra_ricettivita);
-    }
-    &[data-tipologia=APPARTAMENTO]{
-        background-color: var(--tipologia-background-appartamento);
-    }
-    &[data-tipologia=BED_AND_BREAKFAST]{
-        background-color: var(--tipologia-background-bed_and_breakfast);
-    }
-    &[data-tipologia=CAMPEGGIO]{
-        background-color: var(--tipologia-background-campeggio);
-    }
-    &[data-tipologia=COUNTRY_HOUSE]{
-        background-color: var(--tipologia-background-country_house);
-    }
-    &[data-tipologia=RESIDENCE]{
-        background-color: var(--tipologia-background-residence);
-    }
+        &[data-tipologia="AFFITTACAMERE"] {
+            background-color: var(--tipologia-background-affittacamere);
+        }
+        &[data-tipologia="AGRITURISMO"] {
+            background-color: var(--tipologia-background-agriturismo);
+        }
+        &[data-tipologia="ALBERGO"] {
+            background-color: var(--tipologia-background-albergo);
+        }
+        &[data-tipologia="ALTRA_RICETTIVITA"] {
+            background-color: var(--tipologia-background-altra_ricettivita);
+        }
+        &[data-tipologia="APPARTAMENTO"] {
+            background-color: var(--tipologia-background-appartamento);
+        }
+        &[data-tipologia="BED_AND_BREAKFAST"] {
+            background-color: var(--tipologia-background-bed_and_breakfast);
+        }
+        &[data-tipologia="CAMPEGGIO"] {
+            background-color: var(--tipologia-background-campeggio);
+        }
+        &[data-tipologia="COUNTRY_HOUSE"] {
+            background-color: var(--tipologia-background-country_house);
+        }
+        &[data-tipologia="RESIDENCE"] {
+            background-color: var(--tipologia-background-residence);
+        }
     }
 }
 .swiper {
@@ -175,3 +174,4 @@ mgl-map,
         // }
     }
 }
+

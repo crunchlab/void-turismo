@@ -47,7 +47,7 @@
         </div>
         <!-- <div id="slideContainer"> -->
         <swiper #swiperStrutture [slidesPerView]="1.5" [ngClass]="{'visible_slides': strutture.length}"
-            [centeredSlides]="true" [spaceBetween]="10" [virtual]="true">
+            [centeredSlides]="true" [spaceBetween]="10" [virtual]="true" (slideChange)="onSlideChange($event)">
             <ng-container *ngFor="let struttura of strutture;">
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
                     <ion-grid class="ion-no-margin">
