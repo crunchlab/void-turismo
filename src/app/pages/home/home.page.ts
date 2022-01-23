@@ -149,14 +149,14 @@ export class HomePage implements OnInit {
 
 
     public onDragEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
-        let isHuman = get(evt, 'originalEvent.isTrusted', false);
+        let isHuman = get(evt, 'originalEvent.isTrusted', true);
         if (isHuman) {
             this.refreshSlides();
         }
 
     }
     public mapZoomEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
-        let isHuman = get(evt, 'originalEvent.isTrusted', false);
+        let isHuman = get(evt, 'originalEvent.isTrusted', true);
         if (isHuman) {
             this.refreshSlides();
         }
@@ -223,7 +223,14 @@ export class HomePage implements OnInit {
     public onComuneChange(searchTerm: string = "") {
         let comune = comuni.find(c => c.name.toUpperCase() === searchTerm.toUpperCase());
         let filterCoordinates: LngLatLike = [comune.long, comune.lat];
-        this.homeMap.easeTo({ center: filterCoordinates, duration: 1200, zoom: 13 });
+        let easeOptions: any = {
+            center: filterCoordinates,
+            duration: 1200
+        };
+        if (this.homeMap.getZoom() < 13) {
+            easeOptions.zoom = 13;
+        }
+        this.homeMap.easeTo(easeOptions);
     }
 
     public onChipClick(tipologia: string) {
