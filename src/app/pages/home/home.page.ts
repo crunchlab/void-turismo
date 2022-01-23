@@ -50,7 +50,7 @@ export class HomePage implements OnInit {
         },
         'circle-color': [
             'case',
-            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['!', ['boolean', ['feature-state', 'isWithinRange'], true]]],
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "ALTRA_RICETTIVITA"]],
             COLOR_MAP.tipologia.ALTRA_RICETTIVITA,
             ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "ALBERGO"]],
             COLOR_MAP.tipologia.ALBERGO,
@@ -90,17 +90,12 @@ export class HomePage implements OnInit {
             ],
             "text-offset": [
                 0,
-                1.25
+                0.5
             ],
             "text-anchor": "top",
             "text-size": [
                 'interpolate', ['linear'], ['zoom'],
-                6, 1,
-                7, 2,
-                8, 4,
-                9, 8,
-                10, 14,
-                11, 16,
+                10, 10,
                 30, 24
             ]
         };
@@ -111,6 +106,28 @@ export class HomePage implements OnInit {
             ['boolean', ['feature-state', 'isMatch'], true],
             1,
             0
+        ],
+        "text-color": [
+            'case',
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "ALTRA_RICETTIVITA"]],
+            COLOR_MAP.tipologia.ALTRA_RICETTIVITA,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "ALBERGO"]],
+            COLOR_MAP.tipologia.ALBERGO,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "APPARTAMENTO"]],
+            COLOR_MAP.tipologia.APPARTAMENTO,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "AGRITURISMO"]],
+            COLOR_MAP.tipologia.AGRITURISMO,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "BED AND BREAKFAST"]],
+            COLOR_MAP.tipologia.BED_AND_BREAKFAST,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "CAMPEGGIO"]],
+            COLOR_MAP.tipologia.CAMPEGGIO,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "AFFITTACAMERE"]],
+            COLOR_MAP.tipologia.AFFITTACAMERE,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "COUNTRY HOUSE"]],
+            COLOR_MAP.tipologia.COUNTRY_HOUSE,
+            ['all', ['boolean', ['feature-state', 'isMatch'], true], ['==', ['get', 'tipologia'], "RESIDENCE"]],
+            COLOR_MAP.tipologia.RESIDENCE,
+            COLOR_MAP.tipologia.ALTRA_RICETTIVITA,
         ]
     };
 

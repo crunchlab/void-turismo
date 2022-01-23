@@ -36,10 +36,12 @@
                 <mgl-geojson-source id="strutture" [data]="struttureGeoJson" promoteId="codiceIdentificativo">
                 </mgl-geojson-source>
 
-                <mgl-layer id="strutture-label-layer" type="symbol" source="strutture" [layout]="struttureLabelLayout" [paint]="labelPaint">
+                <mgl-layer [minzoom]="10" id="strutture-label-layer" type="symbol" source="strutture" [layout]="struttureLabelLayout"
+                    [paint]="labelPaint">
                 </mgl-layer>
 
-                <mgl-layer id="strutture-layer" type="circle" source="strutture" [paint]="struttureCirclePaint">
+                <mgl-layer  id="strutture-layer" type="circle" source="strutture"
+                    [paint]="struttureCirclePaint">
                 </mgl-layer>
             </mgl-map>
         </div>
