@@ -259,13 +259,13 @@ export class HomePage implements OnInit {
         this.refreshSlides();
     }
 
-    private createMarker(color:string='red'): maplibregl.Marker {
+    private createMarker(color: string = 'red'): maplibregl.Marker {
         const el = document.createElement('div');
         el.className = 'marker-container';
         const markerDiv = document.createElement('div');
         markerDiv.className = 'marker';
         el.appendChild(markerDiv);
-        let marker: maplibregl.Marker = new maplibregl.Marker({color:color});
+        let marker: maplibregl.Marker = new maplibregl.Marker({ color: color });
 
         return marker;
     }
@@ -277,7 +277,8 @@ export class HomePage implements OnInit {
         let geojsonPoint = this.struttureGeoJson.features.find(f => f.properties.codiceIdentificativo == struttura.codiceIdentificativo);
         const coordinates = this.get(geojsonPoint, 'geometry.coordinates', []).slice();
         this.marker.remove();
-        this.marker = this.createMarker(COLOR_MAP.tipologia[struttura.tipologia.replaceAll(' ', '_').toUpperCase()]);
+        let color: string = get(COLOR_MAP, `tipologia[${struttura.tipologia.replaceAll(' ', '_').toUpperCase()}]`, COLOR_MAP.tipologia.ALTRA_RICETTIVITA);
+        this.marker = this.createMarker(color)
         this.marker.setLngLat(coordinates)
             .addTo(this.homeMap);
     }
