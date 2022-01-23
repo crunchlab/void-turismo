@@ -109,13 +109,22 @@ mgl-map,
     z-index: 100;
     position: absolute;
     margin: auto;
-    width: 100%;
+    width: 100vw;
 }
 
+.top-search-tools {
+    width: 100%;
+    display: flex;
+}
+#user_locator {
+    margin: auto;
+    aspect-ratio: 1;
+}
 .search-comuni-select {
     background: white;
     padding-left: 24px !important;
     padding-right: 12px !important;
+    width: 95%;
 
     .ng-select-container {
         min-height: unset !important;
@@ -174,4 +183,3 @@ mgl-map,
         // }
     }
 }
-

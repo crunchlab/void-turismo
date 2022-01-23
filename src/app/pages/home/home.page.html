@@ -15,12 +15,15 @@
 
     <div id="container">
         <div class="search_container" #searchContainer>
-            <ng-select class="search-comuni-select" [items]="comuni" bindLabel="descProgrammaOperativo" [addTag]="false"
-                [multiple]="false" [searchFn]="searchComune" [hideSelected]="false" [minTermLength]="2"
-                [virtualScroll]="true" (change)="onComuneChange($event)" [placeholder]="'home.comune'|transloco"
-                [typeToSearchText]="" [(ngModel)]="comuneSelezionato">
+            <div class="top-search-tools">
+                <ng-select class="search-comuni-select" [items]="comuni" bindLabel="descProgrammaOperativo"
+                    [addTag]="false" [multiple]="false" [searchFn]="searchComune" [hideSelected]="false"
+                    [minTermLength]="2" [virtualScroll]="true" (change)="onComuneChange($event)"
+                    [placeholder]="'home.comune'|transloco" [typeToSearchText]="" [(ngModel)]="comuneSelezionato">
 
-            </ng-select>
+                </ng-select>
+                <ion-fab-button  (click)="onUserLocationClick()" id="user_locator"><ion-icon name="locate-outline"></ion-icon></ion-fab-button>
+            </div>
             <div #tipologieFilter class="horizontal_scroll_flex">
                 <ion-chip mode="md" class="tipologia_chip" (click)="onChipClick(tipologia)"
                     [attr.data-tipologia]="tipologia.replaceAll(' ', '_').replaceAll('\'','')"
@@ -36,12 +39,11 @@
                 <mgl-geojson-source id="strutture" [data]="struttureGeoJson" promoteId="codiceIdentificativo">
                 </mgl-geojson-source>
 
-                <mgl-layer [minzoom]="10" id="strutture-label-layer" type="symbol" source="strutture" [layout]="struttureLabelLayout"
-                    [paint]="labelPaint">
+                <mgl-layer [minzoom]="10" id="strutture-label-layer" type="symbol" source="strutture"
+                    [layout]="struttureLabelLayout" [paint]="labelPaint">
                 </mgl-layer>
 
-                <mgl-layer  id="strutture-layer" type="circle" source="strutture"
-                    [paint]="struttureCirclePaint">
+                <mgl-layer id="strutture-layer" type="circle" source="strutture" [paint]="struttureCirclePaint">
                 </mgl-layer>
             </mgl-map>
         </div>

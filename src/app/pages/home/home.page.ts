@@ -270,6 +270,12 @@ export class HomePage implements OnInit {
         return marker;
     }
 
+    public onUserLocationClick() {
+        let geoSuccess = evt => console.log(evt);
+        let geoError = err => console.error(err);
+        navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+
+    }
 
     public onSlideChange(event: any) {
         let index = event.activeIndex;
