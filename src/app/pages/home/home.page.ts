@@ -11,6 +11,7 @@ import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
 import { FilterServiceProvider } from 'src/app/services/filters/filter-service-provider.service';
 import { FilterOperator } from 'src/app/enums/filterOperator.enum';
 import struttureGeoJson from '../../../assets/data/strutture.json';
+import comuni from '../../../assets/data/comuni.json';
 import { MapUtilsService } from 'src/app/services/utils/map-utils.service';
 import { LngLatLike, MapboxEvent } from 'maplibre-gl';
 SwiperCore.use([Virtual]);
@@ -23,12 +24,18 @@ export class HomePage implements OnInit {
     @ViewChild('searchContainer') searchContainer: HTMLDivElement;
     @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
 
-    homeMap: maplibregl.Map;
-    selectedFeature: any = { lngLat: [0, 0] };
+    public homeMap: maplibregl.Map;
+    public selectedFeature: any = { lngLat: [0, 0] };
     public mapStyle = environment.mapStyle;
     public get = _get;
     public struttureGeoJson: FeatureCollection = (struttureGeoJson as FeatureCollection);
     public comuneSelezionato: string = "";
+
+    public strutture: Struttura[] = [];
+    public comuni: string[] = [];
+    public tipologie: string[] = [];
+    public slidesVisible: boolean = false;
+    public tipologieSelezionate: string[] = [];
 
     public struttureCirclePaint: maplibregl.CirclePaint = {
         'circle-radius': {
@@ -107,11 +114,7 @@ export class HomePage implements OnInit {
         ]
     };
 
-    strutture: Struttura[] = [];
-    comuni: string[] = [];
-    tipologie: string[] = [];
-    slidesVisible: boolean = false;
-    tipologieSelezionate: string[] = [];
+
 
     ngOnInit(): void {
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -159,10 +162,12 @@ export class HomePage implements OnInit {
         }
     }
     private refreshSlides(fitToResults: boolean = false) {
-        let filteredFeatures = this.filterService.applyFilters(this.struttureGeoJson.features, "properties");
+        let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] });
+        // let filteredFeatures = this.filterService.applyFilters(this.struttureGeoJson.features, "properties");
+        let filteredFeatures = this.filterService.applyFilters(renderedFeatures, "properties");
         let filterdIds: number[] = filteredFeatures.map(f => f.codiceIdentificativo);
-        let filterCoordinates: LngLatLike[] = this.struttureGeoJson.features.filter(f => filterdIds.includes(+f.properties.codiceIdentificativo)).map(f => (f.geometry as any).coordinates);
-        this.struttureGeoJson.features.map(f => {
+        // let filterCoordinates: LngLatLike[] = this.struttureGeoJson.features.filter(f => filterdIds.includes(+f.properties.codiceIdentificativo)).map(f => (f.geometry as any).coordinates);
+        renderedFeatures.map(f => {
             let isMatch = filterdIds.includes(f.properties.codiceIdentificativo);
             this.homeMap.setFeatureState({ source: 'strutture', id: f.properties.codiceIdentificativo }, { "isMatch": isMatch });
         });
@@ -178,9 +183,9 @@ export class HomePage implements OnInit {
         } else {
             this.strutture = [];
         }
-        if (fitToResults && filterCoordinates.length) {
-            this.fitResultsBBox(filterCoordinates);
-        }
+        // if (fitToResults && filterCoordinates.length) {
+        //     this.fitResultsBBox(filterCoordinates);
+        // }
     }
 
 
@@ -211,14 +216,14 @@ export class HomePage implements OnInit {
 
     }
 
+    /**
+     * zooms in map to selected city
+     * @param searchTerm string: comune cercato
+     */
     public onComuneChange(searchTerm: string = "") {
-
-        this.filterService.addFilter({
-            property: 'comune',
-            operator: FilterOperator.like,
-            value: searchTerm
-        });
-        this.refreshSlides(true);
+        let comune = comuni.find(c => c.name.toUpperCase() === searchTerm.toUpperCase());
+        let filterCoordinates: LngLatLike = [comune.long, comune.lat];
+        this.homeMap.easeTo({ center: filterCoordinates, duration: 1200, zoom: 13 });
     }
 
     public onChipClick(tipologia: string) {
