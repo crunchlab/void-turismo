@@ -132,13 +132,13 @@ export class HomePage implements OnInit {
         this.homeMap = event;
         this.homeMap.on('click', 'strutture-layer', (e: any) => {
             let clickedFeature = this.get(e, 'features[0]', null);
-            if (!isNil(clickedFeature)) {
+            if (!isNil(clickedFeature) && clickedFeature.state.isMatch) {
                 this.handleLayerClick(clickedFeature);
             }
         });
         this.homeMap.on('click', 'strutture-label-layer', (e: any) => {
             let clickedFeature = this.get(e, 'features[0]', null);
-            if (!isNil(clickedFeature)) {
+            if (!isNil(clickedFeature) && clickedFeature.state.isMatch) {
                 this.handleLayerClick(clickedFeature);
             }
         });
@@ -161,7 +161,7 @@ export class HomePage implements OnInit {
             this.refreshSlides();
         }
     }
-    private refreshSlides(fitToResults: boolean = false) {
+    private refreshSlides() {
         let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] });
         // let filteredFeatures = this.filterService.applyFilters(this.struttureGeoJson.features, "properties");
         let filteredFeatures = this.filterService.applyFilters(renderedFeatures, "properties");
@@ -171,7 +171,7 @@ export class HomePage implements OnInit {
             let isMatch = filterdIds.includes(f.properties.codiceIdentificativo);
             this.homeMap.setFeatureState({ source: 'strutture', id: f.properties.codiceIdentificativo }, { "isMatch": isMatch });
         });
-        if (fitToResults || (this.homeMap.getZoom() > 10)) {
+        if (this.homeMap.getZoom() > 10) {
             this.strutture = filteredFeatures.map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
             this.swiperStrutture.swiperRef.virtual.removeAllSlides();
             this.swiperStrutture.swiperRef.updateSlides();
@@ -183,9 +183,6 @@ export class HomePage implements OnInit {
         } else {
             this.strutture = [];
         }
-        // if (fitToResults && filterCoordinates.length) {
-        //     this.fitResultsBBox(filterCoordinates);
-        // }
     }
 
 
@@ -243,6 +240,6 @@ export class HomePage implements OnInit {
             this.tipologieSelezionate.push(tipologia);
         }
         this.filterService.addFilter({ property: 'tipologia', operator: FilterOperator.in, value: this.tipologieSelezionate });
-        this.refreshSlides(false);
+        this.refreshSlides();
     }
 }
