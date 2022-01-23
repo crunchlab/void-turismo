@@ -201,13 +201,8 @@ export class HomePage implements OnInit {
     }
 
     private handleLayerClick(clickedFeature: Feature<Geometry, { [name: string]: any; }>) {
-        const coordinates = this.get(clickedFeature, 'geometry.coordinates', []).slice();
-        const description = this.get(clickedFeature, 'properties.denominazione');
-        const htmlContent = `<h4 class="tooltip_title">${description}</h4>`;
-        new maplibregl.Popup()
-            .setLngLat(coordinates)
-            .setHTML(htmlContent)
-            .addTo(this.homeMap);
+        let slideIdx = this.strutture.findIndex(s => s.codiceIdentificativo === clickedFeature.id);
+        this.swiperStrutture.swiperRef.slideTo(slideIdx, 1200);
     }
 
     public searchComune(term: string = "", comune: string) {
