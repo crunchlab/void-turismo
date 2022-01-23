@@ -173,6 +173,9 @@ export class HomePage implements OnInit {
         });
         if (this.homeMap.getZoom() > 10) {
             this.strutture = filteredFeatures.map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+            this.strutture = this.strutture.sort((a: Struttura, b: Struttura) => {
+                return (a.denominazione < b.denominazione) ? -1 : (a.denominazione > b.denominazione) ? 1 : 0;
+            })
             this.swiperStrutture.swiperRef.virtual.removeAllSlides();
             this.swiperStrutture.swiperRef.updateSlides();
             this.swiperStrutture.swiperRef.virtual.update(true);
