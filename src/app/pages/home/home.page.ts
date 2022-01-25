@@ -271,7 +271,20 @@ export class HomePage implements OnInit {
     }
 
     public onUserLocationClick() {
-        let geoSuccess = evt => console.log(evt);
+        let geoSuccess = evt => {
+            // console.log(evt);
+            let lng = evt.coords.longitude;
+            let lat = evt.coords.latitude;
+
+            let easeOptions: any = {
+                center: [lng, lat],
+                duration: 1200
+            };
+            if (this.homeMap.getZoom() < 13) {
+                easeOptions.zoom = 13;
+            }
+            this.homeMap.easeTo(easeOptions);
+        };
         let geoError = err => console.error(err);
         navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
 
