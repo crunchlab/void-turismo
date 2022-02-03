@@ -5,7 +5,8 @@ import featureToStrutturaMappings from "../mappings/featureToStrutturaMappings";
 export const environment = {
     production: false,
     fieldMappings: featureToStrutturaMappings,
-    mapStyle: './assets/map-styles/roadmap-style.json'
+    mapStyle: './assets/map-styles/roadmap-style.json',
+    dataPointColorMap: './assets/map-styles/data-points-colors.json'
     // mapStyle: './assets/map-styles/dark-style.json'
 
 };

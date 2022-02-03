@@ -20,9 +20,9 @@ export class FeatureToStrutturaService {
         let struttura: Struttura = new Struttura();
         this.mappings.map((mapping: FieldMapping) => {
             if (Array.isArray(mapping.properties)) {
-                struttura[mapping.field] = pick(feature.properties, mapping.properties)
+                struttura[mapping.field] = pick((feature.properties || feature), mapping.properties)
             } else {
-                struttura[mapping.field] = get(feature.properties, mapping.properties);
+                struttura[mapping.field] = get((feature.properties || feature), mapping.properties);
             }
         });
         return struttura;

@@ -14,28 +14,45 @@
     </ion-header> -->
 
     <div id="container">
-        <div class="search_container">
-            <ion-searchbar debounce="500" type="text" (ionChange)="onSearchItemChange($event)"></ion-searchbar>
-            <ion-list *ngIf="comuniCandidati.length">
-                <ion-item *ngFor="let comune of comuniCandidati">{{ comune }}</ion-item>
-            </ion-list>
+        <div class="search_container" #searchContainer>
+            <div class="top-search-tools">
+                <ng-select class="search-comuni-select" [items]="comuni" bindLabel="descProgrammaOperativo"
+                    [addTag]="false" [multiple]="false" [searchFn]="searchComune" [hideSelected]="false"
+                    [minTermLength]="2" [virtualScroll]="true" (change)="onComuneChange($event)"
+                    [placeholder]="'home.comune'|transloco" [typeToSearchText]="" [(ngModel)]="comuneSelezionato">
+
+                </ng-select>
+                <ion-fab-button (click)="onUserLocationClick()" id="user_locator">
+                    <ion-icon name="locate-outline"></ion-icon>
+                </ion-fab-button>
+            </div>
+            <div #tipologieFilter class="horizontal_scroll_flex">
+                <ion-chip mode="md" class="tipologia_chip" (click)="onChipClick(tipologia)"
+                    [attr.data-tipologia]="tipologia.replaceAll(' ', '_').replaceAll('\'','')"
+                    [ngClass]="{'chip_selected': tipologieSelezionate.includes(tipologia)}"
+                    *ngFor="let tipologia of tipologie">
+                    <ion-label>{{tipologia}}</ion-label>
+                </ion-chip>
+            </div>
         </div>
         <div id="mapContainer">
-            <mgl-map #homeMap [attributionControl]="false" [style]="mapStyle" [zoom]="[9]"
-                (mapLoad)="mapLoaded($event)" (zoomEnd)="mapZoomEnd()" (dragEnd)="onDragEnd()"
-                [center]="[12.5510662,45.6331619]">
-                <mgl-geojson-source id="strutture" [data]="'./assets/data/strutture.json'">
+            <mgl-map #homeMap [attributionControl]="false" [style]="mapStyle" [zoom]="[9]" (mapLoad)="mapLoaded($event)"
+                (zoomEnd)="mapZoomEnd($event)" (mapDragEnd)="onDragEnd($event)" [center]="[12.5510662,45.6331619]">
+                <mgl-geojson-source id="strutture" [data]="struttureGeoJson" promoteId="codiceIdentificativo">
                 </mgl-geojson-source>
 
-                <mgl-layer id="strutture-label-layer" type="symbol" source="strutture" [layout]="struttureLabelLayout"
-               >
+                <mgl-layer [minzoom]="10" id="strutture-label-layer" type="symbol" source="strutture"
+                    [layout]="struttureLabelLayout" [paint]="labelPaint">
                 </mgl-layer>
 
-                <mgl-layer id="strutture-layer" type="circle" source="strutture"></mgl-layer>
+                <mgl-layer id="strutture-layer" type="circle" source="strutture" [paint]="struttureCirclePaint">
+                </mgl-layer>
             </mgl-map>
         </div>
         <!-- <div id="slideContainer"> -->
-        <swiper #swiperStrutture [slidesPerView]="1.5" [centeredSlides]="true" [spaceBetween]="10" [virtual]="true">
+        <swiper #swiperStrutture [slidesPerView]="1.5" [ngClass]="{'visible_slides': strutture.length}"
+            [noSwiping]="true" [allowTouchMove]="false" [centeredSlides]="true" [spaceBetween]="10" [virtual]="true"
+            (slideChange)="onSlideChange($event)">
             <ng-container *ngFor="let struttura of strutture;">
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
                     <ion-grid class="ion-no-margin">

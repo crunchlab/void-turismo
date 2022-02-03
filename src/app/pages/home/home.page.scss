@@ -1,3 +1,5 @@
+@import "../../../theme/scrollbar-width-mixin.scss";
+
 #container {
     text-align: center;
 
@@ -41,9 +43,56 @@ mgl-map,
 .maplibregl-canvas-container {
     height: 100%;
 }
-
+.horizontal_scroll_flex {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    overflow-x: scroll;
+    @include hideScrollbar();
+}
+.tipologia_chip {
+    width: 100%;
+    text-align: center;
+    flex-grow: 3;
+    display: inline-table;
+    white-space: nowrap;
+    background-color: white;
+    &.chip_selected {
+        &[data-tipologia="AFFITTACAMERE"] {
+            background-color: var(--tipologia-background-affittacamere);
+        }
+        &[data-tipologia="AGRITURISMO"] {
+            background-color: var(--tipologia-background-agriturismo);
+        }
+        &[data-tipologia="ALBERGO"] {
+            background-color: var(--tipologia-background-albergo);
+        }
+        &[data-tipologia="ALTRA_RICETTIVITA"] {
+            background-color: var(--tipologia-background-altra_ricettivita);
+        }
+        &[data-tipologia="APPARTAMENTO"] {
+            background-color: var(--tipologia-background-appartamento);
+        }
+        &[data-tipologia="BED_AND_BREAKFAST"] {
+            background-color: var(--tipologia-background-bed_and_breakfast);
+        }
+        &[data-tipologia="CAMPEGGIO"] {
+            background-color: var(--tipologia-background-campeggio);
+        }
+        &[data-tipologia="COUNTRY_HOUSE"] {
+            background-color: var(--tipologia-background-country_house);
+        }
+        &[data-tipologia="RESIDENCE"] {
+            background-color: var(--tipologia-background-residence);
+        }
+    }
+}
 .swiper {
-    height: 25vh;
+    height: 0;
+    &.visible_slides {
+        height: 25vh;
+    }
     top: 75vh;
     ::ng-deep .swiper-slide {
         background-color: white;
@@ -60,5 +109,77 @@ mgl-map,
     z-index: 100;
     position: absolute;
     margin: auto;
+    width: 100vw;
+}
+
+.top-search-tools {
     width: 100%;
+    display: flex;
+}
+#user_locator {
+    margin: auto;
+    aspect-ratio: 1;
+}
+.search-comuni-select {
+    background: white;
+    padding-left: 24px !important;
+    padding-right: 12px !important;
+    width: 95%;
+
+    .ng-select-container {
+        min-height: unset !important;
+        background: white;
+        height: 36px;
+        border-radius: 18px;
+
+        input[type="text"] {
+            padding-left: 17px !important;
+            padding-right: 12px !important;
+        }
+
+        .ng-value-container {
+            align-self: flex-end;
+            margin-left: 17px;
+
+            .ng-placeholder {
+                position: unset;
+            }
+        }
+
+        .ng-arrow-wrapper {
+            visibility: hidden;
+        }
+    }
+
+    &.ng-select-opened {
+        .ng-select-container {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            z-index: 2000;
+
+            .ng-placeholder {
+                display: none;
+            }
+        }
+    }
+
+    .ng-has-value {
+        .ng-placeholder {
+            display: none;
+        }
+    }
+
+    .ng-dropdown-panel {
+        margin-left: 24px;
+        // padding-right: 12px;
+        width: calc(100% - 36px);
+        border-top-left-radius: 18px;
+        border-bottom-left-radius: 0;
+        border-top-right-radius: 18px;
+        margin-bottom: 12px;
+
+        // .scroll-host {
+        //     @include hideScrollbar();
+        // }
+    }
 }
