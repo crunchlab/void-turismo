@@ -1,7 +1,8 @@
 
 {
     "home":{
-        "comune":"Comune"
+        "comune":"Comune",
+        "advancedSearch":"ALTRO"
     },
     "struttura": {
         "dettagli_link": "dettagli"

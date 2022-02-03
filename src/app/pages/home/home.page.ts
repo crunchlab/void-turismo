@@ -301,4 +301,8 @@ export class HomePage implements OnInit {
         this.marker.setLngLat(coordinates)
             .addTo(this.homeMap);
     }
+
+    public onAdvancedSearchClick() {
+        console.log('onAdvancedSearchClick');
+    }
 }

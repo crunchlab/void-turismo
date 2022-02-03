@@ -33,6 +33,13 @@
                     *ngFor="let tipologia of tipologie">
                     <ion-label>{{tipologia}}</ion-label>
                 </ion-chip>
+                <ion-chip mode="md" 
+                    class="tipologia_chip advanced_search" 
+                    (click)="onAdvancedSearchClick()">
+                    <!-- <ion-icon name="filter-outline"></ion-icon> -->
+                    <!-- <ion-label>{{'home.advancedSearch'|transloco}}</ion-label> -->
+                    <ion-icon class="advanced_seach_icon" name="ellipsis-horizontal-outline"></ion-icon>
+                </ion-chip>
             </div>
         </div>
         <div id="mapContainer">
