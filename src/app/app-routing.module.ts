@@ -15,6 +15,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'advanced-search',
+    loadChildren: () => import('./pages/advanced-search/advanced-search.module').then( m => m.AdvancedSearchPageModule)
+  },
 ];
 
 @NgModule({
