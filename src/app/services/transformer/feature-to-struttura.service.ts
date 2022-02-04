@@ -24,12 +24,6 @@ export class FeatureToStrutturaService {
             } else {
                 struttura[mapping.field] = get((feature.properties || feature), mapping.properties);
             }
-
-            // must keep only true value if any
-            // if(mapping.type == "bool"){
-            //     let toKeep = Object.keys(struttura[mapping.field]).filter(k => get(struttura[mapping.field], k, false));
-            //     struttura[mapping.field] = toKeep;
-            // }
         });
         return struttura;
     }
