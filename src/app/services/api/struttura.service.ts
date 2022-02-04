@@ -38,10 +38,8 @@ export class StrutturaService {
                 } else {
                     return get(s, mapping.properties)
                 }
-            }
-            );
-
-            filter.value = uniq(values);
+            });
+            filter.value = uniq(values.sort());
             filter.property = mapping.field;
             return filter;
         });
