@@ -32,16 +32,17 @@ export class StrutturaService {
         let filters: AttributeFilter[] = []
         filters = fieldMappings.map((mapping: FieldMapping) => {
             let filter: AttributeFilter = { property: '', value: '', operator: FilterOperator.in };
-            filter.property = mapping.field;
             let values: any = this.strutture.map((s: Struttura) => {
                 if (Array.isArray(mapping.properties)) {
-                   return pick(s, mapping.properties);
+                    return pick(s, mapping.properties);
                 } else {
-                   return get(s, mapping.properties)
+                    return get(s, mapping.properties)
                 }
             }
             );
+
             filter.value = uniq(values);
+            filter.property = mapping.field;
             return filter;
         });
         return filters;

@@ -25,6 +25,11 @@ describe('StrutturaService', () => {
               properties:"tipologia",
               field:"tipologia",
               type:"string"
+          },
+          {
+              properties: "nuovaClassificazioneLR11",
+              field: "nuovaClassificazioneLR11",
+              type: "string"
           }
       ];
       let expectedValues = ["AFFITTACAMERE", "AGRITURISMO", "ALBERGO", "ALTRA RICETTIVITA'", "APPARTAMENTO", "BED AND BREAKFAST", "CAMPEGGIO", "COUNTRY HOUSE", "RESIDENCE"];
@@ -33,6 +38,13 @@ describe('StrutturaService', () => {
       expect(mapping.operator).toBe(FilterOperator.in);
       expect(mapping.property).toBe("tipologia");
       expect(intersection((mapping.value as string[]), expectedValues).length).toBe(expectedValues.length);
+
+
+      let lr11expectedValues = ["1","2","3","4","5"];
+      let lr11: AttributeFilter = filters[1];
+      expect(lr11.operator).toBe(FilterOperator.in);
+      expect(lr11.property).toBe("nuovaClassificazioneLR11");
+      expect(intersection((lr11.value as string[]), lr11expectedValues).length).toBe(lr11expectedValues.length);
   });
   
 });
