@@ -30,6 +30,16 @@ describe('StrutturaService', () => {
               properties: "nuovaClassificazioneLR11",
               field: "nuovaClassificazioneLR11",
               type: "string"
+          },
+          {
+              properties: "trasporti",
+              field: "trasporti",
+              type: "bool"
+          },
+          {
+              properties: "posizione",
+              field: "posizione",
+              type: "bool"
           }
       ];
       let expectedValues = ["AFFITTACAMERE", "AGRITURISMO", "ALBERGO", "ALTRA RICETTIVITA'", "APPARTAMENTO", "BED AND BREAKFAST", "CAMPEGGIO", "COUNTRY HOUSE", "RESIDENCE"];
@@ -45,6 +55,8 @@ describe('StrutturaService', () => {
       expect(lr11.operator).toBe(FilterOperator.in);
       expect(lr11.property).toBe("nuovaClassificazioneLR11");
       expect(intersection((lr11.value as string[]), lr11expectedValues).length).toBe(lr11expectedValues.length);
+
+      console.log(filters[3])
   });
   
 });

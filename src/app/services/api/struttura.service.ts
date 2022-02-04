@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Struttura } from 'src/app/models/struttura/struttura';
-import { find, get, pick, uniq } from 'lodash';
+import { find, flatten, get, pick, uniq } from 'lodash';
 import { FeatureToStrutturaService } from '../transformer/feature-to-struttura.service';
 
 import strutture from '../../../assets/data/strutture.json';
@@ -39,7 +39,12 @@ export class StrutturaService {
                     return get(s, mapping.properties)
                 }
             });
-            filter.value = uniq(values.sort());
+
+            // must keep only true value if any
+            if (mapping.type == "bool") {
+                values = values.map(v => Object.keys(v));
+            }
+            filter.value = (uniq(flatten(values)) as string[]).sort();
             filter.property = mapping.field;
             return filter;
         });
