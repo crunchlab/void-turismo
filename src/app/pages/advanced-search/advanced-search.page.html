@@ -1,21 +1,28 @@
 <ion-header>
   <ion-toolbar>
+            <ion-buttons slot="start">
+                <ion-back-button mode="md"></ion-back-button>
+            </ion-buttons>
     <ion-title>advanced-search</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-accordion-group [multiple]="true">
+    <ion-accordion-group [multiple]="true" [value]="1">
         <ion-accordion *ngFor="let filter of filters ">
             <ion-item slot="header">
                 <ion-label>{{filter.property}}</ion-label>
             </ion-item>
             <div class="" slot="content">
                 
-                <!-- [ngClass]="{'chip_selected': tipologieSelezionate.includes(tipologia)}"  -->
-                <ion-chip mode="md" class="filter_chip" (click)="onChipClick(filter)"
+                <ion-chip 
+                    mode="md" 
+                    class="filter_chip" 
+                    *ngFor="let filterValue of filter.value"
                     [attr.data-filterProperty]="filterValue.replaceAll(' ', '_').replaceAll('\'','')"
-                    *ngFor="let filterValue of filter.value">
+                    [ngClass]="{'chip_selected': isFilterSet(filter, filterValue)}" 
+                    (click)="onChipClick(filter, filterValue)"
+                >
                     <ion-label>{{filterValue}}</ion-label>
                 </ion-chip>
             </div>
