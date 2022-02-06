@@ -28,7 +28,7 @@
             </div>
             <div #tipologieFilter class="horizontal_scroll_flex">
                 <ion-chip mode="md" class="tipologia_chip" (click)="onChipClick(tipologia)"
-                    [attr.data-tipologia]="tipologia.replaceAll(' ', '_').replaceAll('\'','')"
+                    [attr.data-filterProperty]="tipologia.replaceAll(' ', '_').replaceAll('\'','')"
                     [ngClass]="{'chip_selected': tipologieSelezionate.includes(tipologia)}"
                     *ngFor="let tipologia of tipologie">
                     <ion-label>{{tipologia}}</ion-label>

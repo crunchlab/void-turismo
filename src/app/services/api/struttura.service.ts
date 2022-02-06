@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Struttura } from 'src/app/models/struttura/struttura';
+import { Struttura } from '../../models/struttura/struttura';
 import { find, flatten, get, pick, uniq } from 'lodash';
 import { FeatureToStrutturaService } from '../transformer/feature-to-struttura.service';
 
@@ -7,11 +7,14 @@ import strutture from '../../../assets/data/strutture.json';
 import { AttributeFilter } from '../../interfaces/attributeFilter.interface';
 import { FieldMapping } from '../../interfaces/fieldMapping.interface';
 import { FilterOperator } from '../../enums/filterOperator.enum';
+import { environment } from '../../../environments/environment';
 @Injectable({
     providedIn: 'root'
 })
 export class StrutturaService {
     strutture: Struttura[] = [];
+    mappings: FieldMapping[] = environment.filtersFieldMappings;
+
 
     constructor(private transformer: FeatureToStrutturaService) {
         this.strutture = strutture.features.map((f: any) => this.transformer.featureToStruttura(f));
@@ -28,9 +31,9 @@ export class StrutturaService {
      * @param fieldMappings 
      * @returns 
      */
-    public getFilterValues(fieldMappings: FieldMapping[]): AttributeFilter[] {
+    public getFilterValues(): AttributeFilter[] {
         let filters: AttributeFilter[] = []
-        filters = fieldMappings.map((mapping: FieldMapping) => {
+        filters = this.mappings.map((mapping: FieldMapping) => {
             let filter: AttributeFilter = { property: '', value: '', operator: FilterOperator.in };
             let values: any = this.strutture.map((s: Struttura) => {
                 if (Array.isArray(mapping.properties)) {

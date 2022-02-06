@@ -4,7 +4,7 @@ import { get, get as _get, isNil, remove, uniq } from 'lodash';
 import { Struttura } from '../../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
 import { Feature, FeatureCollection, Geometry } from 'geojson';
-import SwiperCore, { Swiper, Virtual } from 'swiper';
+import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { environment } from '../../../environments/environment';
 import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';

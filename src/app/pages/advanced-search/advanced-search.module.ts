@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AdvancedSearchPageRoutingModule } from './advanced-search-routing.module';
 
 import { AdvancedSearchPage } from './advanced-search.page';
+import { CastToPipeModule } from 'src/app/pipes/cast-to/cast-to.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AdvancedSearchPageRoutingModule
+    AdvancedSearchPageRoutingModule,
+    CastToPipeModule
   ],
   declarations: [AdvancedSearchPage]
 })
