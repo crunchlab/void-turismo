@@ -16,7 +16,7 @@ export class AdvancedSearchPage implements OnInit {
     public selectedFilters: AttributeFilter[];
     constructor(private filterService: FilterServiceProvider, private strutturaService: StrutturaService, private modalController:ModalController) {
         this.filters = this.strutturaService.getFilterValues();
-        this.selectedFilters =[];
+        this.selectedFilters = this.filterService.getFilters();
         console.log(this.filterService.getFilters());
     }
 
