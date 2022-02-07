@@ -15,6 +15,7 @@
 <ion-content>
     <ion-accordion-group [multiple]="true" [value]="1">
         <ion-accordion *ngFor="let filter of filters ">
+            
             <ion-item slot="header">
                 <ion-label>{{filter.property}}</ion-label>
             </ion-item>
@@ -23,7 +24,7 @@
                 <ion-chip 
                     mode="md" 
                     class="filter_chip" 
-                    *ngFor="let filterValue of filter.value"
+                    *ngFor="let filterValue of $any(filter).value"
                     [attr.data-filterProperty]="filterValue.replaceAll(' ', '_').replaceAll('\'','')"
                     [ngClass]="{'chip_selected': isFilterSet(filter, filterValue)}" 
                     (click)="onChipClick(filter, filterValue)"
