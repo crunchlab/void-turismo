@@ -16,6 +16,7 @@ import struttureGeoJson from '../../../assets/data/strutture.json';
 import comuni from '../../../assets/data/comuni.json';
 import { ModalController } from '@ionic/angular';
 import { AdvancedSearchPage } from '../advanced-search/advanced-search.page';
+import { AttributeFilter } from 'src/app/interfaces/attributeFilter.interface';
 SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',
@@ -315,9 +316,11 @@ export class HomePage implements OnInit {
             cssClass: 'monithon-about-modal'
         });
 
-        modal.onDidDismiss().then((modelData) => {
-            if (modelData !== null) {
-                console.log(modelData);
+        modal.onDidDismiss().then((modalData) => {
+            if (modalData !== null) {
+                let filters:AttributeFilter[] = get(modalData, 'data.filters', []);
+                filters.map((f:AttributeFilter)=>this.filterService.addFilter(f));
+                this.refreshSlides();
             }
         });
 

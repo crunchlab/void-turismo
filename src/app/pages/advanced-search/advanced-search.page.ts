@@ -16,7 +16,7 @@ export class AdvancedSearchPage implements OnInit {
     public selectedFilters: AttributeFilter[];
     constructor(private filterService: FilterServiceProvider, private strutturaService: StrutturaService, private modalController:ModalController) {
         this.filters = this.strutturaService.getFilterValues();
-        // this.selectedFilters = this.;
+        this.selectedFilters =[];
         console.log(this.filterService.getFilters());
     }
 
@@ -38,20 +38,20 @@ export class AdvancedSearchPage implements OnInit {
                 operator: filter.operator,
                 value: [value]
             }
-            // this.selectedFilters.push(selectedFilter);
+            this.selectedFilters.push(selectedFilter);
         }
 
-        this.filterService.addFilter(selectedFilter);
+        // this.filterService.addFilter(selectedFilter);
         console.log(this.filterService.getFilters());
 
     }
 
     public getFilterByProperty(filter: AttributeFilter): AttributeFilter {
-        return this.filterService.getFilters().find((f: AttributeFilter) => f.property == filter.property);
+        return this.selectedFilters.find((f: AttributeFilter) => f.property == filter.property);
     }
 
     public getFilterByValue(filter: AttributeFilter, value: string): AttributeFilter {
-        return this.filterService.getFilters().find((f: AttributeFilter) => f.property == filter.property && (f.value as string[]).includes(value));
+        return this.selectedFilters.find((f: AttributeFilter) => f.property == filter.property && (f.value as string[]).includes(value));
     }
 
     public isFilterSet(filter: AttributeFilter, value: string): boolean {
@@ -62,7 +62,10 @@ export class AdvancedSearchPage implements OnInit {
      * applyFilter
      */
     public applyFilter() {
-        
+        console.log(this.selectedFilters);
+        this.modalController.dismiss({
+            filters:this.selectedFilters
+        })
     }
 
     public closeModal(){
