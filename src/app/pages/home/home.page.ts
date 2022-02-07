@@ -8,15 +8,15 @@ import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { environment } from '../../../environments/environment';
 import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
-import { FilterServiceProvider } from 'src/app/services/filters/filter-service-provider.service';
-import { FilterOperator } from 'src/app/enums/filterOperator.enum';
-import { MapUtilsService } from 'src/app/services/utils/map-utils.service';
+import { FilterServiceProvider } from '../../services/filters/filter-service-provider.service';
+import { FilterOperator } from '../../enums/filterOperator.enum';
+import { MapUtilsService } from '../../services/utils/map-utils.service';
 import { LngLatLike, MapboxEvent } from 'maplibre-gl';
 import struttureGeoJson from '../../../assets/data/strutture.json';
 import comuni from '../../../assets/data/comuni.json';
 import { ModalController } from '@ionic/angular';
 import { AdvancedSearchPage } from '../advanced-search/advanced-search.page';
-import { AttributeFilter } from 'src/app/interfaces/attributeFilter.interface';
+import { AttributeFilter } from '../../interfaces/attributeFilter.interface';
 SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',

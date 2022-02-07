@@ -41,21 +41,27 @@ export class FilterServiceProvider {
             switch (filter.operator) {
                 case FilterOperator.eq:
                     filterString += `${filter.property}=${filter.value}`;
+                    filterString += (idx < this.filters.length - 1) ? " & " : "";
                     break;
                 case FilterOperator.gte:
                     filterString += `${filter.property}>${filter.value}`;
+                    filterString += (idx < this.filters.length - 1) ? " & " : "";
                     break;
                 case FilterOperator.gteq:
                     filterString += `${filter.property}>=${filter.value}`;
+                    filterString += (idx < this.filters.length - 1) ? " & " : "";
                     break;
                 case FilterOperator.lte:
                     filterString += `${filter.property}<${filter.value}`;
+                    filterString += (idx < this.filters.length - 1) ? " & " : "";
                     break;
                 case FilterOperator.lteq:
                     filterString += `${filter.property}<=${filter.value}`;
+                    filterString += (idx < this.filters.length - 1) ? " & " : "";
                     break;
                 case FilterOperator.like:
                     filterString += `${filter.property}~/.*${filter.value}.*/i`;
+                    filterString += (idx < this.filters.length - 1) ? " & " : "";
                     break
                 case FilterOperator.in:
                     arrayFilters.push(filter);
@@ -63,9 +69,8 @@ export class FilterServiceProvider {
                 default:
                     break;
             }
-            if (idx < this.filters.length - 1) {
-                filterString += " & ";
-            }
+
+
         });
         filterString += "]";
         results = jq.default(filterString, { data: features, allowRegexp: true }).value;

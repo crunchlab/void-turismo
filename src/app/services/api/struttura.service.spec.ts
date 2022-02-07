@@ -29,7 +29,7 @@ describe('StrutturaService', () => {
           { "field": "lingue", "properties": "lingue", "type": "bool" },
       ];
       let expectedValues = ["AFFITTACAMERE", "AGRITURISMO", "ALBERGO", "ALTRA RICETTIVITA'", "APPARTAMENTO", "BED AND BREAKFAST", "CAMPEGGIO", "COUNTRY HOUSE", "RESIDENCE"];
-      filters = service.getFilterValues(mappings);
+      filters = service.getFilterValues();
       let mapping :AttributeFilter = filters[0];
       expect(mapping.operator).toBe(FilterOperator.in);
       expect(mapping.property).toBe("tipologia");

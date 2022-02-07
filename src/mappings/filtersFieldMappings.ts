@@ -1,4 +1,4 @@
-import { FieldMapping } from "src/app/interfaces/fieldMapping.interface";
+import { FieldMapping } from "../app/interfaces/fieldMapping.interface";
 
 const filtersFieldMappings: FieldMapping[] = [
     { "field": "tipologia", "properties": "tipologia", "type": "string" },
