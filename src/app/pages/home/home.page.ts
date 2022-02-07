@@ -144,6 +144,7 @@ export class HomePage implements OnInit {
         this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
         this.tipologie = uniq(strutture.map((s: Struttura) => s.tipologia)).sort();
         this.tipologieSelezionate = [...this.tipologie];
+        this.filterService.addFilter({ property: 'tipologia', operator: FilterOperator.in, value: this.tipologieSelezionate });
     }
     constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService, public modalController: ModalController) {
 
