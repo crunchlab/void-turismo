@@ -1,7 +1,12 @@
 <ion-header>
   <ion-toolbar>
             <ion-buttons slot="start">
-                <ion-back-button mode="md"></ion-back-button>
+                <!-- <ion-back-button mode="md"></ion-back-button> -->
+                <ion-button (click)="closeModal()">cancel</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+                <!-- <ion-back-button mode="md"></ion-back-button> -->
+                <ion-button (click)="applyFilter()">apply</ion-button>
             </ion-buttons>
     <ion-title>advanced-search</ion-title>
   </ion-toolbar>

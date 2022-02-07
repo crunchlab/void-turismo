@@ -14,6 +14,8 @@ import { MapUtilsService } from 'src/app/services/utils/map-utils.service';
 import { LngLatLike, MapboxEvent } from 'maplibre-gl';
 import struttureGeoJson from '../../../assets/data/strutture.json';
 import comuni from '../../../assets/data/comuni.json';
+import { ModalController } from '@ionic/angular';
+import { AdvancedSearchPage } from '../advanced-search/advanced-search.page';
 SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',
@@ -142,7 +144,7 @@ export class HomePage implements OnInit {
         this.tipologie = uniq(strutture.map((s: Struttura) => s.tipologia)).sort();
         this.tipologieSelezionate = [...this.tipologie];
     }
-    constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService) {
+    constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService, public modalController: ModalController) {
 
     }
 
@@ -304,5 +306,23 @@ export class HomePage implements OnInit {
 
     public onAdvancedSearchClick() {
         console.log('onAdvancedSearchClick');
+
     }
+
+    async openIonModal() {
+        const modal = await this.modalController.create({
+            component: AdvancedSearchPage,
+            cssClass: 'monithon-about-modal'
+        });
+
+        modal.onDidDismiss().then((modelData) => {
+            if (modelData !== null) {
+                console.log(modelData);
+            }
+        });
+
+        return await modal.present();
+    }
+
 }
+
