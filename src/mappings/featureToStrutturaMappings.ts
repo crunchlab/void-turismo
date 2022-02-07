@@ -31,6 +31,11 @@ const featureToStrutturaMappings: FieldMapping[] = [
         "properties": ["www", "email", "fax", "telefono"],
         "type": "link"
     },
+    {
+        "field": "accoglienza",
+        "properties": ["accessoDisabili", "giochiBimbi", "animaliAmmessi"],
+        "type": "bool"
+    },
     { "field": "cap", "properties": "cap", "type": "string" },
     { "field": "zona", "properties": "zona", "type": "string" },
     { "field": "comune", "properties": "comune", "type": "string" },

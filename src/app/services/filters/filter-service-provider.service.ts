@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { remove, set } from 'lodash';
+import { remove, set, some } from 'lodash';
 import { AttributeFilter } from '../../interfaces/attributeFilter.interface';
 import * as jq from "json-query";
 import { FilterOperator } from '../../enums/filterOperator.enum';
@@ -75,7 +75,15 @@ export class FilterServiceProvider {
         filterString += "]";
         results = jq.default(filterString, { data: features, allowRegexp: true }).value;
         arrayFilters.map((filter: AttributeFilter) => {
-            remove(results, r => !(filter.value as any[]).includes(r[filter.property]))
+            remove(results, r => {
+                //1. remove element if the current property is not included in selected values
+                let removeIfNotIncluded: boolean = !(filter.value as any[]).includes(r[filter.property]);
+                //2. remove element if selected values are keys with false values
+                let removeIfNotTrue: boolean = !some(filter.value as any[], key=>r[key]);
+
+                return removeIfNotIncluded && removeIfNotTrue;
+
+            })
         });
         return results;
     }
