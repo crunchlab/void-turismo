@@ -302,8 +302,10 @@ export class HomePage implements OnInit {
         this.marker.remove();
         let color: string = get(COLOR_MAP, `tipologia[${struttura.tipologia.replaceAll(' ', '_').toUpperCase()}]`, COLOR_MAP.tipologia.ALTRA_RICETTIVITA);
         this.marker = this.createMarker(color)
-        this.marker.setLngLat(coordinates)
+        this.marker
+            .setLngLat(coordinates)
             .addTo(this.homeMap);
+        this.homeMap.panTo(coordinates, {duration:250});
     }
 
     public onAdvancedSearchClick() {
@@ -319,8 +321,8 @@ export class HomePage implements OnInit {
 
         modal.onDidDismiss().then((modalData) => {
             if (modalData !== null) {
-                let filters:AttributeFilter[] = get(modalData, 'data.filters', []);
-                filters.map((f:AttributeFilter)=>this.filterService.addFilter(f));
+                let filters: AttributeFilter[] = get(modalData, 'data.filters', []);
+                filters.map((f: AttributeFilter) => this.filterService.addFilter(f));
                 this.refreshSlides();
             }
         });
