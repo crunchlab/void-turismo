@@ -6,6 +6,19 @@
         justify-content: center;
     }
 }
+
+.detail_contacts {
+    ion-col {
+        background: var(--detail-contact-background, #ffce4f);
+        border: 2px solid white;
+        border-radius: 10px;
+        color: var(--detail-contact-font-color, #737373);
+    }
+    ion-icon {
+        background: var(--detail-contact-background, #ffce4f);
+        color: white;
+    }
+}
 .icon_container {
     display: flex;
     flex-direction: column;

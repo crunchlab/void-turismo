@@ -3,7 +3,9 @@
         <ion-buttons slot="start">
             <ion-back-button mode="md"></ion-back-button>
         </ion-buttons>
-        <ion-title><h3>{{t('detail.title')}}</h3></ion-title>
+        <ion-title>
+            <h3>{{t('detail.title')}}</h3>
+        </ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -28,7 +30,9 @@
             </ion-col>
         </ion-row>
 
-        <ion-row class="detail_services_header">
+        <ion-row class="detail_services_header" *ngIf="struttura.accoglienza['accessoDisabili'] 
+            || struttura.accoglienza['giochiBimbi'] 
+            || struttura.accoglienza['animaliAmmessi']">
             <ion-col>
                 <h5>{{t('detail.accoglienza')}}</h5>
             </ion-col>
@@ -41,7 +45,7 @@
                 </div>
             </ion-col>
             <ion-col *ngIf="struttura.accoglienza['giochiBimbi']" size="4">
-                <div class="icon_container" >
+                <div class="icon_container">
                     <ion-icon src="../../assets/icons/playground.svg"></ion-icon>
                     <ion-label>{{t('detail.giochiBimbi')}}</ion-label>
                 </div>
@@ -59,20 +63,20 @@
                 <h5>{{t('detail.contatti')}}</h5>
             </ion-col>
         </ion-row>
-        <ion-row class="detail_contacts">
-            <ion-col size="4">
+        <ion-row class="detail_contacts" *ngIf="struttura.contatti['www']">
+            <ion-col size="4" (click)="goToSite()">
                 <div class="icon_container">
                     <ion-icon name="globe-outline"></ion-icon>
                     <ion-label>{{t('detail.web')}}</ion-label>
                 </div>
             </ion-col>
-            <ion-col size="4">
+            <ion-col size="4" (click)="writeTo()" *ngIf="struttura.contatti['email']">
                 <div class="icon_container">
                     <ion-icon name="at-outline"></ion-icon>
                     <ion-label>{{t('detail.mail')}}</ion-label>
                 </div>
             </ion-col>
-            <ion-col size="4">
+            <ion-col size="4" (click)="phoneTo()" *ngIf="struttura.contatti['telefono']">
                 <div class="icon_container">
                     <ion-icon name="call-outline"></ion-icon>
                     <ion-label>{{t('detail.phone')}}</ion-label>
@@ -147,7 +151,7 @@
                     <ion-col>
                         <ion-row>
                             <ion-col *ngFor="let item of struttura.wellness | keyvalue | filterkeyvalue">
-                                <span >{{item.key}}</span>
+                                <span>{{item.key}}</span>
                             </ion-col>
                         </ion-row>
                     </ion-col>
