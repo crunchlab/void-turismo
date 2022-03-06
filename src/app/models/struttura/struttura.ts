@@ -5,6 +5,7 @@ export class Struttura {
     wellness: object;
     lingue: object;
     contatti: object;
+    accoglienza:object;
     cap: string;
     zona: string;
     comune: string;

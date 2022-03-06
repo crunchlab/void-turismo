@@ -1,3 +1,4 @@
+import filtersFieldMappings from "../mappings/filtersFieldMappings";
 import featureToStrutturaMappings from "../mappings/featureToStrutturaMappings";
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
@@ -5,6 +6,7 @@ import featureToStrutturaMappings from "../mappings/featureToStrutturaMappings";
 export const environment = {
     production: false,
     fieldMappings: featureToStrutturaMappings,
+    filtersFieldMappings: filtersFieldMappings,
     mapStyle: './assets/map-styles/roadmap-style.json',
     dataPointColorMap: './assets/map-styles/data-points-colors.json'
     // mapStyle: './assets/map-styles/dark-style.json'

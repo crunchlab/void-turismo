@@ -59,31 +59,31 @@ mgl-map,
     white-space: nowrap;
     background-color: white;
     &.chip_selected {
-        &[data-tipologia="AFFITTACAMERE"] {
+        &[data-filterProperty="AFFITTACAMERE"] {
             background-color: var(--tipologia-background-affittacamere);
         }
-        &[data-tipologia="AGRITURISMO"] {
+        &[data-filterProperty="AGRITURISMO"] {
             background-color: var(--tipologia-background-agriturismo);
         }
-        &[data-tipologia="ALBERGO"] {
+        &[data-filterProperty="ALBERGO"] {
             background-color: var(--tipologia-background-albergo);
         }
-        &[data-tipologia="ALTRA_RICETTIVITA"] {
+        &[data-filterProperty="ALTRA_RICETTIVITA"] {
             background-color: var(--tipologia-background-altra_ricettivita);
         }
-        &[data-tipologia="APPARTAMENTO"] {
+        &[data-filterProperty="APPARTAMENTO"] {
             background-color: var(--tipologia-background-appartamento);
         }
-        &[data-tipologia="BED_AND_BREAKFAST"] {
+        &[data-filterProperty="BED_AND_BREAKFAST"] {
             background-color: var(--tipologia-background-bed_and_breakfast);
         }
-        &[data-tipologia="CAMPEGGIO"] {
+        &[data-filterProperty="CAMPEGGIO"] {
             background-color: var(--tipologia-background-campeggio);
         }
-        &[data-tipologia="COUNTRY_HOUSE"] {
+        &[data-filterProperty="COUNTRY_HOUSE"] {
             background-color: var(--tipologia-background-country_house);
         }
-        &[data-tipologia="RESIDENCE"] {
+        &[data-filterProperty="RESIDENCE"] {
             background-color: var(--tipologia-background-residence);
         }
     }
@@ -182,4 +182,8 @@ mgl-map,
         //     @include hideScrollbar();
         // }
     }
+}
+
+.advanced_seach_icon{
+    margin: auto;
 }

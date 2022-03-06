@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
-import { DetailPage } from './detail.page';
+import { AdvancedSearchPage } from './advanced-search.page';
 
-describe('DetailPage', () => {
-  let component: DetailPage;
-  let fixture: ComponentFixture<DetailPage>;
+describe('AdvancedSearchPage', () => {
+  let component: AdvancedSearchPage;
+  let fixture: ComponentFixture<AdvancedSearchPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ DetailPage ],
+      declarations: [ AdvancedSearchPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(DetailPage);
+    fixture = TestBed.createComponent(AdvancedSearchPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

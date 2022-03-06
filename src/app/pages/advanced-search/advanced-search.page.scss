@@ -1,0 +1,8 @@
+.filter_chip {
+    text-align: center;
+    background-color: rgb(160, 160, 160);
+    &.chip_selected {
+        background-color: gray;
+        font-weight: bold;
+    }
+}

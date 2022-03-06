@@ -1,18 +1,22 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
-import { get, get as _get, isNil, remove, uniq } from 'lodash';
-import { Struttura } from '../../models/struttura/struttura';
-import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
+import { get, isNil, remove, uniq } from 'lodash';
 import { Feature, FeatureCollection, Geometry } from 'geojson';
-import SwiperCore, { Swiper, Virtual } from 'swiper';
+import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 import { environment } from '../../../environments/environment';
 import COLOR_MAP from '../../../assets/map-styles/data-points-colors.json';
-import { FilterServiceProvider } from 'src/app/services/filters/filter-service-provider.service';
-import { FilterOperator } from 'src/app/enums/filterOperator.enum';
-import { MapUtilsService } from 'src/app/services/utils/map-utils.service';
+import { FilterServiceProvider } from '../../services/filters/filter-service-provider.service';
+import { FilterOperator } from '../../enums/filterOperator.enum';
+import { MapUtilsService } from '../../services/utils/map-utils.service';
 import { LngLatLike, MapboxEvent } from 'maplibre-gl';
+import { ModalController } from '@ionic/angular';
+import { AdvancedSearchPage } from '../advanced-search/advanced-search.page';
+import { AttributeFilter } from '../../interfaces/attributeFilter.interface';
+
 import struttureGeoJson from '../../../assets/data/strutture.json';
+import { Struttura } from '../../models/struttura/struttura';
+import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
 import comuni from '../../../assets/data/comuni.json';
 SwiperCore.use([Virtual]);
 @Component({
@@ -27,7 +31,6 @@ export class HomePage implements OnInit {
     public homeMap: maplibregl.Map;
     public selectedFeature: any = { lngLat: [0, 0] };
     public mapStyle = environment.mapStyle;
-    public get = _get;
     public struttureGeoJson: FeatureCollection = (struttureGeoJson as FeatureCollection);
     public comuneSelezionato: string = "";
 
@@ -141,21 +144,22 @@ export class HomePage implements OnInit {
         this.comuni = uniq(strutture.map((s: Struttura) => s.comune)).sort();
         this.tipologie = uniq(strutture.map((s: Struttura) => s.tipologia)).sort();
         this.tipologieSelezionate = [...this.tipologie];
+        this.filterService.addFilter({ property: 'tipologia', operator: FilterOperator.in, value: this.tipologieSelezionate });
     }
-    constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService) {
+    constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService, public modalController: ModalController) {
 
     }
 
     public mapLoaded(event: any) {
         this.homeMap = event;
         this.homeMap.on('click', 'strutture-layer', (e: any) => {
-            let clickedFeature = this.get(e, 'features[0]', null);
+            let clickedFeature = get(e, 'features[0]', null);
             if (!isNil(clickedFeature) && clickedFeature.state.isMatch) {
                 this.handleLayerClick(clickedFeature);
             }
         });
         this.homeMap.on('click', 'strutture-label-layer', (e: any) => {
-            let clickedFeature = this.get(e, 'features[0]', null);
+            let clickedFeature = get(e, 'features[0]', null);
             if (!isNil(clickedFeature) && clickedFeature.state.isMatch) {
                 this.handleLayerClick(clickedFeature);
             }
@@ -294,11 +298,35 @@ export class HomePage implements OnInit {
         let index = event.activeIndex;
         let struttura = this.strutture[index];
         let geojsonPoint = this.struttureGeoJson.features.find(f => f.properties.codiceIdentificativo == struttura.codiceIdentificativo);
-        const coordinates = this.get(geojsonPoint, 'geometry.coordinates', []).slice();
+        const coordinates = get(geojsonPoint, 'geometry.coordinates', []).slice();
         this.marker.remove();
         let color: string = get(COLOR_MAP, `tipologia[${struttura.tipologia.replaceAll(' ', '_').toUpperCase()}]`, COLOR_MAP.tipologia.ALTRA_RICETTIVITA);
         this.marker = this.createMarker(color)
         this.marker.setLngLat(coordinates)
             .addTo(this.homeMap);
     }
+
+    public onAdvancedSearchClick() {
+        console.log('onAdvancedSearchClick');
+
+    }
+
+    async openIonModal() {
+        const modal = await this.modalController.create({
+            component: AdvancedSearchPage,
+            cssClass: 'monithon-about-modal'
+        });
+
+        modal.onDidDismiss().then((modalData) => {
+            if (modalData !== null) {
+                let filters:AttributeFilter[] = get(modalData, 'data.filters', []);
+                filters.map((f:AttributeFilter)=>this.filterService.addFilter(f));
+                this.refreshSlides();
+            }
+        });
+
+        return await modal.present();
+    }
+
 }
+

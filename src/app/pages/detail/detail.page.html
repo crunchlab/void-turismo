@@ -29,19 +29,19 @@
         </ion-row>
 
         <ion-row class="detail_services">
-            <ion-col *ngIf="struttura.accessoDisabili">
+            <ion-col *ngIf="struttura.accoglienza['accessoDisabili']">
                 <div>
                     <ion-icon src="../../assets/icons/ISO_wheel_chair.svg"></ion-icon>
                     <ion-label>{{t('detail.accessibility')}}</ion-label>
                 </div>
             </ion-col>
-            <ion-col *ngIf="struttura.giochiBimbi">
+            <ion-col *ngIf="struttura.accoglienza['giochiBimbi']">
                 <div>
                     <ion-icon src="../../assets/icons/playground.svg"></ion-icon>
                     <ion-label>{{t('detail.areaBimbi')}}</ion-label>
                 </div>
             </ion-col>
-            <ion-col *ngIf="struttura.animaliAmmessi">
+            <ion-col *ngIf="struttura.accoglienza['animaliAmmessi']">
                 <div>
                     <ion-icon src="../../assets/icons/pets.svg"></ion-icon>
                     <ion-label>{{t('detail.animaliAmmessi')}}</ion-label>

@@ -11,7 +11,7 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
-        "test": "ng test -- --watch",
+        "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
         "publish": "ionic build --prod -- --base-href https://crunchlab.github.io/void-turismo/ && npx angular-cli-ghpages --dir=www"

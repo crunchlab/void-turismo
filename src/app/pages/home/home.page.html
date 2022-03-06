@@ -28,11 +28,18 @@
             </div>
             <div #tipologieFilter class="horizontal_scroll_flex">
                 <ion-chip mode="md" class="tipologia_chip" (click)="onChipClick(tipologia)"
-                    [attr.data-tipologia]="tipologia.replaceAll(' ', '_').replaceAll('\'','')"
+                    [attr.data-filterProperty]="tipologia.replaceAll(' ', '_').replaceAll('\'','')"
                     [ngClass]="{'chip_selected': tipologieSelezionate.includes(tipologia)}"
                     *ngFor="let tipologia of tipologie">
                     <ion-label>{{tipologia}}</ion-label>
                 </ion-chip>
+                <!-- <a [routerLink]="['/','advanced-search']"> -->
+                    <ion-chip mode="md" 
+                        class="tipologia_chip advanced_search"
+                        (click)="openIonModal()">
+                        <ion-icon class="advanced_seach_icon" name="ellipsis-horizontal-outline"></ion-icon>
+                    </ion-chip>
+                <!-- </a> -->
             </div>
         </div>
         <div id="mapContainer">

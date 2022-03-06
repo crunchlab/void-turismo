@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+            <ion-buttons slot="start">
+                <!-- <ion-back-button mode="md"></ion-back-button> -->
+                <ion-button (click)="closeModal()">cancel</ion-button>
+            </ion-buttons>
+            <ion-buttons slot="end">
+                <!-- <ion-back-button mode="md"></ion-back-button> -->
+                <ion-button (click)="applyFilter()">apply</ion-button>
+            </ion-buttons>
+    <ion-title>advanced-search</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-accordion-group [multiple]="true" [value]="1">
+        <ion-accordion *ngFor="let filter of filters ">
+            
+            <ion-item slot="header">
+                <ion-label>{{filter.property}}</ion-label>
+            </ion-item>
+            <div class="" slot="content">
+                
+                <ion-chip 
+                    mode="md" 
+                    class="filter_chip" 
+                    *ngFor="let filterValue of $any(filter).value"
+                    [attr.data-filterProperty]="filterValue.replaceAll(' ', '_').replaceAll('\'','')"
+                    [ngClass]="{'chip_selected': isFilterSet(filter, filterValue)}" 
+                    (click)="onChipClick(filter, filterValue)"
+                >
+                    <ion-label>{{filterValue}}</ion-label>
+                </ion-chip>
+            </div>
+        </ion-accordion>
+    </ion-accordion-group>
+
+</ion-content>
