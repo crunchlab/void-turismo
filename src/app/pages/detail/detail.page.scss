@@ -1,12 +1,16 @@
-.detail_services {
+.detail_services,
+.detail_contacts {
     ion-col {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
+        justify-content: center;
     }
 }
 .icon_container {
     display: flex;
     flex-direction: column;
+    text-align: center;
+
     ion-icon {
         width: 32px;
         height: 32px;
@@ -14,6 +18,9 @@
     }
     ion-label {
         align-self: center;
-        white-space: nowrap;
     }
+}
+
+.detail_lang_flag {
+    width: 32px;
 }
