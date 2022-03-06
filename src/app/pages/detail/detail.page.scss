@@ -1,0 +1,19 @@
+.detail_services {
+    ion-col {
+        display: flex;
+        align-items: center;
+    }
+}
+.icon_container {
+    display: flex;
+    flex-direction: column;
+    ion-icon {
+        width: 32px;
+        height: 32px;
+        align-self: center;
+    }
+    ion-label {
+        align-self: center;
+        white-space: nowrap;
+    }
+}
