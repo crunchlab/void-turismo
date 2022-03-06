@@ -13,7 +13,7 @@ import { LngLatLike, MapboxEvent } from 'maplibre-gl';
 import { ModalController } from '@ionic/angular';
 import { AdvancedSearchPage } from '../advanced-search/advanced-search.page';
 import { AttributeFilter } from '../../interfaces/attributeFilter.interface';
-
+import distance from '@turf/distance';
 import struttureGeoJson from '../../../assets/data/strutture.json';
 import { Struttura } from '../../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
@@ -184,20 +184,25 @@ export class HomePage implements OnInit {
         }
     }
     private refreshSlides() {
-        let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap.queryRenderedFeatures(null, { "layers": ["strutture-layer"] });
-        // let filteredFeatures = this.filterService.applyFilters(this.struttureGeoJson.features, "properties");
+        let mapCenter = [this.homeMap.getCenter().lng, this.homeMap.getCenter().lat];
+        let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap
+            .queryRenderedFeatures(null, { "layers": ["strutture-layer"] })
+            .sort((f1: any, f2: any) => {
+                let f1ToCenter = distance(mapCenter, f1.geometry.coordinates);
+                let f2ToCenter = distance(mapCenter, f2.geometry.coordinates);
+                return f1ToCenter - f2ToCenter;
+            })
         let filteredFeatures = this.filterService.applyFilters(renderedFeatures, "properties");
         let filterdIds: number[] = filteredFeatures.map(f => f.codiceIdentificativo);
-        // let filterCoordinates: LngLatLike[] = this.struttureGeoJson.features.filter(f => filterdIds.includes(+f.properties.codiceIdentificativo)).map(f => (f.geometry as any).coordinates);
+
         renderedFeatures.map(f => {
             let isMatch = filterdIds.includes(f.properties.codiceIdentificativo);
             this.homeMap.setFeatureState({ source: 'strutture', id: f.properties.codiceIdentificativo }, { "isMatch": isMatch });
         });
         if (this.homeMap.getZoom() > 10) {
-            this.strutture = filteredFeatures.map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
-            this.strutture = this.strutture.sort((a: Struttura, b: Struttura) => {
-                return (a.denominazione < b.denominazione) ? -1 : (a.denominazione > b.denominazione) ? 1 : 0;
-            })
+            this.strutture = filteredFeatures
+                .map((feature: Feature) => this.featureTransformer.featureToStruttura(feature));
+
             this.swiperStrutture.swiperRef.virtual.removeAllSlides();
             this.swiperStrutture.swiperRef.updateSlides();
             this.swiperStrutture.swiperRef.virtual.update(true);
