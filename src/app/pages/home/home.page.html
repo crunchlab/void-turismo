@@ -68,25 +68,25 @@
                         <ion-row class="ion-no-margin">
                             <ion-col class="ion-no-margin">
                                 <a [routerLink]="['/','detail',struttura.codiceIdentificativo]">
-                                    <h5 class="struttura_slide_titolo">{{struttura.denominazione}}</h5>
+                                    <h5 class="struttura_slide_titolo">{{struttura.denominazione | titlecase}} </h5>
                                 </a>
                             </ion-col>
                         </ion-row>
                         <ion-row class="ion-no-margin">
                             <ion-col class="ion-no-margin">
-                                <div class="struttura_slide_tipologia">{{struttura.tipologia}}</div>
+                                <div class="struttura_slide_tipologia">{{struttura.tipologia | titlecase}}</div>
                             </ion-col>
                         </ion-row>
                         <ion-row class="ion-no-margin">
                             <ion-col class="ion-no-margin">
-                                <span class="struttura_slide_indirizzo">{{struttura.indirizzo}},
-                                    {{struttura.comune}}</span>
+                                <span class="struttura_slide_indirizzo">{{struttura.indirizzo | titlecase}},
+                                    {{struttura.comune | titlecase}}</span>
                             </ion-col>
                         </ion-row>
                         <ion-row *ngIf="struttura.nuovaClassificazioneLR11" class="ion-no-margin">
                             <ion-col class="ion-no-margin">
                                 <span
-                                    class="struttura_slide_classificazione">{{struttura.nuovaClassificazioneLR11}}</span>
+                                    class="struttura_slide_classificazione">{{struttura.nuovaClassificazioneLR11 | titlecase}}</span>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
