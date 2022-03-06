@@ -58,7 +58,9 @@
         </div>
         <!-- <div id="slideContainer"> -->
         <swiper #swiperStrutture [slidesPerView]="1.5" [ngClass]="{'visible_slides': strutture.length}"
-            [noSwiping]="true" [allowTouchMove]="false" [centeredSlides]="true" [spaceBetween]="10" [virtual]="true"
+            [noSwiping]="false" 
+            [allowTouchMove]="true" 
+            [centeredSlides]="true" [spaceBetween]="10" [virtual]="true"
             (slideChange)="onSlideChange($event)">
             <ng-container *ngFor="let struttura of strutture;">
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
@@ -81,7 +83,7 @@
                                     {{struttura.comune}}</span>
                             </ion-col>
                         </ion-row>
-                        <ion-row class="ion-no-margin">
+                        <ion-row *ngIf="struttura.nuovaClassificazioneLR11" class="ion-no-margin">
                             <ion-col class="ion-no-margin">
                                 <span
                                     class="struttura_slide_classificazione">{{struttura.nuovaClassificazioneLR11}}</span>
