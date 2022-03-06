@@ -203,6 +203,8 @@ export class HomePage implements OnInit {
             this.swiperStrutture.swiperRef.virtual.update(true);
             if (this.strutture.length) {
                 this.swiperStrutture.swiperRef.slideTo(0);
+                let coordinates: LngLatLike = (renderedFeatures.find(f => f.properties.codiceIdentificativo == this.strutture[0].codiceIdentificativo).geometry as any).coordinates;
+                this.setMarker(this.strutture[0], coordinates);
             }
 
         } else {
@@ -299,13 +301,17 @@ export class HomePage implements OnInit {
         let struttura = this.strutture[index];
         let geojsonPoint = this.struttureGeoJson.features.find(f => f.properties.codiceIdentificativo == struttura.codiceIdentificativo);
         const coordinates = get(geojsonPoint, 'geometry.coordinates', []).slice();
+        this.setMarker(struttura, coordinates);
+        this.homeMap.panTo(coordinates, { duration: 250 });
+    }
+
+    private setMarker(struttura: Struttura, coordinates: any) {
         this.marker.remove();
         let color: string = get(COLOR_MAP, `tipologia[${struttura.tipologia.replaceAll(' ', '_').toUpperCase()}]`, COLOR_MAP.tipologia.ALTRA_RICETTIVITA);
-        this.marker = this.createMarker(color)
+        this.marker = this.createMarker(color);
         this.marker
             .setLngLat(coordinates)
             .addTo(this.homeMap);
-        this.homeMap.panTo(coordinates, {duration:250});
     }
 
     public onAdvancedSearchClick() {
