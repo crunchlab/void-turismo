@@ -14,17 +14,24 @@
         <ion-row class="detail_intestazione">
             <ion-col>
                 <ion-row>
-                    <h3>{{struttura.denominazione}}</h3>
+                    <h3>{{struttura.denominazione | titlecase}}</h3>
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        {{struttura.tipologia}} - {{struttura.nuovaClassificazioneLR11}}
+                        {{struttura.tipologia | titlecase}} - {{struttura.nuovaClassificazioneLR11}}
                     </ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        {{struttura.indirizzo}} {{struttura.numeroCivico}}, {{struttura.comune}},
-                        {{struttura.provincia}}
+                        <div class="detail_address_section">
+                            {{struttura.indirizzo | titlecase}} {{struttura.numeroCivico | titlecase}}
+                        </div>
+                        <div class="detail_address_section">
+                            {{struttura.comune | titlecase}}
+                        </div>
+                        <div class="detail_address_section">
+                            {{struttura.provincia | titlecase}}
+                        </div>
                     </ion-col>
                 </ion-row>
             </ion-col>
@@ -34,7 +41,7 @@
             || struttura.accoglienza['giochiBimbi'] 
             || struttura.accoglienza['animaliAmmessi']">
             <ion-col>
-                <h5>{{t('detail.accoglienza')}}</h5>
+                <h5>{{t('detail.accoglienza') | titlecase}}</h5>
             </ion-col>
         </ion-row>
         <ion-row class="detail_services">
@@ -58,9 +65,10 @@
             </ion-col>
         </ion-row>
 
-        <ion-row class="detail_contacts_header">
+        <ion-row class="detail_contacts_header"
+            *ngIf="struttura.contatti['www'] || struttura.contatti['email'] || struttura.contatti['telefono']">
             <ion-col>
-                <h5>{{t('detail.contatti')}}</h5>
+                <h5>{{t('detail.contatti') | titlecase }}</h5>
             </ion-col>
         </ion-row>
         <ion-row class="detail_contacts" *ngIf="struttura.contatti['www']">
@@ -86,7 +94,7 @@
 
         <ion-row class="detail_insights_header">
             <ion-col>
-                <h5>{{t('detail.dettagli')}}</h5>
+                <h5>{{t('detail.dettagli') | titlecase}}</h5>
             </ion-col>
         </ion-row>
         <ion-row class="detail_insights">
@@ -141,7 +149,7 @@
                     <ion-col>
                         <ion-row>
                             <ion-col *ngFor="let item of struttura.servizi | keyvalue | filterkeyvalue">
-                                <span>{{item.key}}</span>
+                                <span>{{t(item.key)}}</span>
                             </ion-col>
                         </ion-row>
                     </ion-col>
