@@ -12,15 +12,17 @@
         "false": "No"
     },
     "detail": {
+        "title":"dettaglio",
         "back": "indietro",
         "contatti": "contatti",
-        "web": "www",
-        "mail": "mail",
-        "phone": "tel.",
+        "web": "vai al sito",
+        "mail": "scrivi",
+        "phone": "chiama",
         "dettagli": "dettagli",
         "tipologia": "tipologia",
         "classificazione": "classificazione",
         "aperto": "aperto",
+        "accoglienza":"accoglienza",
         "accessoDisabili": "accessibile",
         "giochiBimbi": "area giochi",
         "animaliAmmessi": "animali ammessi",
@@ -30,5 +32,6 @@
         "wellness": "wellness",
         "lingue": "lingue",
         "dataUltimaModifica": "aggiornato il"
-    }
+    },
+    "ariaCondizionata":"aria condizionata"
 }
