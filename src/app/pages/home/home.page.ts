@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import * as maplibregl from 'maplibre-gl';
-import { get, get as _get, isNil, remove, uniq } from 'lodash';
-import { Struttura } from '../../models/struttura/struttura';
-import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
+import { get, isNil, remove, uniq } from 'lodash';
 import { Feature, FeatureCollection, Geometry } from 'geojson';
 import SwiperCore, { Virtual } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
@@ -12,11 +10,14 @@ import { FilterServiceProvider } from '../../services/filters/filter-service-pro
 import { FilterOperator } from '../../enums/filterOperator.enum';
 import { MapUtilsService } from '../../services/utils/map-utils.service';
 import { LngLatLike, MapboxEvent } from 'maplibre-gl';
-import struttureGeoJson from '../../../assets/data/strutture.json';
-import comuni from '../../../assets/data/comuni.json';
 import { ModalController } from '@ionic/angular';
 import { AdvancedSearchPage } from '../advanced-search/advanced-search.page';
 import { AttributeFilter } from '../../interfaces/attributeFilter.interface';
+
+import struttureGeoJson from '../../../assets/data/strutture.json';
+import { Struttura } from '../../models/struttura/struttura';
+import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
+import comuni from '../../../assets/data/comuni.json';
 SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',
@@ -30,7 +31,6 @@ export class HomePage implements OnInit {
     public homeMap: maplibregl.Map;
     public selectedFeature: any = { lngLat: [0, 0] };
     public mapStyle = environment.mapStyle;
-    public get = _get;
     public struttureGeoJson: FeatureCollection = (struttureGeoJson as FeatureCollection);
     public comuneSelezionato: string = "";
 
@@ -153,13 +153,13 @@ export class HomePage implements OnInit {
     public mapLoaded(event: any) {
         this.homeMap = event;
         this.homeMap.on('click', 'strutture-layer', (e: any) => {
-            let clickedFeature = this.get(e, 'features[0]', null);
+            let clickedFeature = get(e, 'features[0]', null);
             if (!isNil(clickedFeature) && clickedFeature.state.isMatch) {
                 this.handleLayerClick(clickedFeature);
             }
         });
         this.homeMap.on('click', 'strutture-label-layer', (e: any) => {
-            let clickedFeature = this.get(e, 'features[0]', null);
+            let clickedFeature = get(e, 'features[0]', null);
             if (!isNil(clickedFeature) && clickedFeature.state.isMatch) {
                 this.handleLayerClick(clickedFeature);
             }
@@ -298,7 +298,7 @@ export class HomePage implements OnInit {
         let index = event.activeIndex;
         let struttura = this.strutture[index];
         let geojsonPoint = this.struttureGeoJson.features.find(f => f.properties.codiceIdentificativo == struttura.codiceIdentificativo);
-        const coordinates = this.get(geojsonPoint, 'geometry.coordinates', []).slice();
+        const coordinates = get(geojsonPoint, 'geometry.coordinates', []).slice();
         this.marker.remove();
         let color: string = get(COLOR_MAP, `tipologia[${struttura.tipologia.replaceAll(' ', '_').toUpperCase()}]`, COLOR_MAP.tipologia.ALTRA_RICETTIVITA);
         this.marker = this.createMarker(color)
