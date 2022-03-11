@@ -7,14 +7,16 @@ import { IonicModule } from '@ionic/angular';
 import { AboutPageRoutingModule } from './about-routing.module';
 
 import { AboutPage } from './about.page';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AboutPageRoutingModule
-  ],
-  declarations: [AboutPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        AboutPageRoutingModule,
+        TranslocoModule
+    ],
+    declarations: [AboutPage]
 })
-export class AboutPageModule {}
+export class AboutPageModule { }

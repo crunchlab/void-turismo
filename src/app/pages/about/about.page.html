@@ -1,9 +1,77 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>about</ion-title>
-  </ion-toolbar>
+<ion-header class="monithon-about-header">
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-icon class="monithon-close-modal" (click)="closeModal()"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
 
+<ion-content [fullscreen]="true" [scrollY]="true" class="monithon-about-modal-content" *transloco="let t">
+    <ion-grid class="monithon-about-grid">
+        <ion-row class="monithon-logo-row">
+            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
+                <img class="monithon-about-logo" src="../../assets/img/logo_monithon.svg">
+
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
+                <h1 class="monithon-about-titolo">{{t('about.projectFinder.t)itolo')}}</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
+                <h3 class="monithon-about-titolo-sezione">{{t('about.projectFinder.s)ottotitolo')}}</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
+                <h3 class="monithon-about-titolo-sezione">{{t('about.projectFinder.c)osaPuoiFare')}}</h3>
+                <ul [innerHTML]="'about.projectFinder.htmlCosaPuoiFare'">
+                </ul>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
+                <h3 class="monithon-about-titolo-sezione">{{t('about.projectFinder.m)etodologia')}}</h3>
+                <ul [innerHTML]="'about.projectFinder.htmlMetodologia'">
+                </ul>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="monithon-credits-row">
+            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-credits-container">
+                <h3 class="monithon-about-titolo-sezione">{{t('about.credits')}}</h3>
+                <p class="monithon-about-credit">{{t("about.projectFinder.d)esign")}} <a
+                        href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> </p>
+
+                <p class="monithon-about-credit"> {{t("about.dataAnalysis")}} <a href="https://www.monithon.eu"
+                        target="_blank">Team Monithon</a>
+                </p>
+
+                <p class="monithon-about-credit"> {{t("about.softwareDevelopment")}} <a
+                        href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> & <a
+                        href="https://www.monithon.eu" target="_blank">Team Monithon</a>
+                </p>
+
+
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="monithon-colophon-row">
+            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
+                <img class="monithon-about-eu-flag" src="../../assets/img/eu_flag.png">
+
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="monithon-colophon-row monithon-app-info-row">
+            <ion-col size-md="4" size-sm="6"
+                class="monithon-about-col monithon-colophon-container monithon-app-info-container">
+                <div class="monithon-about-version-number">Project Finder - v.</div>
+            </ion-col>
+        </ion-row>
+
+    </ion-grid>
 </ion-content>
