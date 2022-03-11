@@ -1,77 +1,69 @@
-<ion-header class="monithon-about-header">
+<ion-header class="about-header" *transloco="let t">
     <ion-toolbar>
+        <ion-title>
+            <h3>{{t('about-title')}}</h3>
+        </ion-title>
         <ion-buttons slot="end">
-            <ion-icon class="monithon-close-modal" (click)="closeModal()"></ion-icon>
+            <ion-icon slot="icon-only" name="close-circle-outline" (click)="closeModal()"></ion-icon>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 
-<ion-content [fullscreen]="true" [scrollY]="true" class="monithon-about-modal-content" *transloco="let t">
-    <ion-grid class="monithon-about-grid">
-        <ion-row class="monithon-logo-row">
-            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
-                <img class="monithon-about-logo" src="../../assets/img/logo_monithon.svg">
+<ion-content [fullscreen]="true" [scrollY]="true" class="about-modal-content" *transloco="let t">
+    <ion-grid class="about-grid">
+        <ion-row class="logo-row">
+            <ion-col size="8" class="about-col colophon-container">
+                <img class="about-logo" src="../../assets/icon/favicon.png">
 
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
-                <h1 class="monithon-about-titolo">{{t('about.projectFinder.t)itolo')}}</h1>
+            <ion-col text-center size="8" class="about-col">
+                <h1 class="about-titolo">{{t('about.titolo')}}</h1>
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
-                <h3 class="monithon-about-titolo-sezione">{{t('about.projectFinder.s)ottotitolo')}}</h3>
+            <ion-col text-center size="8" class="about-col">
+                <h3 class="about-titolo-sezione">{{t('about.sottotitolo')}}</h3>
             </ion-col>
         </ion-row>
         <ion-row>
-            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
-                <h3 class="monithon-about-titolo-sezione">{{t('about.projectFinder.c)osaPuoiFare')}}</h3>
-                <ul [innerHTML]="'about.projectFinder.htmlCosaPuoiFare'">
-                </ul>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col text-center size-md="4" size-sm="6" class="monithon-about-col">
-                <h3 class="monithon-about-titolo-sezione">{{t('about.projectFinder.m)etodologia')}}</h3>
-                <ul [innerHTML]="'about.projectFinder.htmlMetodologia'">
+            <ion-col text-center size="8" class="about-col">
+                <h3 class="about-titolo-sezione">{{t('about.metodologia')}}</h3>
+                <ul [innerHTML]="'about.htmlMetodologia'">
                 </ul>
             </ion-col>
         </ion-row>
 
-        <ion-row class="monithon-credits-row">
-            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-credits-container">
-                <h3 class="monithon-about-titolo-sezione">{{t('about.credits')}}</h3>
-                <p class="monithon-about-credit">{{t("about.projectFinder.d)esign")}} <a
-                        href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> </p>
+        <ion-row class="credits-row">
+            <ion-col size="8" class="about-col credits-container">
+                <h3 class="about-titolo-sezione">{{t('about.credits')}}</h3>
+                <p class="about-credit">{{t("about.design")}} & {{t("about.development")}} <a
+                        href="https://vo-id.it/index.php/progetto/open-data/" target="_blank">VOID Open Data</a> </p>
 
-                <p class="monithon-about-credit"> {{t("about.dataAnalysis")}} <a href="https://www.monithon.eu"
-                        target="_blank">Team Monithon</a>
+                <p class="about-credit"> {{t("about.projectManagement")}} <a href="https://www.vo-id.it"
+                        target="_blank">VOID: Veneto Orientale Innovation District</a>
                 </p>
 
-                <p class="monithon-about-credit"> {{t("about.softwareDevelopment")}} <a
-                        href="https://sheldon.studio/" target="_blank">Sheldon.studio</a> & <a
-                        href="https://www.monithon.eu" target="_blank">Team Monithon</a>
+                <p class="about-credit"> {{t("about.code")}} <a href="https://github.com/crunchlab/void-turismo" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
                 </p>
 
-
             </ion-col>
         </ion-row>
 
-        <ion-row class="monithon-colophon-row">
-            <ion-col size-md="4" size-sm="6" class="monithon-about-col monithon-colophon-container">
-                <img class="monithon-about-eu-flag" src="../../assets/img/eu_flag.png">
-
+        <!-- <ion-row class="colophon-row">
+            <ion-col size="8" class="about-col colophon-container">
+                <img class="about-eu-flag" src="../../assets/img/eu_flag.png">
             </ion-col>
         </ion-row>
 
-        <ion-row class="monithon-colophon-row monithon-app-info-row">
-            <ion-col size-md="4" size-sm="6"
-                class="monithon-about-col monithon-colophon-container monithon-app-info-container">
-                <div class="monithon-about-version-number">Project Finder - v.</div>
+        <ion-row class="colophon-row app-info-row">
+            <ion-col size="8"
+                class="about-col colophon-container app-info-container">
+                <div class="about-version-number"></div>
             </ion-col>
-        </ion-row>
+        </ion-row> -->
 
     </ion-grid>
 </ion-content>
