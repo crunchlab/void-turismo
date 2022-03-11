@@ -324,7 +324,7 @@ export class HomePage implements OnInit {
 
     }
 
-    async openIonModal() {
+    async openSearchModal() {
         const modal = await this.modalController.create({
             component: AdvancedSearchPage,
             cssClass: 'monithon-about-modal'
@@ -341,5 +341,13 @@ export class HomePage implements OnInit {
         return await modal.present();
     }
 
+    async openAboutModal(){
+        const modal = await this.modalController.create({
+            component: AdvancedSearchPage,
+            cssClass: 'monithon-about-modal'
+        });
+
+        return await modal.present();
+    }
 }
 
