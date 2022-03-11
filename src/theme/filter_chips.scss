@@ -1,0 +1,37 @@
+.filter_chip {
+    width: auto;
+    text-align: center;
+    flex-grow: 3;
+    display: inline-table;
+    white-space: nowrap;
+    background-color: white;
+    &.chip_selected {
+        &[data-filterProperty="AFFITTACAMERE"] {
+            background-color: var(--tipologia-background-affittacamere);
+        }
+        &[data-filterProperty="AGRITURISMO"] {
+            background-color: var(--tipologia-background-agriturismo);
+        }
+        &[data-filterProperty="ALBERGO"] {
+            background-color: var(--tipologia-background-albergo);
+        }
+        &[data-filterProperty="ALTRA_RICETTIVITA"] {
+            background-color: var(--tipologia-background-altra_ricettivita);
+        }
+        &[data-filterProperty="APPARTAMENTO"] {
+            background-color: var(--tipologia-background-appartamento);
+        }
+        &[data-filterProperty="BED_AND_BREAKFAST"] {
+            background-color: var(--tipologia-background-bed_and_breakfast);
+        }
+        &[data-filterProperty="CAMPEGGIO"] {
+            background-color: var(--tipologia-background-campeggio);
+        }
+        &[data-filterProperty="COUNTRY_HOUSE"] {
+            background-color: var(--tipologia-background-country_house);
+        }
+        &[data-filterProperty="RESIDENCE"] {
+            background-color: var(--tipologia-background-residence);
+        }
+    }
+}
