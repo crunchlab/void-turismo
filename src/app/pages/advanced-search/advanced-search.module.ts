@@ -8,15 +8,17 @@ import { AdvancedSearchPageRoutingModule } from './advanced-search-routing.modul
 
 import { AdvancedSearchPage } from './advanced-search.page';
 import { CastToPipeModule } from 'src/app/pipes/cast-to/cast-to.module';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AdvancedSearchPageRoutingModule,
-    CastToPipeModule
-  ],
-  declarations: [AdvancedSearchPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        AdvancedSearchPageRoutingModule,
+        CastToPipeModule,
+        TranslocoModule
+    ],
+    declarations: [AdvancedSearchPage]
 })
-export class AdvancedSearchPageModule {}
+export class AdvancedSearchPageModule { }

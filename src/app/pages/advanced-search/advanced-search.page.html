@@ -1,35 +1,35 @@
-<ion-header>
-  <ion-toolbar>
-            <ion-buttons slot="start">
-                <!-- <ion-back-button mode="md"></ion-back-button> -->
-                <ion-button (click)="closeModal()">cancel</ion-button>
-            </ion-buttons>
-            <ion-buttons slot="end">
-                <!-- <ion-back-button mode="md"></ion-back-button> -->
-                <ion-button (click)="applyFilter()">apply</ion-button>
-            </ion-buttons>
-    <ion-title>advanced-search</ion-title>
-  </ion-toolbar>
+<ion-header *transloco="let t">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <!-- <ion-back-button mode="md"></ion-back-button> -->
+            <ion-button color="light" fill="solid" (click)="closeModal()">{{t('cancel')}}</ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <!-- <ion-back-button mode="md"></ion-back-button> -->
+            <ion-button color="light" fill="solid" (click)="applyFilter()">{{t('apply')}}</ion-button>
+        </ion-buttons>
+        <ion-title>
+            <h3>{{t('advanced-search')}}</h3>
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-accordion-group [multiple]="true" [value]="1">
-        <ion-accordion *ngFor="let filter of filters ">
-            
+<ion-content *transloco="let t">
+    <ion-accordion-group [multiple]="true" [value]="filters">
+
+        <ion-accordion *ngFor="let filter of filters" [value]="filter" toggleIcon="chevron-down-circle-outline">
+
             <ion-item slot="header">
-                <ion-label>{{filter.property}}</ion-label>
+                <ion-label class="filter_section_name">{{t(filter.property)}}</ion-label>
             </ion-item>
-            <div class="" slot="content">
-                
-                <ion-chip 
-                    mode="md" 
-                    class="filter_chip" 
-                    *ngFor="let filterValue of $any(filter).value"
-                    [attr.data-filterProperty]="filterValue.replaceAll(' ', '_').replaceAll('\'','')"
-                    [ngClass]="{'chip_selected': isFilterSet(filter, filterValue)}" 
-                    (click)="onChipClick(filter, filterValue)"
-                >
-                    <ion-label>{{filterValue}}</ion-label>
+            <div class="filter_values_container" slot="content">
+
+                <ion-chip mode="md" class="filter_chip" *ngFor="let filterValue of $any(filter).value"
+                    [attr.data-filterPropertyValue]="filterValue.replaceAll(' ', '_').replaceAll('\'','')"
+                    [attr.data-filterPropertyName]="filter.property.replaceAll(' ', '_').replaceAll('\'','')"
+                    [ngClass]="{'chip_selected': isFilterSet(filter, filterValue)}"
+                    (click)="onChipClick(filter, filterValue)">
+                    <ion-label>{{t(filterValue || 'NA')}}</ion-label>
                 </ion-chip>
             </div>
         </ion-accordion>
