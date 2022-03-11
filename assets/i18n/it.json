@@ -1,8 +1,7 @@
-
 {
-    "home":{
-        "comune":"Comune",
-        "advancedSearch":"ALTRO"
+    "home": {
+        "comune": "Comune",
+        "advancedSearch": "ALTRO"
     },
     "struttura": {
         "dettagli_link": "dettagli"
@@ -12,7 +11,7 @@
         "false": "No"
     },
     "detail": {
-        "title":"dettaglio",
+        "title": "dettaglio",
         "back": "indietro",
         "contatti": "contatti",
         "web": "vai al sito",
@@ -22,7 +21,7 @@
         "tipologia": "tipologia",
         "classificazione": "classificazione",
         "aperto": "aperto",
-        "accoglienza":"accoglienza",
+        "accoglienza": "accoglienza",
         "accessoDisabili": "accessibile",
         "giochiBimbi": "area giochi",
         "animaliAmmessi": "animali ammessi",
@@ -33,5 +32,41 @@
         "lingue": "lingue",
         "dataUltimaModifica": "aggiornato il"
     },
-    "ariaCondizionata":"aria condizionata"
+    "ariaCondizionata": "aria condizionata",
+    "cancel": "annulla",
+    "apply": "filtra",
+    "advanced-search": "Filtri Avanzati",
+    "tipologia": "tipologia",
+    "ALTRA RICETTIVITA'": "ALTRA RICETTIVITA'",
+    "AFFITTACAMERE": "AFFITTACAMERE",
+    "AGRITURISMO": "AGRITURISMO",
+    "ALBERGO": "ALBERGO",
+    "APPARTAMENTO": "APPARTAMENTO",
+    "BED AND BREAKFAST": "BED AND BREAKFAST",
+    "CAMPEGGIO": "CAMPEGGIO",
+    "COUNTRY HOUSE": "COUNTRY HOUSE",
+    "RESIDENCE": "RESIDENCE",
+    "nuovaClassificazioneLR11": "classificazione (stelle)",
+    "NA": "-",
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "posizione": "posizione",
+    "centroStorico": "centro",
+    "collinare": "collina",
+    "lago": "lago",
+    "mare": "mare",
+    "periferia": "periferia",
+    "zonaFiera": "fiera",
+    "lingue": "lingue",
+    "francese": "francese",
+    "inglese": "inglese",
+    "spagnolo": "spagnolo",
+    "tedesco": "tedesco",
+    "accoglienza": "accoglienza",
+    "accessoDisabili": "accessibile",
+    "animaliAmmessi": "animali ammessi",
+    "giochiBimbi": "area giochi"
 }
