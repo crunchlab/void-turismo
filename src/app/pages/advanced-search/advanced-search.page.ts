@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FilterServiceProvider } from '../../services/filters/filter-service-provider.service';
 import { StrutturaService } from '../../services/api/struttura.service';
 import { AttributeFilter } from '../../interfaces/attributeFilter.interface';
-import { isNil, remove } from 'lodash';
+import { cloneDeep, isNil, remove } from 'lodash';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -13,22 +13,25 @@ import { ModalController } from '@ionic/angular';
 export class AdvancedSearchPage implements OnInit {
 
     public filters: AttributeFilter[] = [];
-    public selectedFilters: AttributeFilter[];
-    constructor(private filterService: FilterServiceProvider, private strutturaService: StrutturaService, private modalController:ModalController) {
+    public selectedFilters: AttributeFilter[] = [];
+    constructor(private filterService: FilterServiceProvider, private strutturaService: StrutturaService, private modalController: ModalController) {
         this.filters = this.strutturaService.getFilterValues();
         this.selectedFilters = this.filterService.getFilters();
-        console.log(this.filterService.getFilters());
+        console.log('constructor', this.filterService.getFilters());
+
     }
 
     ngOnInit() {
-        console.dir(this.filterService.getFilters());
+        console.dir('ngOnInit', this.filterService.getFilters());
     }
 
     public onChipClick(filter: AttributeFilter, value: string) {
         let selectedFilter: AttributeFilter = this.getFilterByProperty(filter);
         if (selectedFilter) {
-            if ((selectedFilter.value as string[]).includes(value)){
-                remove((selectedFilter.value as string[]), el => el===value);
+            if ((selectedFilter.value as string[]).includes(value)) {
+                remove((selectedFilter.value as string[]), el => el === value);
+                //remove empty filters
+                remove(this.selectedFilters, f=>!(f.value as string[]).length);
             } else {
                 (selectedFilter.value as string[]).push(value);
             }
@@ -41,7 +44,6 @@ export class AdvancedSearchPage implements OnInit {
             this.selectedFilters.push(selectedFilter);
         }
 
-        // this.filterService.addFilter(selectedFilter);
         console.log(this.filterService.getFilters());
 
     }
@@ -64,11 +66,11 @@ export class AdvancedSearchPage implements OnInit {
     public applyFilter() {
         console.log(this.selectedFilters);
         this.modalController.dismiss({
-            filters:this.selectedFilters
-        })
+            filters: this.selectedFilters
+        });
     }
 
-    public closeModal(){
+    public closeModal() {
         this.modalController.dismiss();
     }
 }
