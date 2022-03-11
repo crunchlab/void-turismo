@@ -4,34 +4,75 @@
     flex-grow: 3;
     display: inline-table;
     white-space: nowrap;
-    background-color: white;
+    background-color: transparent;
+    border-style: solid;
+    border-width: 1px;
+    border-color: var(--ion-color-medium);
+
     &.chip_selected {
-        &[data-filterProperty="AFFITTACAMERE"] {
+        background-color: #d0d0d0; //var(--ion-color-light-tint);
+        // border-color: var(--ion-color-light-tint);
+    }
+    &[data-filterPropertyValue="AFFITTACAMERE"] {
+        &.chip_selected {
             background-color: var(--tipologia-background-affittacamere);
         }
-        &[data-filterProperty="AGRITURISMO"] {
+        border-color: var(--tipologia-background-affittacamere);
+    }
+    &[data-filterPropertyValue="AGRITURISMO"] {
+        &.chip_selected {
             background-color: var(--tipologia-background-agriturismo);
+            color: var(--ion-color-dark);
         }
-        &[data-filterProperty="ALBERGO"] {
+        border-color: var(--tipologia-background-agriturismo);
+    }
+    &[data-filterPropertyValue="ALBERGO"] {
+        &.chip_selected {
             background-color: var(--tipologia-background-albergo);
         }
-        &[data-filterProperty="ALTRA_RICETTIVITA"] {
+        border-color: var(--tipologia-background-albergo);
+    }
+    &[data-filterPropertyValue="ALTRA_RICETTIVITA"] {
+        &.chip_selected {
             background-color: var(--tipologia-background-altra_ricettivita);
         }
-        &[data-filterProperty="APPARTAMENTO"] {
+        border-color: var(--tipologia-background-altra_ricettivita);
+    }
+    &[data-filterPropertyValue="APPARTAMENTO"] {
+        &.chip_selected {
             background-color: var(--tipologia-background-appartamento);
         }
-        &[data-filterProperty="BED_AND_BREAKFAST"] {
+        border-color: var(--tipologia-background-appartamento);
+    }
+    &[data-filterPropertyValue="BED_AND_BREAKFAST"] {
+        &.chip_selected {
             background-color: var(--tipologia-background-bed_and_breakfast);
         }
-        &[data-filterProperty="CAMPEGGIO"] {
+        border-color: var(--tipologia-background-bed_and_breakfast);
+    }
+    &[data-filterPropertyValue="CAMPEGGIO"] {
+        &.chip_selected {
             background-color: var(--tipologia-background-campeggio);
         }
-        &[data-filterProperty="COUNTRY_HOUSE"] {
+        border-color: var(--tipologia-background-campeggio);
+    }
+    &[data-filterPropertyValue="COUNTRY_HOUSE"] {
+        &.chip_selected {
             background-color: var(--tipologia-background-country_house);
         }
-        &[data-filterProperty="RESIDENCE"] {
+        border-color: var(--tipologia-background-country_house);
+    }
+    &[data-filterPropertyValue="RESIDENCE"] {
+        &.chip_selected {
             background-color: var(--tipologia-background-residence);
         }
+        border-color: var(--tipologia-background-residence);
     }
+}
+
+.advanced_search {
+    background-color: white;
+    opacity: 1;
+    border-width: 0;
+    display: inline-flex;
 }

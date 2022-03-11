@@ -19,12 +19,13 @@
         <ion-accordion *ngFor="let filter of filters ">
 
             <ion-item slot="header">
-                <ion-label>{{t(filter.property)}}</ion-label>
+                <ion-label class="filter_section_name">{{t(filter.property)}}</ion-label>
             </ion-item>
-            <div class="" slot="content">
+            <div class="filter_values_container" slot="content">
 
                 <ion-chip mode="md" class="filter_chip" *ngFor="let filterValue of $any(filter).value"
-                    [attr.data-filterProperty]="filterValue.replaceAll(' ', '_').replaceAll('\'','')"
+                    [attr.data-filterPropertyValue]="filterValue.replaceAll(' ', '_').replaceAll('\'','')"
+                    [attr.data-filterPropertyName]="filter.property.replaceAll(' ', '_').replaceAll('\'','')"
                     [ngClass]="{'chip_selected': isFilterSet(filter, filterValue)}"
                     (click)="onChipClick(filter, filterValue)">
                     <ion-label>{{t(filterValue || 'NA')}}</ion-label>
