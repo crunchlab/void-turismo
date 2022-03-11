@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'advanced-search',
     loadChildren: () => import('./pages/advanced-search/advanced-search.module').then( m => m.AdvancedSearchPageModule)
   },
+  {
+    path: 'about',
+    loadChildren: () => import('./pages/about/about.module').then( m => m.AboutPageModule)
+  },
 ];
 
 @NgModule({

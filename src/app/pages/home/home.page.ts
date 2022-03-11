@@ -18,6 +18,7 @@ import struttureGeoJson from '../../../assets/data/strutture.json';
 import { Struttura } from '../../models/struttura/struttura';
 import { FeatureToStrutturaService } from '../../services/transformer/feature-to-struttura.service';
 import comuni from '../../../assets/data/comuni.json';
+import { AboutPage } from '../about/about.page';
 SwiperCore.use([Virtual]);
 @Component({
     selector: 'app-home',
@@ -324,7 +325,7 @@ export class HomePage implements OnInit {
 
     }
 
-    async openIonModal() {
+    async openSearchModal() {
         const modal = await this.modalController.create({
             component: AdvancedSearchPage,
             cssClass: 'monithon-about-modal'
@@ -341,5 +342,13 @@ export class HomePage implements OnInit {
         return await modal.present();
     }
 
+    async openAboutModal(){
+        const modal = await this.modalController.create({
+            component: AboutPage,
+            cssClass: 'monithon-about-modal'
+        });
+
+        return await modal.present();
+    }
 }
 

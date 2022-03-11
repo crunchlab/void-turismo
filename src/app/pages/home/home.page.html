@@ -14,19 +14,16 @@
                 </ion-fab-button>
             </div>
             <div #tipologieFilter class="horizontal_scroll_flex">
-                <ion-chip mode="md" class="filter_chip" 
-                    (click)="onChipClick(tipologia)"
+                <ion-chip mode="md" class="filter_chip" (click)="onChipClick(tipologia)"
                     [attr.data-filterPropertyValue]="tipologia.replaceAll(' ', '_').replaceAll('\'','')"
                     [ngClass]="{'chip_selected': tipologieSelezionate.includes(tipologia)}"
                     *ngFor="let tipologia of tipologie">
                     <ion-label>{{tipologia}}</ion-label>
                 </ion-chip>
                 <!-- <a [routerLink]="['/','advanced-search']"> -->
-                    <ion-chip mode="md" 
-                        class="filter_chip advanced_search"
-                        (click)="openIonModal()">
-                        <ion-icon class="advanced_seach_icon" name="ellipsis-horizontal-outline"></ion-icon>
-                    </ion-chip>
+                <ion-chip mode="md" class="filter_chip advanced_search" (click)="openSearchModal()">
+                    <ion-icon class="advanced_seach_icon" name="ellipsis-horizontal-outline"></ion-icon>
+                </ion-chip>
                 <!-- </a> -->
             </div>
         </div>
@@ -44,11 +41,8 @@
                 </mgl-layer>
             </mgl-map>
         </div>
-        <!-- <div id="slideContainer"> -->
         <swiper #swiperStrutture [slidesPerView]="1.5" [ngClass]="{'visible_slides': strutture.length}"
-            [noSwiping]="false" 
-            [allowTouchMove]="true" 
-            [centeredSlides]="true" [spaceBetween]="10" [virtual]="true"
+            [noSwiping]="false" [allowTouchMove]="true" [centeredSlides]="true" [spaceBetween]="10" [virtual]="true"
             (slideChange)="onSlideChange($event)">
             <ng-container *ngFor="let struttura of strutture;">
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
@@ -73,15 +67,18 @@
                         </ion-row>
                         <ion-row *ngIf="struttura.nuovaClassificazioneLR11" class="ion-no-margin">
                             <ion-col class="ion-no-margin">
-                                <span
-                                    class="struttura_slide_classificazione">{{struttura.nuovaClassificazioneLR11 | titlecase}}</span>
+                                <span class="struttura_slide_classificazione">{{struttura.nuovaClassificazioneLR11 |
+                                    titlecase}}</span>
                             </ion-col>
                         </ion-row>
                     </ion-grid>
                 </ng-template>
             </ng-container>
         </swiper>
-
-        <!-- </div> -->
+        <div class="about_btn_container">
+            <ion-button shape="round" size="small" color="light" (click)="openAboutModal()">
+                <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
+            </ion-button>
+        </div>
     </div>
 </ion-content>

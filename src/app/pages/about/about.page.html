@@ -1,0 +1,69 @@
+<ion-header class="about-header" *transloco="let t">
+    <ion-toolbar>
+        <ion-title>
+            <h3>{{t('about-title')}}</h3>
+        </ion-title>
+        <ion-buttons slot="end">
+            <ion-icon slot="icon-only" name="close-circle-outline" (click)="closeModal()"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" [scrollY]="true" class="about-modal-content" *transloco="let t">
+    <ion-grid class="about-grid">
+        <ion-row class="logo-row">
+            <ion-col size="8" class="about-col colophon-container">
+                <img class="about-logo" src="../../assets/icon/favicon.png">
+
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center size="8" class="about-col">
+                <h1 class="about-titolo">{{t('about.titolo')}}</h1>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center size="8" class="about-col">
+                <h3 class="about-titolo-sezione">{{t('about.sottotitolo')}}</h3>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col text-center size="8" class="about-col">
+                <h3 class="about-titolo-sezione">{{t('about.metodologia')}}</h3>
+                <ul [innerHTML]="'about.htmlMetodologia'">
+                </ul>
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="credits-row">
+            <ion-col size="8" class="about-col credits-container">
+                <h3 class="about-titolo-sezione">{{t('about.credits')}}</h3>
+                <p class="about-credit">{{t("about.design")}} & {{t("about.development")}} <a
+                        href="https://vo-id.it/index.php/progetto/open-data/" target="_blank">VOID Open Data</a> </p>
+
+                <p class="about-credit"> {{t("about.projectManagement")}} <a href="https://www.vo-id.it"
+                        target="_blank">VOID: Veneto Orientale Innovation District</a>
+                </p>
+
+                <p class="about-credit"> {{t("about.code")}} <a href="https://github.com/crunchlab/void-turismo" target="_blank"><ion-icon name="logo-github"></ion-icon></a>
+                </p>
+
+            </ion-col>
+        </ion-row>
+
+        <!-- <ion-row class="colophon-row">
+            <ion-col size="8" class="about-col colophon-container">
+                <img class="about-eu-flag" src="../../assets/img/eu_flag.png">
+            </ion-col>
+        </ion-row>
+
+        <ion-row class="colophon-row app-info-row">
+            <ion-col size="8"
+                class="about-col colophon-container app-info-container">
+                <div class="about-version-number"></div>
+            </ion-col>
+        </ion-row> -->
+
+    </ion-grid>
+</ion-content>
