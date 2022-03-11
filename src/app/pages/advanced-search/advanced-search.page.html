@@ -15,8 +15,9 @@
 </ion-header>
 
 <ion-content *transloco="let t">
-    <ion-accordion-group [multiple]="true" [value]="1">
-        <ion-accordion *ngFor="let filter of filters ">
+    <ion-accordion-group [multiple]="true" [value]="filters">
+
+        <ion-accordion *ngFor="let filter of filters" [value]="filter" toggleIcon="chevron-down-circle-outline">
 
             <ion-item slot="header">
                 <ion-label class="filter_section_name">{{t(filter.property)}}</ion-label>
