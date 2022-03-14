@@ -16,8 +16,10 @@
             <div #tipologieFilter class="horizontal_scroll_flex">
                 <ion-chip mode="md" class="filter_chip" (click)="onChipClick(tipologia)"
                     [attr.data-filterPropertyValue]="tipologia.replaceAll(' ', '_').replaceAll('\'','')"
+                    data-filterPropertyName="tipologia"
                     [ngClass]="{'chip_selected': tipologieSelezionate.includes(tipologia)}"
                     *ngFor="let tipologia of tipologie">
+                    <ion-icon name="ellipse" color="dark"></ion-icon>
                     <ion-label>{{tipologia}}</ion-label>
                 </ion-chip>
                 <!-- <a [routerLink]="['/','advanced-search']"> -->

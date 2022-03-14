@@ -29,6 +29,7 @@
                     [attr.data-filterPropertyName]="filter.property.replaceAll(' ', '_').replaceAll('\'','')"
                     [ngClass]="{'chip_selected': isFilterSet(filter, filterValue)}"
                     (click)="onChipClick(filter, filterValue)">
+                    <ion-icon *ngIf="filter.property=='tipologia'" name="ellipse" color="dark"></ion-icon>
                     <ion-label>{{t(filterValue || 'NA')}}</ion-label>
                 </ion-chip>
             </div>
