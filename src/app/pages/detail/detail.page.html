@@ -24,7 +24,7 @@
                 <ion-row>
                     <ion-col>
                         <div class="detail_address_section">
-                            {{struttura.indirizzo | titlecase}} {{struttura.numeroCivico | titlecase}}
+                            {{struttura.indirizzo | titlecase}} {{struttura.numeroCivico}}
                         </div>
                         <div class="detail_address_section">
                             {{struttura.comune | titlecase}}
@@ -71,14 +71,14 @@
                 <h5>{{t('detail.contatti') | titlecase }}</h5>
             </ion-col>
         </ion-row>
-        <ion-row class="detail_contacts" >
+        <ion-row class="detail_contacts">
             <ion-col size="4" (click)="goToSite()" *ngIf="struttura.contatti['www']">
                 <div class="icon_container">
                     <ion-icon name="globe-outline"></ion-icon>
                     <ion-label>{{t('detail.web')}}</ion-label>
                 </div>
             </ion-col>
-            <ion-col size="4" (click)="writeTo()" *ngIf="struttura.contatti['email']"> 
+            <ion-col size="4" (click)="writeTo()" *ngIf="struttura.contatti['email']">
                 <div class="icon_container">
                     <ion-icon name="at-outline"></ion-icon>
                     <ion-label>{{t('detail.mail')}}</ion-label>
