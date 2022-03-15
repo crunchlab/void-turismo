@@ -49,13 +49,13 @@
             <ng-container *ngFor="let struttura of strutture;">
                 <ng-template class="struttura_slide" swiperSlide *transloco="let t">
                     <ion-grid class="ion-no-margin">
-                        <ion-row class="ion-no-margin">
-                            <ion-col class="ion-no-margin">
-                                <a [routerLink]="['/','detail',struttura.codiceIdentificativo]">
+                        <a [routerLink]="['/','detail',struttura.codiceIdentificativo]">
+                            <ion-row class="ion-no-margin">
+                                <ion-col class="ion-no-margin">
                                     <h5 class="struttura_slide_titolo">{{struttura.denominazione | titlecase}} </h5>
-                                </a>
-                            </ion-col>
-                        </ion-row>
+                                </ion-col>
+                            </ion-row>
+                        </a>
                         <ion-row class="ion-no-margin">
                             <ion-col class="ion-no-margin">
                                 <div class="struttura_slide_tipologia">{{struttura.tipologia | titlecase}}</div>
