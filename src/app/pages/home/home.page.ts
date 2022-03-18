@@ -164,6 +164,21 @@ export class HomePage implements OnInit {
     public mapLoaded(event: any) {
         this.homeMap = event;
 
+        this.homeMap.on('mouseenter', 'strutture-layer', () => {
+            this.homeMap.getCanvas().style.cursor = 'pointer';
+        });
+        this.homeMap.on('mouseleave', 'strutture-layer', () => {
+            this.homeMap.getCanvas().style.cursor = '';
+
+        });
+
+        this.homeMap.on('mouseenter', 'strutture-label-layer', () => {
+            this.homeMap.getCanvas().style.cursor = 'pointer';
+        });
+        this.homeMap.on('mouseleave', 'strutture-label-layer', () => {
+            this.homeMap.getCanvas().style.cursor = '';
+
+        });
 
         this.homeMap.on('click', 'strutture-layer', (e: any) => {
             let clickedFeature = get(e, 'features[0]', null);
