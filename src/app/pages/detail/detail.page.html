@@ -18,7 +18,7 @@
                 </ion-row>
                 <ion-row>
                     <ion-col>
-                        {{struttura.tipologia | titlecase}} - {{struttura.nuovaClassificazioneLR11}}
+                        {{struttura.tipologia | titlecase}} - {{'rating' | transloco:{rating: struttura.nuovaClassificazioneLR11 } }}
                     </ion-col>
                 </ion-row>
                 <ion-row>
@@ -106,7 +106,7 @@
 
                 <ion-row>
                     <ion-col>{{t('detail.classificazione')}}</ion-col>
-                    <ion-col>{{struttura.nuovaClassificazioneLR11}}</ion-col>
+                    <ion-col>{{'rating' | transloco:{rating: struttura.nuovaClassificazioneLR11 } }}</ion-col>
                 </ion-row>
                 <ion-row>
                     <ion-col>{{t('detail.aperto')}}</ion-col>
