@@ -29,7 +29,7 @@
                 <!-- </a> -->
             </div>
         </div>
-        <div id="mapContainer">
+        <div #mapContainer id="mapContainer">
             <mgl-map #homeMap [attributionControl]="false" [style]="mapStyle" [zoom]="[9]" (mapLoad)="mapLoaded($event)"
                 (zoomEnd)="mapZoomEnd($event)" (mapDragEnd)="onDragEnd($event)" [center]="[12.5510662,45.6331619]">
                 <mgl-geojson-source id="strutture" [data]="struttureGeoJson" promoteId="codiceIdentificativo">
@@ -77,7 +77,7 @@
                 </ng-template>
             </ng-container>
         </swiper>
-        <div class="about_btn_container">
+        <div class="about_btn_container" #aboutBtnContainer>
             <ion-button shape="round" size="small" color="light" (click)="openAboutModal()">
                 <ion-icon slot="icon-only" name="information-circle-outline"></ion-icon>
             </ion-button>

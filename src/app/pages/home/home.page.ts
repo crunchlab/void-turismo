@@ -27,6 +27,9 @@ SwiperCore.use([Virtual]);
 })
 export class HomePage implements OnInit {
     @ViewChild('searchContainer') searchContainer: HTMLDivElement;
+    @ViewChild('mapContainer') mapContainer: HTMLDivElement;
+    @ViewChild('aboutBtnContainer') aboutBtnContainer: HTMLDivElement;
+
     @ViewChild('swiperStrutture', { static: false }) swiperStrutture: SwiperComponent;
 
     public homeMap: maplibregl.Map;
@@ -136,6 +139,9 @@ export class HomePage implements OnInit {
         ]
     };
 
+    constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService, public modalController: ModalController) {
+
+    }
 
 
     ngOnInit(): void {
@@ -146,13 +152,19 @@ export class HomePage implements OnInit {
         this.tipologie = uniq(strutture.map((s: Struttura) => s.tipologia)).sort();
         this.tipologieSelezionate = [...this.tipologie];
         this.filterService.addFilter({ property: 'tipologia', operator: FilterOperator.in, value: this.tipologieSelezionate });
-    }
-    constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService, public modalController: ModalController) {
 
     }
 
+    ngAfterViewInit(): void {
+        //sets elements height to fill viewport even if app is not fullscreen
+        (this.mapContainer as any).nativeElement.style.height = `${window.innerHeight}px`;
+        (this.swiperStrutture as any).elementRef.nativeElement.style.top = `calc(${window.innerHeight}px - 26vh)`;
+        (this.aboutBtnContainer as any).nativeElement.style.top = `calc(${window.innerHeight}px - 48px)`;
+    }
     public mapLoaded(event: any) {
         this.homeMap = event;
+
+
         this.homeMap.on('click', 'strutture-layer', (e: any) => {
             let clickedFeature = get(e, 'features[0]', null);
             if (!isNil(clickedFeature) && clickedFeature.state.isMatch) {
@@ -165,6 +177,7 @@ export class HomePage implements OnInit {
                 this.handleLayerClick(clickedFeature);
             }
         });
+
         event.resize();
         let filterCoordinates: LngLatLike[] = this.struttureGeoJson.features.map(f => (f.geometry as any).coordinates);
         this.fitResultsBBox(filterCoordinates);
@@ -342,7 +355,7 @@ export class HomePage implements OnInit {
         return await modal.present();
     }
 
-    async openAboutModal(){
+    async openAboutModal() {
         const modal = await this.modalController.create({
             component: AboutPage,
             cssClass: 'monithon-about-modal'
