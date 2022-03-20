@@ -75,16 +75,18 @@
     "accessoDisabili": "accessibile",
     "animaliAmmessi": "animali ammessi",
     "giochiBimbi": "area giochi",
-    "about-title": "Il progetto",
+    "about-title": "Info",
     "about": {
-        "titolo": "Lorem Ipsum",
-        "sottotitolo": "In labore sit consectetur ea sint consequat aute anim enim est nulla aliqua. Do qui irure ex aute ea enim ut velit elit. Proident nisi laborum dolor aliqua aliquip pariatur. Et dolor sint id ea enim commodo cupidatat eu culpa deserunt excepteur qui. Ex duis adipisicing proident consequat sunt exercitation excepteur. Ea consectetur sint excepteur culpa nostrud commodo eiusmod enim.",
-        "metodologia": "Metodologia",
-        "htmlMetodologia": "Officia proident irure labore deserunt officia ullamco consequat quis excepteur. Occaecat mollit proident quis fugiat incididunt irure tempor tempor culpa adipisicing nulla. In quis officia do irure non nulla et adipisicing. Consequat eiusmod qui Lorem excepteur aliqua fugiat minim do aliqua sunt reprehenderit. Minim proident consectetur sit pariatur in proident cupidatat duis magna tempor aliquip. Deserunt laboris ex laboris eu adipisicing enim reprehenderit sint proident sit.",
+        "titolo": "Mappa delle strutture ricettive del distretto VOID",
+        "sottotitolo": "La web app mostra le strutture ricettive site nei 17 comuni che fanno parte del Veneto Orientale Innovation District. Selezionando il comune di pertinenza, la posizione dell'utente, la tipologia alberghiera o accedendo ai filtri avanzati, l'utente può visualizzare le strutture inserite nel dataset 'Elenco delle Strutture Ricettive Turistiche della Regione Veneto'.",
+        "metodologia": "Veneto Orientale Innovation Discrict",
+        "htmlMetodologia": "Veneto Orientale Innovation District è un progetto promosso da 17 Comuni del Veneto Orientale e finanziato da Regione Veneto. Si occupa di Open Data, Open Innovation, Co-progettazione, Prototipazione, Building Information Modeling e Formazione.",
         "credits": "Credits",
         "design": "Design",
         "development": "Sviluppo",
         "projectManagement": "Coordinamento",
-        "code": "Codice sorgente"
+        "code": "Codice sorgente",
+        "dataset": "Dati",
+        "dataseturl": "Open Data Veneto"
     }
 }
