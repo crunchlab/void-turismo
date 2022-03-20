@@ -50,7 +50,17 @@
     padding-left: 20px;
 }
 
-[name="logo-github"] {
+.about-social{
+    margin-top:25px;
+    display: flex;
+    justify-content: space-around;
+}
+[name="logo-github"],
+[name="logo-instagram"],
+[name="logo-facebook"],
+[name="logo-linkedin"] {
+    display: inline-flex;
+    margin:auto;
     width: 24px;
     height: 24px;
 }
