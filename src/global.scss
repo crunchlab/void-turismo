@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,19 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import "~maplibre-gl/dist/maplibre-gl.css";
+
+@import "theme/theme.scss";
+@import "~swiper/scss";
+@import "~@ionic/angular/css/ionic-swiper";
+@import "~swiper/scss/pagination";
+// @import "../node_modules/swiper/modules/pagination/pagination.scss"
+
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+@import "theme/variables.scss";
+* {
+    font-family: $font-family-base;
+    --ion-font-family: $font-family-base;
+}
