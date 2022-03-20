@@ -51,7 +51,7 @@
 }
 
 .about-social{
-    margin-top:25px;
+    margin-top:50px;
     display: flex;
     justify-content: space-around;
 }
@@ -63,4 +63,10 @@
     margin:auto;
     width: 24px;
     height: 24px;
+}
+
+.about-version-number{
+    width: 100%;
+    font-size: small;
+    text-align: right;
 }
