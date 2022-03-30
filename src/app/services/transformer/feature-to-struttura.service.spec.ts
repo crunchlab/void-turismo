@@ -83,7 +83,7 @@ describe('FeatureToStrutturaService', () => {
                 "dataUltimaModifica": "02/11/2017",
                 "tipologiaSecondaria": "Albergo",
                 "codiceIdentificativo": 42409,
-                "nuovaClassificazioneLR11": "2 **"
+                "nuovaClassificazioneLr11": "2 **"
             }
         };
         let expectedStruttura: Struttura = new Struttura();
@@ -114,7 +114,7 @@ describe('FeatureToStrutturaService', () => {
         expectedStruttura.dataUltimaModifica = get(feature.properties, 'dataUltimaModifica');
         expectedStruttura.tipologiaSecondaria = get(feature.properties, 'tipologiaSecondaria');
         expectedStruttura.codiceIdentificativo = get(feature.properties, 'codiceIdentificativo');
-        expectedStruttura.nuovaClassificazioneLR11 = get(feature.properties, 'nuovaClassificazioneLR11');
+        expectedStruttura.nuovaClassificazioneLr11 = get(feature.properties, 'nuovaClassificazioneLr11');
         let struttura: Struttura = transformer.featureToStruttura(feature);
         expect(struttura).toBeDefined();
         expect(struttura).toMatchObject(expectedStruttura);

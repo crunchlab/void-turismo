@@ -56,7 +56,7 @@ const featureToStrutturaMappings: FieldMapping[] = [
     { "field": "dataUltimaModifica", "properties": "dataUltimaModifica", "type": "string" },
     { "field": "tipologiaSecondaria", "properties": "tipologiaSecondaria", "type": "string" },
     { "field": "codiceIdentificativo", "properties": "codiceIdentificativo", "type": "int" },
-    { "field": "nuovaClassificazioneLR11", "properties": "nuovaClassificazioneLR11", "type": "string" }
+    { "field": "nuovaClassificazioneLr11", "properties": "nuovaClassificazioneLr11", "type": "string" }
 
 ];
 
