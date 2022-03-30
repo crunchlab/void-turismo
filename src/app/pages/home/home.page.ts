@@ -202,17 +202,17 @@ export class HomePage implements OnInit {
     public onDragEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
         let isHuman = get(evt, 'originalEvent.isTrusted', true);
         if (isHuman) {
-            this.refreshSlides();
+            this.refreshSlides(false);
         }
 
     }
     public mapZoomEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
         let isHuman = get(evt, 'originalEvent.isTrusted', true);
         if (isHuman) {
-            this.refreshSlides();
+            this.refreshSlides(false);
         }
     }
-    private refreshSlides() {
+    private refreshSlides(pinCenter = true) {
         let mapCenter = [this.homeMap.getCenter().lng, this.homeMap.getCenter().lat];
         let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap
             .queryRenderedFeatures(null, { "layers": ["strutture-layer"] })
@@ -238,7 +238,9 @@ export class HomePage implements OnInit {
             if (this.strutture.length) {
                 this.swiperStrutture.swiperRef.slideTo(0);
                 let coordinates: LngLatLike = (renderedFeatures.find(f => f.properties.codiceIdentificativo == this.strutture[0].codiceIdentificativo).geometry as any).coordinates;
-                this.setMarker(this.strutture[0], coordinates);
+                if (pinCenter) {
+                    this.setMarker(this.strutture[0], coordinates);
+                }
             }
 
         } else {
