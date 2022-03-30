@@ -22,7 +22,7 @@ describe('StrutturaService', () => {
       let filters:AttributeFilter[]=[];
       let mappings: FieldMapping[] = [
           { "field": "tipologia", "properties": "tipologia", "type": "string" },
-          { "field": "nuovaClassificazioneLR11", "properties": "nuovaClassificazioneLR11", "type": "string" },
+          { "field": "nuovaClassificazioneLr11", "properties": "nuovaClassificazioneLr11", "type": "string" },
           { "field": "posizione", "properties": "posizione", "type": "bool" },
           { "field": "trasporti", "properties": "trasporti", "type": "bool" },
           { "field": "accoglienza", "properties": ["accessoDisabili", "giochiBimbi", "animaliAmmessi"], "type": "bool" },
@@ -39,7 +39,7 @@ describe('StrutturaService', () => {
       let lr11expectedValues = ["1","2","3","4","5"];
       let lr11: AttributeFilter = filters[1];
       expect(lr11.operator).toBe(FilterOperator.in);
-      expect(lr11.property).toBe("nuovaClassificazioneLR11");
+      expect(lr11.property).toBe("nuovaClassificazioneLr11");
       expect(intersection((lr11.value as string[]), lr11expectedValues).length).toBe(lr11expectedValues.length);
 
       console.log(filters);

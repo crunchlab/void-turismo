@@ -26,5 +26,5 @@ export class Struttura {
     dataUltimaModifica: string;
     tipologiaSecondaria: string;
     codiceIdentificativo: number;
-    nuovaClassificazioneLR11: string;
+    nuovaClassificazioneLr11: string;
 }
