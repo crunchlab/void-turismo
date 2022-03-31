@@ -43,7 +43,7 @@ export class HomePage implements OnInit {
     public tipologie: string[] = [];
     public slidesVisible: boolean = false;
     public tipologieSelezionate: string[] = [];
-    private marker: maplibregl.Marker = this.createMarker();
+    private marker: maplibregl.Marker;
 
     public struttureCirclePaint: maplibregl.CirclePaint = {
         'circle-radius': {
@@ -141,8 +141,8 @@ export class HomePage implements OnInit {
 
     constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService, public modalController: ModalController) {
     }
-    
-    
+
+
     ngOnInit(): void {
         this.openAboutModal();
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -307,7 +307,6 @@ export class HomePage implements OnInit {
         markerDiv.className = 'marker';
         el.appendChild(markerDiv);
         let marker: maplibregl.Marker = new maplibregl.Marker({ color: color });
-
         return marker;
     }
 
@@ -340,10 +339,16 @@ export class HomePage implements OnInit {
         this.homeMap.panTo(coordinates, { duration: 250 });
     }
 
+
     private setMarker(struttura: Struttura, coordinates: any) {
-        this.marker.remove();
+        if (this.marker){
+            this.marker.remove();
+        }
+        this.marker = this.createMarker();
         let color: string = get(COLOR_MAP, `tipologia[${struttura.tipologia.replaceAll(' ', '_').toUpperCase()}]`, COLOR_MAP.tipologia.ALTRA_RICETTIVITA);
-        this.marker = this.createMarker(color);
+        this.marker.getElement()
+            .querySelector('svg g:nth-child(2)')
+            .setAttribute("fill", color);
         this.marker
             .setLngLat(coordinates)
             .addTo(this.homeMap);
