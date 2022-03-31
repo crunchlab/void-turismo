@@ -76,7 +76,7 @@
     "accessoDisabili": "accessibile",
     "animaliAmmessi": "animali ammessi",
     "giochiBimbi": "area giochi",
-    "about-title": "Info",
+    "about-title": "Disclaimer",
     "about": {
         "titolo": "Mappa delle strutture ricettive del distretto VOID (Beta version)",
         "sottotitolo": "VOID-turismo è un prototipo di APP basata sugli Open Data della Regione Veneto ed è rilasciata come Software Libero: può essere quindi liberamente riutilizzata, migliorata e completata grazie al contributo della comunità di utenti. L'APP è stata concepita per essere continuamente 'in divenire', per essere adatta per l'utilizzo nell'ambito di laboratori didattici, e per essere interfacciata con sistemi di geolocalizzazione/navigazione e diverse tipologie di dati che possono essere visualizzati all'interno di una mappa. Per feedback, richieste e commenti scrivi alla mail opendata@vo-id.it .",
@@ -88,6 +88,7 @@
         "projectManagement": "Coordinamento",
         "code": "Codice sorgente",
         "dataset": "Dati",
-        "dataseturl":"Open Data Veneto"
+        "dataseturl":"Open Data Veneto",
+        "contatti":"Contatti"
     }
 }

@@ -140,11 +140,11 @@ export class HomePage implements OnInit {
     };
 
     constructor(private featureTransformer: FeatureToStrutturaService, private filterService: FilterServiceProvider, private mapUtils: MapUtilsService, public modalController: ModalController) {
-
     }
-
-
+    
+    
     ngOnInit(): void {
+        this.openAboutModal();
         //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
         //Add 'implements OnInit' to the class.
         let strutture = this.struttureGeoJson.features.map(feature => this.featureTransformer.featureToStruttura(feature as Feature));
@@ -161,6 +161,7 @@ export class HomePage implements OnInit {
         (this.swiperStrutture as any).elementRef.nativeElement.style.top = `calc(${window.innerHeight}px - 26vh)`;
         (this.aboutBtnContainer as any).nativeElement.style.top = `calc(${window.innerHeight}px - 48px)`;
     }
+
     public mapLoaded(event: any) {
         this.homeMap = event;
 
