@@ -14,9 +14,7 @@
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e",
-        "publish": "ionic build --prod -- --base-href https://crunchlab.github.io/void-turismo/ && npx angular-cli-ghpages --dir=www",
-        "hotfix:create": "git fetch --all -p && git checkout master && git pull && git flow hotfix start $(gitversion /showvariable Major).$(gitversion /showvariable Minor).$(($(gitversion /showvariable Patch)+1)) && git flow hotfix publish $(gitversion /showvariable Major).$(gitversion /showvariable Minor).$(($(gitversion /showvariable Patch)+1))",
-        "hotfix:version": "bash scripts/hotfix_version.sh"
+        "publish": "ionic build --prod -- --base-href https://crunchlab.github.io/void-turismo/ && npx angular-cli-ghpages --dir=www"
     },
     "private": true,
     "dependencies": {
