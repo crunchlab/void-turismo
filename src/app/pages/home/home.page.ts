@@ -221,6 +221,7 @@ export class HomePage implements OnInit {
                 let f1ToCenter = distance(mapCenter, f1.geometry.coordinates);
                 let f2ToCenter = distance(mapCenter, f2.geometry.coordinates);
                 return f1ToCenter - f2ToCenter;
+                // return distance(f1.geometry.coordinates, f2.geometry.coordinates);
             })
         let filteredFeatures = this.filterService.applyFilters(renderedFeatures, "properties");
         let filterdIds: number[] = filteredFeatures.map(f => f.codiceIdentificativo);
@@ -238,6 +239,9 @@ export class HomePage implements OnInit {
             this.swiperStrutture.swiperRef.virtual.update(true);
             if (this.strutture.length) {
                 this.swiperStrutture.swiperRef.slideTo(0);
+                let coordinates: LngLatLike = (renderedFeatures.find(f => f.properties.codiceIdentificativo == this.strutture[0].codiceIdentificativo).geometry as any).coordinates;
+                this.setMarker(this.strutture[0], coordinates);
+
             }
 
         } else {
@@ -341,7 +345,7 @@ export class HomePage implements OnInit {
 
 
     private setMarker(struttura: Struttura, coordinates: any) {
-        if (this.marker){
+        if (this.marker) {
             this.marker.remove();
         }
         this.marker = this.createMarker();
