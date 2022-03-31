@@ -238,8 +238,6 @@ export class HomePage implements OnInit {
             this.swiperStrutture.swiperRef.virtual.update(true);
             if (this.strutture.length) {
                 this.swiperStrutture.swiperRef.slideTo(0);
-                let coordinates: LngLatLike = (renderedFeatures.find(f => f.properties.codiceIdentificativo == this.strutture[0].codiceIdentificativo).geometry as any).coordinates;
-                this.setMarker(this.strutture[0], coordinates);
             }
 
         } else {
@@ -261,6 +259,8 @@ export class HomePage implements OnInit {
 
     private handleLayerClick(clickedFeature: Feature<Geometry, { [name: string]: any; }>) {
         let slideIdx = this.strutture.findIndex(s => s.codiceIdentificativo === clickedFeature.id);
+        this.setMarker(this.strutture[slideIdx], (clickedFeature.geometry as any).coordinates);
+
         this.swiperStrutture.swiperRef.slideTo(slideIdx, 1200);
     }
 
@@ -347,11 +347,6 @@ export class HomePage implements OnInit {
         this.marker
             .setLngLat(coordinates)
             .addTo(this.homeMap);
-    }
-
-    public onAdvancedSearchClick() {
-        console.log('onAdvancedSearchClick');
-
     }
 
     async openSearchModal() {
