@@ -47,7 +47,7 @@ describe('FilterServiceProvider', () => {
                 operator: FilterOperator.like,
                 value: "JESO"
             }, {
-                property: 'pnuovaClassificazioneLR11osizione',
+                property: 'pnuovaClassificazioneLr11osizione',
                 operator: FilterOperator.eq,
                 value: 3
             }
@@ -68,7 +68,7 @@ describe('FilterServiceProvider', () => {
                 operator: FilterOperator.like,
                 value: "JESO"
             }, {
-                property: 'nuovaClassificazioneLR11',
+                property: 'nuovaClassificazioneLr11',
                 operator: FilterOperator.like,
                 value: 3
             }

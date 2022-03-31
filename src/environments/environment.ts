@@ -10,7 +10,7 @@ export const environment = {
     filtersFieldMappings: filtersFieldMappings,
     mapStyle: './assets/map-styles/roadmap-style.json',
     dataPointColorMap: './assets/map-styles/data-points-colors.json',
-    version: "1.0.0"
+    version: "1.0.2-beta"
     // mapStyle: './assets/map-styles/dark-style.json'
 
 };
