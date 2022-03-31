@@ -202,17 +202,17 @@ export class HomePage implements OnInit {
     public onDragEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
         let isHuman = get(evt, 'originalEvent.isTrusted', true);
         if (isHuman) {
-            this.refreshSlides(false);
+            this.refreshSlides();
         }
 
     }
     public mapZoomEnd(evt: MapboxEvent<MouseEvent | TouchEvent | WheelEvent> & maplibregl.EventData) {
         let isHuman = get(evt, 'originalEvent.isTrusted', true);
         if (isHuman) {
-            this.refreshSlides(false);
+            this.refreshSlides();
         }
     }
-    private refreshSlides(pinCenter = true) {
+    private refreshSlides() {
         let mapCenter = [this.homeMap.getCenter().lng, this.homeMap.getCenter().lat];
         let renderedFeatures: maplibregl.MapboxGeoJSONFeature[] = this.homeMap
             .queryRenderedFeatures(null, { "layers": ["strutture-layer"] })
@@ -237,10 +237,6 @@ export class HomePage implements OnInit {
             this.swiperStrutture.swiperRef.virtual.update(true);
             if (this.strutture.length) {
                 this.swiperStrutture.swiperRef.slideTo(0);
-                // let coordinates: LngLatLike = (renderedFeatures.find(f => f.properties.codiceIdentificativo == this.strutture[0].codiceIdentificativo).geometry as any).coordinates;
-                // if (pinCenter) {
-                //     this.setMarker(this.strutture[0], coordinates);
-                // }
             }
 
         } else {
@@ -350,11 +346,6 @@ export class HomePage implements OnInit {
         this.marker
             .setLngLat(coordinates)
             .addTo(this.homeMap);
-    }
-
-    public onAdvancedSearchClick() {
-        console.log('onAdvancedSearchClick');
-
     }
 
     async openSearchModal() {
